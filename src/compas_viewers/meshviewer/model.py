@@ -10,7 +10,7 @@ __all__ = ['MeshView']
 
 
 class MeshView(object):
-    
+
     def __init__(self, mesh):
         self._mesh = None
         self._xyz = None
@@ -49,7 +49,6 @@ class MeshView(object):
         faces = []
 
         for fkey in mesh.faces():
-            # fvertices = mesh.face_vertices(fkey)
             fvertices = [key_index[key] for key in mesh.face_vertices(fkey)]
 
             f = len(fvertices)

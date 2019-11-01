@@ -14,7 +14,7 @@ from OpenGL.GL import *
 from compas.geometry import normalize_vector
 from compas.geometry import cross_vectors
 
-from compas.geometry import global_coords_numpy
+from compas.geometry import local_to_world_coords_numpy
 
 
 __all__ = [
@@ -212,7 +212,7 @@ def draw_circle(circle, color=None, n=100):
         x = radius * cos(a)
         y = radius * sin(a)
         z = 0
-        x, y, z = global_coords_numpy(center, uvw, [[x, y, z]]).tolist()[0]
+        x, y, z = local_to_world_coords_numpy(center, uvw, [[x, y, z]]).tolist()[0]
         glVertex3f(x, y, z)
     glEnd()
 
@@ -222,7 +222,7 @@ def draw_circle(circle, color=None, n=100):
         x = radius * cos(a)
         y = radius * sin(a)
         z = 0
-        x, y, z = global_coords_numpy(center, uvw, [[x, y, z]]).tolist()[0]
+        x, y, z = local_to_world_coords_numpy(center, uvw, [[x, y, z]]).tolist()[0]
         glVertex3f(x, y, z)
     glEnd()
 

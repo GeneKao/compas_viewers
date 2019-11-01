@@ -142,7 +142,6 @@ class View(GLWidget):
 
         glEnableClientState(GL_VERTEX_ARRAY)
         glEnableClientState(GL_COLOR_ARRAY)
-
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
         glVertexPointer(3, GL_FLOAT, 0, None)
 
