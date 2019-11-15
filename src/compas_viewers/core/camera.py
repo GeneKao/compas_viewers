@@ -10,72 +10,77 @@ from math import cos
 from math import sin
 from math import pi
 
+from PySide2.QtCore import QObject
+from PySide2.QtCore import Signal
+
 
 __all__ = ['Camera']
 
 
-class Camera(object):
+class RotationEvent(QObject):
+
+    rotX = Signal(float)
+    rotZ = Signal(float)
+
+
+class Camera(QObject):
     """"""
 
     def __init__(self, view):
         self.view = view
         self.tx = +0.0
         self.ty = +0.0
-        self.dt = +0.05
+        self.dt = +0.01
         self.distance = 10.0
         self.dd = +0.05
         self.target = [0.0, 0.0, 0.0]
-
-    @property
-    def settings(self):
-        if self.view:
-            return self.view.settings
-        else:
-            return None
+        self.rotation = RotationEvent()
 
     @property
     def rx(self):
-        return self.settings['camera.elevation:value']
+        return self.view.settings['camera.elevation:value']
 
     @rx.setter
     def rx(self, value):
-        self.settings['camera.elevation:value'] = value
+        self.view.settings['camera.elevation:value'] = value
+        self.rotation.rotX.emit(self.rx)
 
     @property
     def rz(self):
-        return self.settings['camera.azimuth:value']
+        return self.view.settings['camera.azimuth:value']
 
     @rz.setter
     def rz(self, value):
-        self.settings['camera.azimuth:value'] = value
+        self.view.settings['camera.azimuth:value'] = value
+        self.rotation.rotZ.emit(self.rz)
 
     @property
     def dr(self):
-        return self.settings['camera.rotation:delta']
+        return self.view.settings['camera.rotation:delta']
 
     @property
     def fov(self):
-        return self.settings['camera.fov:value']
+        return self.view.settings['camera.fov:value']
 
     @fov.setter
     def fov(self, value):
-        self.settings['camera.fov:value'] = value
+        self.view.settings['camera.fov:value'] = value
 
     @property
     def near(self):
-        return self.settings['camera.near:value']
+        return self.view.settings['camera.near:value']
 
     @near.setter
     def near(self, value):
-        self.settings['camera.near:value'] = value
+        self.view.settings['camera.near:value'] = value
 
     @property
     def far(self):
-        return self.settings['camera.far:value']
+        return self.view.settings['camera.far:value']
 
     @far.setter
     def far(self, value):
-        self.settings['camera.far:value'] = value
+        self.view.settings['camera.far:value'] = value
 
     @property
     def aspect(self):

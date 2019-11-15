@@ -2,12 +2,7 @@ from __future__ import print_function
 from __future__ import absolute_import
 from __future__ import division
 
-try:
-    import PySide2
-except ImportError:
-    from PySide import QtCore
-else:
-    from PySide2 import QtCore
+from PySide2 import QtCore
 
 
 __all__ = ['Mouse']

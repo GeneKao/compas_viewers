@@ -4,6 +4,8 @@ from __future__ import division
 
 from functools import partial
 
+from random import random
+
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
@@ -32,6 +34,8 @@ class View(GLWidget):
     def __init__(self, controller):
         super(View, self).__init__()
         self.controller = controller
+        self.camera.rotation.rotX.connect(self.controller.on_rotX)
+        self.camera.rotation.rotZ.connect(self.controller.on_rotZ)
         self.n = 0
         self.v = 0
         self.e = 0
@@ -81,7 +85,7 @@ class View(GLWidget):
 
     @property
     def array_faces_color_front(self):
-        return flist(hex_to_rgb(self.settings['faces.color:front']) for key in self.mesh.xyz)
+        return flist([random(), random(), random()] for key in self.mesh.xyz)
 
     @property
     def array_faces_color_back(self):

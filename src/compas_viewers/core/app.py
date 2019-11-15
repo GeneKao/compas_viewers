@@ -6,16 +6,9 @@ import sys
 
 from functools import partial
 
-try:
-    import PySide2
-except ImportError:
-    from PySide import QtCore
-    from PySide import QtGui
-    import PySide.QtGui as QtWidgets
-else:
-    from PySide2 import QtCore
-    from PySide2 import QtGui
-    from PySide2 import QtWidgets
+from PySide2 import QtCore
+from PySide2 import QtGui
+from PySide2 import QtWidgets
 
 from compas_viewers.core import ColorButton
 from compas_viewers.core import Slider
@@ -121,7 +114,8 @@ class App(QtWidgets.QApplication):
         self.main.addDockWidget(QtCore.Qt.LeftDockWidgetArea, self.sidebar)
         widget = QtWidgets.QWidget()
         layout = QtWidgets.QVBoxLayout()
-        layout.setContentsMargins(4, 8, 4, 8)
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
         widget.setLayout(layout)
         self.sidebar.setWidget(widget)
         self.add_sidebar_items(self.config['sidebar'], layout)
@@ -231,13 +225,16 @@ class App(QtWidgets.QApplication):
         group = QtWidgets.QGroupBox(item.get('text', None))
         box = QtWidgets.QVBoxLayout()
         box.setContentsMargins(0, 0, 0, 0)
+        box.setSpacing(8)
         group.setContentsMargins(0, 0, 0, 0)
         group.setLayout(box)
         parent.addWidget(group)
+
         self.add_sidebar_items(item['items'], box)
 
     def add_slider(self, item, parent):
-        slider = Slider(item['text'],
+        slider = Slider(item['name'],
+                        item['text'],
                         item['value'],
                         item['minval'],
                         item['maxval'],
@@ -246,6 +243,7 @@ class App(QtWidgets.QApplication):
                         getattr(self.controller, item['slide']),
                         getattr(self.controller, item['edit']))
         parent.addLayout(slider.layout)
+        self.controller.controls[slider.name] = slider
 
     def add_checkbox(self, item, parent):
         checkbox = QtWidgets.QCheckBox(item['text'])

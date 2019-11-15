@@ -6,16 +6,9 @@ import sys
 
 from functools import partial
 
-try:
-    import PySide2
-except ImportError:
-    from PySide import QtCore
-    from PySide import QtGui
-    import PySide.QtGui as QtWidgets
-else:
-    from PySide2 import QtCore
-    from PySide2 import QtGui
-    from PySide2 import QtWidgets
+from PySide2 import QtCore
+from PySide2 import QtGui
+from PySide2 import QtWidgets
 
 
 __all__ = ['Sidebar']

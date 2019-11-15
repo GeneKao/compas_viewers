@@ -4,16 +4,9 @@ from __future__ import division
 
 from functools import partial
 
-try:
-    import PySide2
-except ImportError:
-    from PySide import QtCore
-    from PySide import QtGui
-    import PySide.QtGui as QtWidgets
-else:
-    from PySide2 import QtCore
-    from PySide2 import QtGui
-    from PySide2 import QtWidgets
+from PySide2 import QtCore
+from PySide2 import QtGui
+from PySide2 import QtWidgets
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -74,25 +67,25 @@ def flist(items):
 class Controller(core.controller.Controller):
     settings = core.controller.Controller.settings or {}
 
-    settings['vertices.size:value'] = 1.0
+    settings['vertices.size:value'] = 1
     settings['vertices.size:minval'] = 1
     settings['vertices.size:maxval'] = 100
     settings['vertices.size:step'] = 1
     settings['vertices.size:scale'] = 0.1
 
-    settings['edges.width:value'] = 1.0
+    settings['edges.width:value'] = 1
     settings['edges.width:minval'] = 1
     settings['edges.width:maxval'] = 100
     settings['edges.width:step'] = 1
     settings['edges.width:scale'] = 0.1
 
-    settings['normals.scale:value'] = 1.0
+    settings['normals.scale:value'] = 1
     settings['normals.scale:minval'] = 1
     settings['normals.scale:maxval'] = 100
     settings['normals.scale:step'] = 1
     settings['normals.scale:scale'] = 0.1
 
-    settings['vertices.color'] = '#0092d2'
+    settings['vertices.color'] = '#222222'
     settings['edges.color'] = '#666666'
     settings['faces.color:front'] = '#cccccc'
     settings['faces.color:back'] = '#ff5e99'
@@ -110,7 +103,7 @@ class Controller(core.controller.Controller):
 
     settings['camera.elevation:value'] = -10
     settings['camera.elevation:minval'] = -180
-    settings['camera.elevation:maxval'] = 0
+    settings['camera.elevation:maxval'] = +180
     settings['camera.elevation:step'] = +1
     settings['camera.elevation:scale'] = +1
 
@@ -127,8 +120,13 @@ class Controller(core.controller.Controller):
     settings['camera.distance:scale'] = +1
     settings['camera.distance:delta'] = +0.05
 
-    settings['camera.rotation:delta'] = +0.5
     settings['camera.fov:value'] = 50
+    settings['camera.fov:minval'] = 10
+    settings['camera.fov:maxval'] = 170
+    settings['camera.fov:step'] = +1
+    settings['camera.fov:scale'] = +1
+
+    settings['camera.rotation:delta'] = +0.5
     settings['camera.near:value'] = 0.1
     settings['camera.far:value'] = 1000
 
@@ -163,6 +161,37 @@ class Controller(core.controller.Controller):
             attr['z'] -= cz
 
     def adjust_camera(self):
+        pass
+
+    # ==========================================================================
+    # Slots
+    # ==========================================================================
+
+    def on_rotX(self, rx):
+        slider = self.controls['elevation']
+        slider.input.blockSignals(True)
+        slider.slider.blockSignals(True)
+        slider.value = rx
+        slider.input.setText("{0:.{1}}".format(slider.value, slider.precision))
+        slider.slider.setValue(slider.value)
+        slider.input.blockSignals(False)
+        slider.slider.blockSignals(False)
+
+    def on_rotZ(self, rz):
+        slider = self.controls['azimuth']
+        slider.input.blockSignals(True)
+        slider.slider.blockSignals(True)
+        slider.value = rz
+        slider.input.setText("{0:.{1}}".format(slider.value, slider.precision))
+        slider.slider.setValue(slider.value)
+        slider.input.blockSignals(False)
+        slider.slider.blockSignals(False)
+
+    # ==========================================================================
+    # commands
+    # ==========================================================================
+
+    def select_command(self):
         pass
 
     # ==========================================================================
@@ -335,25 +364,28 @@ class Controller(core.controller.Controller):
         self.view.updateGL()
 
     def edit_azimuth(self, value):
-        print(value)
+        pass
 
     def slide_elevation(self, value):
         self.view.camera.rx = float(value)
         self.view.updateGL()
 
     def edit_elevation(self, value):
-        print(value)
+        pass
 
     def slide_distance(self, value):
         self.view.camera.distance = float(value)
         self.view.updateGL()
 
     def edit_distance(self, value):
-        print(value)
+        pass
 
-    def edit_fov(self, value):
+    def slide_fov(self, value):
         self.view.camera.fov = float(value)
         self.view.updateGL()
+
+    def edit_fov(self, value):
+        pass
 
     # ==========================================================================
     # tools

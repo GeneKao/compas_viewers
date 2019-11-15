@@ -149,25 +149,28 @@ CONFIG = {
     ],
     'sidebar': [
         {
+            'type' : 'group',
+            'text' : None,
+            'items': [
+                {
+                    'type'   : 'textedit',
+                    'text'   : None,
+                    'value'  : None,
+                    'edit'   : 'select_command'
+                },
+                # {
+                #     'type'   : 'stretch',
+                # }
+            ],
+        },
+        {
             'type'  : 'group',
             'text'  : None,
             'items' : [
-                {
-                    'type'  : 'group',
-                    'text'  : None,
-                    'items' : [
-                        {'type' : 'checkbox', 'text' : 'vertices', 'action' : 'toggle_vertices', 'state' : True, },
-                        {'type' : 'checkbox', 'text' : 'edges', 'action' : 'toggle_edges', 'state' : True, },
-                        {'type' : 'checkbox', 'text' : 'faces', 'action' : 'toggle_faces', 'state' : True, },
-                    ]
-                },
-                {
-                    'type'  : 'group',
-                    'text'  : None,
-                    'items' : [
-                        {'type' : 'checkbox', 'text' : 'normals', 'action' : 'toggle_normals', 'state' : False, },
-                    ]
-                },
+                {'type' : 'checkbox', 'text' : 'vertices', 'action' : 'toggle_vertices', 'state' : True, },
+                {'type' : 'checkbox', 'text' : 'edges', 'action' : 'toggle_edges', 'state' : True, },
+                {'type' : 'checkbox', 'text' : 'faces', 'action' : 'toggle_faces', 'state' : True, },
+                {'type' : 'checkbox', 'text' : 'normals', 'action' : 'toggle_normals', 'state' : False, },
             ]
         },
         {
@@ -175,63 +178,63 @@ CONFIG = {
             'text' : None,
             'items': [
                 {
-                    'type' : 'group',
-                    'text' : None,
-                    'items': [
-                        {
-                            'type'  : 'colorbutton',
-                            'text'  : 'color vertices',
-                            'value' : Controller.settings['vertices.color'],
-                            'action': 'change_vertices_color',
-                        },
-                        {
-                            'type'  : 'colorbutton',
-                            'text'  : 'color edges',
-                            'value' : Controller.settings['edges.color'],
-                            'action': 'change_edges_color',
-                        },
-                        {
-                            'type'  : 'colorbutton',
-                            'text'  : 'color faces (front)',
-                            'value' : Controller.settings['faces.color:front'],
-                            'action': 'change_faces_color_front',
-                        },
-                        {
-                            'type'  : 'colorbutton',
-                            'text'  : 'color faces (back)',
-                            'value' : Controller.settings['faces.color:back'],
-                            'action': 'change_faces_color_back',
-                        },
-                    ]
+                    'type'  : 'colorbutton',
+                    'text'  : 'color vertices',
+                    'value' : Controller.settings['vertices.color'],
+                    'action': 'change_vertices_color',
+                    'size'  : (16, 16),
                 },
                 {
-                    'type' : 'group',
-                    'text' : None,
-                    'items': [
-                        {
-                            'type'   : 'slider',
-                            'text'   : 'size vertices',
-                            'value'  : Controller.settings['vertices.size:value'],
-                            'minval' : Controller.settings['vertices.size:minval'],
-                            'maxval' : Controller.settings['vertices.size:maxval'],
-                            'step'   : Controller.settings['vertices.size:step'],
-                            'scale'  : Controller.settings['vertices.size:scale'],
-                            'slide'  : 'slide_size_vertices',
-                            'edit'   : 'edit_size_vertices',
-                        },
-                        {
-                            'type'   : 'slider',
-                            'text'   : 'width edges',
-                            'value'  : Controller.settings['edges.width:value'],
-                            'minval' : Controller.settings['edges.width:minval'],
-                            'maxval' : Controller.settings['edges.width:maxval'],
-                            'step'   : Controller.settings['edges.width:step'],
-                            'scale'  : Controller.settings['edges.width:scale'],
-                            'slide'  : 'slide_width_edges',
-                            'edit'   : 'edit_width_edges',
-                        }
-                    ]
-                }
+                    'type'  : 'colorbutton',
+                    'text'  : 'color edges',
+                    'value' : Controller.settings['edges.color'],
+                    'action': 'change_edges_color',
+                    'size'  : (16, 16),
+                },
+                # {
+                #     'type'  : 'colorbutton',
+                #     'text'  : 'color faces (front)',
+                #     'value' : Controller.settings['faces.color:front'],
+                #     'action': 'change_faces_color_front',
+                #     'size'  : (16, 16),
+                # },
+                # {
+                #     'type'  : 'colorbutton',
+                #     'text'  : 'color faces (back)',
+                #     'value' : Controller.settings['faces.color:back'],
+                #     'action': 'change_faces_color_back',
+                #     'size'  : (16, 16),
+                # },
+            ]
+        },
+        {
+            'type' : 'group',
+            'text' : None,
+            'items': [
+                {
+                    'name'   : 'size_vertices',
+                    'type'   : 'slider',
+                    'text'   : 'size vertices',
+                    'value'  : Controller.settings['vertices.size:value'],
+                    'minval' : Controller.settings['vertices.size:minval'],
+                    'maxval' : Controller.settings['vertices.size:maxval'],
+                    'step'   : Controller.settings['vertices.size:step'],
+                    'scale'  : Controller.settings['vertices.size:scale'],
+                    'slide'  : 'slide_size_vertices',
+                    'edit'   : 'edit_size_vertices',
+                },
+                {
+                    'name'   : 'width_edges',
+                    'type'   : 'slider',
+                    'text'   : 'width edges',
+                    'value'  : Controller.settings['edges.width:value'],
+                    'minval' : Controller.settings['edges.width:minval'],
+                    'maxval' : Controller.settings['edges.width:maxval'],
+                    'step'   : Controller.settings['edges.width:step'],
+                    'scale'  : Controller.settings['edges.width:scale'],
+                    'slide'  : 'slide_width_edges',
+                    'edit'   : 'edit_width_edges',
+                },
             ]
         },
         {
@@ -275,15 +278,22 @@ CONFIG = {
                     'edit'   : 'edit_distance'
                 },
                 {
-                    'type'   : 'textedit',
+                    'name'   : 'fov',
+                    'type'   : 'slider',
                     'text'   : 'fov',
                     'value'  : Controller.settings['camera.fov:value'],
+                    'value'  : Controller.settings['camera.fov:value'],
+                    'minval' : Controller.settings['camera.fov:minval'],
+                    'maxval' : Controller.settings['camera.fov:maxval'],
+                    'step'   : Controller.settings['camera.fov:step'],
+                    'scale'  : Controller.settings['camera.fov:scale'],
+                    'slide'  : 'slide_fov',
                     'edit'   : 'edit_fov'
                 },
-                {
-                    'type'   : 'stretch',
-                }
-            ],
+            ]
+        },
+        {
+            'type'   : 'stretch',
         }
     ]
 }
@@ -291,25 +301,41 @@ CONFIG = {
 STYLE = """
 QMainWindow {}
 
-QMenuBar {}
-
-QToolBar#Tools {
-padding: 4px;
+QDockWidget#Sidebar {
 }
 
-QDockWidget#Sidebar {}
-
-QDockWidget#Console {}
-
-QDockWidget#Console QPlainTextEdit {
-background-color: #222222;
-color: #eeeeee;
-border-top: 8px solid #cccccc;
-border-left: 1px solid #cccccc;
-border-right: 1px solid #cccccc;
-border-bottom: 1px solid #cccccc;
-padding-left: 4px;
+QGroupBox, QSlider, QLabel, QDockWidget {
+background-color: rgba(255, 255, 255, 0.0);
 }
+
+QGroupBox, QSlider, QLabel, QLineEdit, QColorButton {
+margin: 0;
+padding: 0;
+border: 0;
+}
+
+QGroupBox {
+    border-bottom: 1px solid white;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 2px;
+    background-color: #999999;
+}
+
+QSlider::handle:horizontal {
+    background-color: #333333;
+    border: 1px solid #333333;
+    width: 3px;
+    margin: -4px 0;
+}
+
+
 """
 
 from .app import MeshViewer
