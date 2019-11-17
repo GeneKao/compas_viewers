@@ -17,10 +17,11 @@ from PySide2.QtCore import Signal
 __all__ = ['Camera']
 
 
-class RotationEvent(QObject):
+class CameraEvents(QObject):
 
     rotX = Signal(float)
     rotZ = Signal(float)
+    distance = Signal(float)
 
 
 class Camera(QObject):
@@ -30,11 +31,9 @@ class Camera(QObject):
         self.view = view
         self.tx = +0.0
         self.ty = +0.0
-        self.dt = +0.01
-        self.distance = 10.0
-        self.dd = +0.05
+        self.tdelta = +0.01
         self.target = [0.0, 0.0, 0.0]
-        self.rotation = RotationEvent()
+        self.events = CameraEvents()
 
     @property
     def rx(self):
@@ -43,7 +42,7 @@ class Camera(QObject):
     @rx.setter
     def rx(self, value):
         self.view.settings['camera.elevation:value'] = value
-        self.rotation.rotX.emit(self.rx)
+        self.events.rotX.emit(self.rx)
 
     @property
     def rz(self):
@@ -52,11 +51,24 @@ class Camera(QObject):
     @rz.setter
     def rz(self, value):
         self.view.settings['camera.azimuth:value'] = value
-        self.rotation.rotZ.emit(self.rz)
+        self.events.rotZ.emit(self.rz)
 
     @property
-    def dr(self):
+    def rotation_delta(self):
         return self.view.settings['camera.rotation:delta']
+
+    @property
+    def distance(self):
+        return self.view.settings['camera.distance:value']
+
+    @distance.setter
+    def distance(self, value):
+        self.view.settings['camera.distance:value'] = value
+        self.events.distance.emit(self.distance)
+
+    @property
+    def distance_delta(self):
+        return self.view.settings['camera.distance:delta']
 
     @property
     def fov(self):
@@ -97,8 +109,7 @@ class Camera(QObject):
         camera, i.e. by decreasing the absolute size of the Z-component of the
         translation vector that is applied to all objects.
         """
-        increment = self.dd * self.distance
-        self.distance -= steps * increment
+        self.distance -= steps * self.distance_delta * self.distance
 
     def zoom_in(self, steps=1):
         """Zoom in.
@@ -109,8 +120,7 @@ class Camera(QObject):
         camera, i.e. by decreasing the absolute size of the Z-component of the
         translation vector that is applied to all objects.
         """
-        increment = self.dd * self.distance
-        self.distance += steps * increment
+        self.distance += steps * self.distance_delta * self.distance
 
     def zoom_out(self, steps=1):
         """Zoom out.
@@ -122,8 +132,7 @@ class Camera(QObject):
         the Z-component of the translation vector that is used to transform all
         objects.
         """
-        increment = self.dd * self.distance
-        self.distance -= steps * increment
+        self.distance -= steps * self.distance_delta * self.distance
 
     def zoom_extents(self):
         pass
@@ -132,16 +141,16 @@ class Camera(QObject):
         if self.view.current == self.view.VIEW_PERSPECTIVE:
             dx = self.view.mouse.dx()
             dy = self.view.mouse.dy()
-            self.rx = self.rx + self.dr * dy
-            self.rz = self.rz + self.dr * dx
+            self.rx += self.rotation_delta * dy
+            self.rz += self.rotation_delta * dx
 
     def translate(self):
         """"""
         # should be reimplemented per view
         dx = self.view.mouse.dx()
         dy = self.view.mouse.dy()
-        self.tx += self.dt * dx
-        self.ty -= self.dt * dy
+        self.tx += self.tdelta * dx
+        self.ty -= self.tdelta * dy
 
     def aim(self):
         """Aim the camera.
@@ -158,21 +167,17 @@ class Camera(QObject):
 
         glTranslatef(self.tx, self.ty, 0)
         glTranslatef(0, 0, -self.distance)
-
         glTranslatef(self.target[0], self.target[1], self.target[2])
 
         if self.view.current == self.view.VIEW_PERSPECTIVE:
             glRotatef(self.rx, 1, 0, 0)
             glRotatef(self.rz, 0, 0, 1)
-
-        if self.view.current == self.view.VIEW_FRONT:
+        elif self.view.current == self.view.VIEW_FRONT:
             glRotatef(-90, 1, 0, 0)
-
-        if self.view.current == self.view.VIEW_LEFT:
+        elif self.view.current == self.view.VIEW_LEFT:
             glRotatef(-90, 1, 0, 0)
             glRotatef(+90, 0, 0, 1)
-
-        if self.view.current == self.view.VIEW_TOP:
+        elif self.view.current == self.view.VIEW_TOP:
             pass
 
         glTranslatef(-self.target[0], -self.target[1], -self.target[2])
@@ -184,7 +189,6 @@ class Camera(QObject):
 
         if self.view.current == self.view.VIEW_PERSPECTIVE:
             gluPerspective(self.fov, self.aspect, self.near, self.far)
-
         else:
             glOrtho(-self.distance, self.distance, -self.distance / self.aspect, self.distance / self.aspect, self.near, self.far)
 

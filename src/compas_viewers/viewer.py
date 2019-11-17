@@ -1,7 +1,3 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
 from PySide2 import QtCore
 from PySide2 import QtGui
 from PySide2 import QtWidgets
@@ -9,6 +5,10 @@ from PySide2 import QtWidgets
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
+
+from numpy import array
+from numpy import float64
+from numpy import int32
 
 from functools import partial
 
@@ -298,6 +298,7 @@ class View(GLWidget):
         glEnableClientState(GL_VERTEX_ARRAY)
         glEnableClientState(GL_COLOR_ARRAY)
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
+
         glVertexPointer(3, GL_FLOAT, 0, None)
 
         if self.settings['faces.on']:

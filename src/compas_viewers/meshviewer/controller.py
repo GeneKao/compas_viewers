@@ -1,6 +1,4 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
+import os
 
 from functools import partial
 
@@ -24,6 +22,9 @@ from compas.utilities import flatten
 
 from compas_viewers import core
 from compas_viewers.meshviewer.model import MeshView
+
+
+HERE = os.path.dirname(__file__)
 
 
 __all__ = ['Controller']
@@ -169,23 +170,15 @@ class Controller(core.controller.Controller):
 
     def on_rotX(self, rx):
         slider = self.controls['elevation']
-        slider.input.blockSignals(True)
-        slider.slider.blockSignals(True)
-        slider.value = rx
-        slider.input.setText("{0:.{1}}".format(slider.value, slider.precision))
-        slider.slider.setValue(slider.value)
-        slider.input.blockSignals(False)
-        slider.slider.blockSignals(False)
+        slider.update(rx)
 
     def on_rotZ(self, rz):
         slider = self.controls['azimuth']
-        slider.input.blockSignals(True)
-        slider.slider.blockSignals(True)
-        slider.value = rz
-        slider.input.setText("{0:.{1}}".format(slider.value, slider.precision))
-        slider.slider.setValue(slider.value)
-        slider.input.blockSignals(False)
-        slider.slider.blockSignals(False)
+        slider.update(rz)
+
+    def on_distance(self, d):
+        slider = self.controls['distance']
+        slider.update(d)
 
     # ==========================================================================
     # commands
@@ -267,7 +260,14 @@ class Controller(core.controller.Controller):
         self.log('Updating the camera settings.')
 
     def capture_image(self):
-        self.message('Capture Image is under construction...')
+        result = QtWidgets.QFileDialog.getSaveFileName(caption="File name", dir=HERE)
+        if not result:
+            return
+        filepath = result[0]
+        root, ext = os.path.splitext(filepath)
+        if not ext:
+            return
+        self.view.capture(filepath, ext[1:])
 
     def capture_video(self):
         self.message('Capture Video is under construction...')

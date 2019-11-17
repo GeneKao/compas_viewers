@@ -52,11 +52,13 @@ class Controller(object):
         self.app.console.widget().appendPlainText(text)
 
     def opengl_version_info(self):
+        context = self.app.view.context()
+        functions = context.functions()
         text = [
-            "Vendor: {}".format(glGetString(GL_VENDOR)),
-            "Renderer: {}".format(glGetString(GL_RENDERER)),
-            "GL Version: {}".format(glGetString(GL_VERSION)),
-            "GLSL Version: {}".format(glGetString(GL_SHADING_LANGUAGE_VERSION)),
+            "Vendor: {}".format(functions.glGetString(GL_VENDOR)),
+            "Renderer: {}".format(functions.glGetString(GL_RENDERER)),
+            "GL Version: {}".format(functions.glGetString(GL_VERSION)),
+            "GLSL Version: {}".format(functions.glGetString(GL_SHADING_LANGUAGE_VERSION)),
         ]
         self.message('\n'.join([str(line) for line in text]))
 

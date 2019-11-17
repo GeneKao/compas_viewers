@@ -95,6 +95,15 @@ class Slider(object):
             p = "{}f".format(e)
         self._precision = p
 
+    def update(self, value):
+        self.input.blockSignals(True)
+        self.slider.blockSignals(True)
+        self.value = value
+        self.input.setText("{0:.{1}}".format(self.value, self.precision))
+        self.slider.setValue(self.value)
+        self.input.blockSignals(False)
+        self.slider.blockSignals(False)
+
     def slide(self, f):
         def wrapper(position):
             self.value = position * self.scale

@@ -54,7 +54,7 @@ class App(QtWidgets.QApplication):
         # self.main.setUnifiedTitleAndToolBarOnMac(True)
         self.init_statusbar()
         # self.init_menubar()
-        # self.init_toolbar()
+        self.init_toolbar()
         self.init_sidebar()
         self.init_console()
 

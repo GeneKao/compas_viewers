@@ -14,11 +14,12 @@ import compas
 from compas.utilities import hex_to_rgb
 from compas.utilities import flatten
 from compas_viewers.core import GLWidget
+# from compas_viewers.core import OpenGLWidget
 from compas_viewers.core import Grid
 from compas_viewers.core import Axes
 
 
-__all__ = ['MeshViewer']
+__all__ = ['View']
 
 
 hex_to_rgb = partial(hex_to_rgb, normalize=True)
@@ -34,12 +35,13 @@ class View(GLWidget):
     def __init__(self, controller):
         super(View, self).__init__()
         self.controller = controller
-        self.camera.rotation.rotX.connect(self.controller.on_rotX)
-        self.camera.rotation.rotZ.connect(self.controller.on_rotZ)
         self.n = 0
         self.v = 0
         self.e = 0
         self.f = 0
+
+    # def glInit(self):
+    #     self.initializeGL()
 
     @property
     def mesh(self):

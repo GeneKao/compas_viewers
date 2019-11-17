@@ -11,6 +11,7 @@ from .mouse import *
 from .slider import *
 from .colorbutton import *
 from .glwidget import *
+from .openglwidget import *
 from .controller import *
 from .textedit import *
 from .buffers import *
