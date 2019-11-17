@@ -15,6 +15,13 @@ from numpy import float64
 from numpy import int32
 
 
+# //uniform mat4 view;
+# //uniform mat4 model;
+# //uniform mat4 projection;
+
+# //gl_Position = projection * view * model * vec4(position, 1.0);
+
+
 class View(QtWidgets.QOpenGLWidget):
 
     vertexcode = """
@@ -37,9 +44,10 @@ void main()
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-        self.vertices = np.array([
-            [0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.5, 1.0, 0.0], [0.0, 0.0, 0.0]
-        ], dtype=np.float64)
+        self.xyz = np.array([[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [1.0, 1.0, 0.0]], dtype=np.float64)
+        self.vertices = np.array([0, 1, 2], dtype=np.int32)
+        self.faces = np.array([[0, 1, 2, 0]], dtype=np.int32)
+        self.edges = np.array([[0, 1], [1, 2], [2, 0]], dtype=np.int32)
         self.buffers = {'xyz': None, 'vertices': None, 'edges': None, 'faces': None}
 
     def make_shader_program(self):
@@ -56,40 +64,50 @@ void main()
         glCompileShader(vertex)
         if not glGetShaderiv(vertex, GL_COMPILE_STATUS):
             error = glGetShaderInfoLog(vertex).decode()
-            print(error)
-            raise RuntimeError("Vertex shader compilation error.")
+            raise RuntimeError("Vertex shader compilation error: {}".format(error))
 
         glCompileShader(fragment)
         if not glGetShaderiv(fragment, GL_COMPILE_STATUS):
             error = glGetShaderInfoLog(fragment).decode()
-            print(error)
-            raise RuntimeError("Fragment shader compilation error.")
+            raise RuntimeError("Fragment shader compilation error: {}".format(error))
 
         glAttachShader(program, vertex)
         glAttachShader(program, fragment)
 
         glLinkProgram(program)
         if not glGetProgramiv(program, GL_LINK_STATUS):
-            print(glGetProgramInfoLog(program))
-            raise RuntimeError("Linking error.")
+            error = glGetProgramInfoLog(program).decode()
+            raise RuntimeError("Linking error: {}".format(error))
 
         glDetachShader(program, vertex)
         glDetachShader(program, fragment)
-
         glUseProgram(program)
 
         # xyz buffer
         buffer = glGenBuffers(1)
         glBindBuffer(GL_ARRAY_BUFFER, buffer)
-        glBufferData(GL_ARRAY_BUFFER, self.vertices.nbytes, self.vertices, GL_STATIC_DRAW)
+        glBufferData(GL_ARRAY_BUFFER, self.xyz.nbytes, self.xyz, GL_STATIC_DRAW)
         self.buffers['xyz'] = buffer
+
+        # # vertices (index) buffer
+        # buffer = glGenBuffers(1)
+        # glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer)
+        # glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.vertices.nbytes, self.vertices, GL_STATIC_DRAW)
+        # self.buffers['vertices'] = buffer
+
+        # # faces (index) buffer
+        # buffer = glGenBuffers(1)
+        # glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer)
+        # glBufferData(GL_ELEMENT_ARRAY_BUFFER, self.faces.nbytes, self.faces, GL_STATIC_DRAW)
+        # self.buffers['faces'] = buffer
 
         # position attribute
         stride = self.vertices.strides[0]
         offset = ctypes.c_void_p(0)
         loc = glGetAttribLocation(program, "position")
         glEnableVertexAttribArray(loc)
-        glVertexAttribPointer(loc, 3, GL_DOUBLE, False, stride, offset)
+        glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
+        glVertexAttribPointer(loc, self.xyz.shape[1], GL_DOUBLE, False, stride, offset)
 
         # color attribute
         loc = glGetUniformLocation(program, "color")
@@ -125,13 +143,25 @@ void main()
         context = self.context()
         f = context.functions()
 
-        if not self.isValid():
-            return
-        if glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE:
-            return
+        # if not self.isValid():
+        #     return
+        # if glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE:
+        #     return
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, self.vertices.shape[0])
+
+        glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 3)
+
+        # glVertexPointer(3, GL_DOUBLE, 0, None)
+        # loc = glGetAttribLocation(program, "position")
+        # glVertexAttribPointer(loc, 3, GL_DOUBLE, False, stride, offset)
+
+        # glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.buffers['faces'])
+        # glDrawElements(GL_TRIANGLES, self.faces.shape[0], GL_UNSIGNED_INT, None)
+
+        # glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.buffers['vertices'])
+        # glDrawElements(GL_POINTS, self.vertices.shape[0], GL_UNSIGNED_INT, None)
 
     def resizGL(self):
         context = self.context()
