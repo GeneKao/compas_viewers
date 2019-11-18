@@ -23,6 +23,7 @@ from __future__ import print_function
 from .core import *
 from .viewer import *
 from .meshviewer import *
+from .multimeshviewer import *
 
 try:
     from .vtkviewer import *
