@@ -134,6 +134,7 @@ class Controller(core.controller.Controller):
     def __init__(self, app):
         super(Controller, self).__init__(app)
         self._meshes = None
+        self._colors = None
 
     @property
     def view(self):
@@ -147,16 +148,25 @@ class Controller(core.controller.Controller):
     def meshes(self, meshes):
         self._meshes = []
         for mesh in meshes:
-            self._meshes.append(MeshView(mesh))
+            mesh.view = MeshView(mesh.data)
+            self._meshes.append(mesh)
+
+    @property
+    def colors(self):
+        return self._colors
+
+    @colors.setter
+    def colors(self, colors):
+        self._colors = colors
 
     def center(self):
         # perhaps this should be a bestfit_frame
         # and a frame to frame transformation of all points
         # most certainly use numpy transformations
-        xyz = [_xyz for mview in self.meshes for _xyz in mview.mesh.get_vertices_attributes('xyz')]
+        xyz = [_xyz for m in self.meshes for _xyz in m.data.get_vertices_attributes('xyz')]
         cx, cy, cz = centroid_points(xyz)
-        for mview in self._meshes:
-            for key, attr in mview.mesh.vertices(True):
+        for m in self.meshes:
+            for key, attr in m.data.vertices(True):
                 attr['x'] -= cx
                 attr['y'] -= cy
                 attr['z'] -= cz

@@ -46,6 +46,10 @@ class View(GLWidget):
     def meshes(self):
         return self.controller.meshes
 
+    # @property
+    # def colors(self):
+    #     return self.controller.colors
+
     @property
     def settings(self):
         return self.controller.settings
@@ -84,16 +88,17 @@ class View(GLWidget):
 
     def make_buffers(self):
         self.buffers = []
-        for mesh in self.meshes:
-            xyz = flist(mesh.xyz)
-            vertices = list(mesh.vertices)
-            edges = flist(mesh.edges)
-            faces = flist(mesh.faces)
-            faces_back = flist(face[::-1] for face in mesh.faces)
-            vertices_color = flist(hex_to_rgb(self.settings['vertices.color']) for key in mesh.vertices)
-            edges_color = flist(hex_to_rgb(self.settings['edges.color']) for key in mesh.edges)
-            faces_color = flist([random(), random(), random()] for key in mesh.xyz)
-            faces_color_back = flist(hex_to_rgb(self.settings['faces.color:back']) for key in mesh.xyz)
+        print(self.controller.colors)
+        for m in self.meshes:
+            xyz = flist(m.view.xyz)
+            vertices = list(m.view.vertices)
+            edges = flist(m.view.edges)
+            faces = flist(m.view.faces)
+            faces_back = flist(face[::-1] for face in m.view.faces)
+            vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
+            edges_color = flist(hex_to_rgb('#333333') for key in m.view.edges)
+            faces_color = flist(hex_to_rgb(m.color) for key in m.view.xyz)
+            faces_color_back = flist(hex_to_rgb(m.color) for key in m.view.xyz)
             self.buffers.append({
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),

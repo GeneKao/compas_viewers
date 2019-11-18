@@ -19,7 +19,6 @@ class MultiMeshViewer(App):
 
     def __init__(self):
         super().__init__(CONFIG, STYLE)
-        self._meshes = None
         self.controller = Controller(self)
         self.view = View(self.controller)
         self.view.camera.events.rotX.connect(self.controller.on_rotX)
@@ -30,6 +29,14 @@ class MultiMeshViewer(App):
         self.view.glInit()
         self.view.setup_grid()
         self.view.setup_axes()
+
+    @property
+    def colors(self):
+        return self.controller.colors
+
+    @colors.setter
+    def colors(self, colors):
+        self.controller.colors = colors
 
     @property
     def meshes(self):
@@ -60,19 +67,25 @@ if __name__ == '__main__':
 
     from compas.geometry import Box
     from compas.datastructures import Mesh
-    from compas.datastructures import mesh_subdivide_quad
+    # from compas.datastructures import mesh_subdivide_quad
     from compas.datastructures import mesh_quads_to_triangles
+
+    class MeshObject(object):
+        def __init__(self, mesh, color):
+            self.data = mesh
+            self.color = color
 
     box = Box.from_width_height_depth(5.0, 3.0, 1.0)
     a = Mesh.from_vertices_and_faces(box.vertices, box.faces)
-    a = mesh_subdivide_quad(a, k=2)
+    # a = mesh_subdivide_quad(a, k=2)
     mesh_quads_to_triangles(a)
 
     box = Box.from_width_height_depth(1.0, 5.0, 3.0)
     b = Mesh.from_vertices_and_faces(box.vertices, box.faces)
-    b = mesh_subdivide_quad(b, k=2)
+    # b = mesh_subdivide_quad(b, k=2)
+    mesh_quads_to_triangles(b)
 
     viewer = MultiMeshViewer()
-    viewer.meshes = [a, b]
+    viewer.meshes = [MeshObject(a, '#ff0000'), MeshObject(b, '#0000ff')]
 
     viewer.show()
