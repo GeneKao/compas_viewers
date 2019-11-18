@@ -32,6 +32,25 @@ from compas.geometry import Projection
 
 # //gl_Position = projection * view * model * vec4(position, 1.0);
 
+    # aspect = self.width() / self.height()
+    # fov = 50
+    # znear = 0.1
+    # zfar = 100
+    # h = znear * tan(pi * fov / 360.0)
+    # w = h * aspect
+    # P = np.zeros((4, 4), dtype=np.float32)
+    # left = -w
+    # right = w
+    # bottom = -h
+    # top = h
+    # P[0, 0] = +2.0 * znear / (right - left)
+    # P[2, 0] = (right + left) / (right - left)
+    # P[1, 1] = +2.0 * znear / (top - bottom)
+    # P[2, 1] = (top + bottom) / (top - bottom)
+    # P[2, 2] = -(zfar + znear) / (zfar - znear)
+    # P[3, 2] = -2.0 * znear * zfar / (zfar - znear)
+    # P[2, 3] = -1.0
+
 
 class View(QtWidgets.QOpenGLWidget):
 
@@ -98,28 +117,37 @@ void main()
     def make_shader_program(self):
         context = self.context()
         f = context.functions()
+
         program = glCreateProgram()
         vertex = glCreateShader(GL_VERTEX_SHADER)
         fragment = glCreateShader(GL_FRAGMENT_SHADER)
+
         glShaderSource(vertex, self.vertexcode)
         glShaderSource(fragment, self.fragmentcode)
+
         glCompileShader(vertex)
         if not glGetShaderiv(vertex, GL_COMPILE_STATUS):
             error = glGetShaderInfoLog(vertex).decode()
             raise RuntimeError("Vertex shader compilation error: {}".format(error))
+
         glCompileShader(fragment)
         if not glGetShaderiv(fragment, GL_COMPILE_STATUS):
             error = glGetShaderInfoLog(fragment).decode()
             raise RuntimeError("Fragment shader compilation error: {}".format(error))
+
         glAttachShader(program, vertex)
         glAttachShader(program, fragment)
+
         glLinkProgram(program)
         if not glGetProgramiv(program, GL_LINK_STATUS):
             error = glGetProgramInfoLog(program).decode()
             raise RuntimeError("Linking error: {}".format(error))
+
         glDetachShader(program, vertex)
         glDetachShader(program, fragment)
+
         glUseProgram(program)
+
         self.program = program
 
     def make_vertex_buffer(self, data):
@@ -143,8 +171,7 @@ void main()
         self.buffers['edges'] = self.make_element_buffer(self.edges)
         self.buffers['vertices'] = self.make_element_buffer(self.vertices)
 
-    def set_attributes(self):
-        # position
+    def set_position_attribute(self):
         loc = glGetAttribLocation(self.program, "a_position")
         size = self.xyz.shape[1]
         stride = self.xyz.strides[0]
@@ -152,7 +179,8 @@ void main()
         glEnableVertexAttribArray(loc)
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
         glVertexAttribPointer(loc, size, GL_FLOAT, False, stride, offset)
-        # color
+
+    def set_color_attribute(self):
         loc = glGetAttribLocation(self.program, "a_color")
         size = self.colors.shape[1]
         stride = self.colors.strides[0]
@@ -160,7 +188,8 @@ void main()
         glEnableVertexAttribArray(loc)
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['colors'])
         glVertexAttribPointer(loc, size, GL_FLOAT, False, stride, offset)
-        # uniform edge color
+
+    def set_uniform_color(self):
         loc = glGetUniformLocation(self.program, "u_color")
         glUniform4f(loc, 1, 1, 1, 1)
 
@@ -179,24 +208,6 @@ void main()
     def set_projection_matrix(self):
         w = self.width()
         h = self.height()
-        # aspect = self.width() / self.height()
-        # fov = 50
-        # znear = 0.1
-        # zfar = 100
-        # h = znear * tan(pi * fov / 360.0)
-        # w = h * aspect
-        # P = np.zeros((4, 4), dtype=np.float32)
-        # left = -w
-        # right = w
-        # bottom = -h
-        # top = h
-        # P[0, 0] = +2.0 * znear / (right - left)
-        # P[2, 0] = (right + left) / (right - left)
-        # P[1, 1] = +2.0 * znear / (top - bottom)
-        # P[2, 1] = (top + bottom) / (top - bottom)
-        # P[2, 2] = -(zfar + znear) / (zfar - znear)
-        # P[3, 2] = -2.0 * znear * zfar / (zfar - znear)
-        # P[2, 3] = -1.0
         P = glm.perspective(45.0, w / float(h), 0.1, 100.0)
         loc = glGetUniformLocation(self.program, "projection")
         glUniformMatrix4fv(loc, 1, False, P)
@@ -204,6 +215,7 @@ void main()
     def initializeGL(self):
         context = self.context()
         f = context.functions()
+
         # init
         glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
         glClearColor(255, 255, 255, 255)
@@ -221,11 +233,14 @@ void main()
         glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST)
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
+
         # further init
         self.make_shader_program()
         self.make_vertex_buffers()
         self.make_element_buffers()
-        self.set_attributes()
+        self.set_position_attribute()
+        self.set_color_attribute()
+        self.set_uniform_color()
         self.set_model_matrix()
         self.set_view_matrix()
         self.set_projection_matrix()
@@ -233,11 +248,14 @@ void main()
     def paintGL(self):
         context = self.context()
         f = context.functions()
+
         if not self.isValid():
             return
         if glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE:
             return
+
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
         # faces
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.buffers['faces'])
         glDisable(GL_BLEND)
@@ -246,6 +264,7 @@ void main()
         loc = glGetUniformLocation(self.program, "u_color")
         glUniform4f(loc, 1, 1, 1, 1)
         glDrawElements(GL_TRIANGLES, self.faces.size, GL_UNSIGNED_INT, None)
+
         # edges
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.buffers['edges'])
         glDisable(GL_POLYGON_OFFSET_FILL)
@@ -257,20 +276,12 @@ void main()
         glDrawElements(GL_LINES, self.edges.size, GL_UNSIGNED_INT, None)
         glDepthMask(GL_TRUE)
 
-    # def resizeEvent(self, event):
-    #     super().resizeEvent(event)
-    #     # context = self.context()
-    #     # if context:
-    #     #     f = context.functions()
-    #     #     w = event.size().width()
-    #     #     h = event.size().height()
-    #     #     glViewport(0, 0, w, h)
-
     def resizeGL(self, w, h):
         context = self.context()
         f = context.functions()
+
         glViewport(0, 0, w, h)
-        self.set_view_matrix()
+
         self.set_projection_matrix()
 
 
