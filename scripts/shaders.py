@@ -1,7 +1,14 @@
 import sys
 
+from math import tan
+from math import pi
+from math import radians
+
 import numpy as np
 import ctypes
+
+from glumpy import gloo
+from glumpy import glm
 
 from PySide2 import QtCore
 from PySide2 import QtGui
@@ -14,6 +21,10 @@ from numpy import array
 from numpy import float64
 from numpy import int32
 
+from compas.geometry import Translation
+from compas.geometry import Rotation
+from compas.geometry import Scale
+from compas.geometry import Projection
 
 # //uniform mat4 view;
 # //uniform mat4 model;
@@ -25,20 +36,26 @@ from numpy import int32
 class View(QtWidgets.QOpenGLWidget):
 
     vertexcode = """
+uniform mat4   model;
+uniform mat4   view;
+uniform mat4   projection;
+
 attribute vec3 a_position;
 attribute vec4 a_color;
-uniform vec4 u_color;
-varying vec4 v_color;
+
+uniform vec4   u_color;
+
+varying vec4 v_color; // out
 
 void main()
 {
     v_color = u_color * a_color;
-    gl_Position = vec4(a_position, 1.0);
+    gl_Position = projection * view * model * vec4(a_position, 1.0);
 }
 """
 
     fragmentcode = """
-varying vec4 v_color;
+varying vec4 v_color; // in
 
 void main()
 {
@@ -53,15 +70,29 @@ void main()
             [0.0, 0.0, 0.0],
             [1.0, 0.0, 0.0],
             [1.0, 1.0, 0.0],
-            [0.0, 1.0, 0.0]], dtype=np.float64)
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+            [1.0, 0.0, 1.0],
+            [1.0, 1.0, 1.0],
+            [0.0, 1.0, 1.0]], dtype=np.float32)
         self.colors = np.array([
             [1.0, 0.0, 0.0, 1.0],
+            [1.0, 1.0, 0.0, 1.0],
             [0.0, 1.0, 0.0, 1.0],
             [0.0, 1.0, 1.0, 1.0],
-            [0.0, 0.0, 1.0, 1.0]], dtype=np.float64)
-        self.vertices = np.array([0, 1, 2], dtype=np.int32).flatten()
-        self.faces = np.array([[0, 1, 2], [0, 2, 3]], dtype=np.int32).flatten()
-        self.edges = np.array([[0, 1], [1, 2], [2, 0], [2, 3], [3, 0]], dtype=np.int32).flatten()
+            [0.0, 0.0, 1.0, 1.0],
+            [0.0, 1.0, 1.0, 1.0],
+            [0.0, 1.0, 0.0, 1.0],
+            [1.0, 1.0, 0.0, 1.0]], dtype=np.float32)
+        self.vertices = np.array([0, 1, 2, 3, 4, 5, 6, 7], dtype=np.int32)
+        self.faces = np.array([
+            [0, 2, 1], [0, 3, 2],
+            [0, 1, 5], [0, 5, 4],
+            [4, 3, 0], [4, 7, 3],
+            [7, 2, 3], [7, 6, 2],
+            [6, 5, 2], [5, 1, 2],
+            [4, 6, 7], [5, 6, 4]], dtype=np.int32).flatten()
+        self.edges = np.array([[0, 1], [1, 2], [2, 0], [2, 3], [3, 0], [4, 5], [5, 6], [6, 7], [7, 4], [0, 4], [1, 5], [2, 6], [3, 7]], dtype=np.int32).flatten()
         self.buffers = {'xyz': None, 'vertices': None, 'edges': None, 'faces': None, 'colors': None}
 
     def make_shader_program(self):
@@ -91,33 +122,26 @@ void main()
         glUseProgram(program)
         self.program = program
 
+    def make_vertex_buffer(self, data):
+        buffer = glGenBuffers(1)
+        glBindBuffer(GL_ARRAY_BUFFER, buffer)
+        glBufferData(GL_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
+        return buffer
+
     def make_vertex_buffers(self):
-        # vertex locations
-        data = self.xyz
+        self.buffers['xyz'] = self.make_vertex_buffer(self.xyz)
+        self.buffers['colors'] = self.make_vertex_buffer(self.colors)
+
+    def make_element_buffer(self, data):
         buffer = glGenBuffers(1)
-        glBindBuffer(GL_ARRAY_BUFFER, buffer)
-        glBufferData(GL_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
-        self.buffers['xyz'] = buffer
-        # vertex colors
-        data = self.colors
-        buffer = glGenBuffers(1)
-        glBindBuffer(GL_ARRAY_BUFFER, buffer)
-        glBufferData(GL_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
-        self.buffers['colors'] = buffer
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer)
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
+        return buffer
 
     def make_element_buffers(self):
-        # faces
-        data = self.faces
-        buffer = glGenBuffers(1)
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer)
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
-        self.buffers['faces'] = buffer
-        # edges
-        data = self.edges
-        buffer = glGenBuffers(1)
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer)
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, data.nbytes, data, GL_STATIC_DRAW)
-        self.buffers['edges'] = buffer
+        self.buffers['faces'] = self.make_element_buffer(self.faces)
+        self.buffers['edges'] = self.make_element_buffer(self.edges)
+        self.buffers['vertices'] = self.make_element_buffer(self.vertices)
 
     def set_attributes(self):
         # position
@@ -127,7 +151,7 @@ void main()
         offset = ctypes.c_void_p(0)
         glEnableVertexAttribArray(loc)
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['xyz'])
-        glVertexAttribPointer(loc, size, GL_DOUBLE, False, stride, offset)
+        glVertexAttribPointer(loc, size, GL_FLOAT, False, stride, offset)
         # color
         loc = glGetAttribLocation(self.program, "a_color")
         size = self.colors.shape[1]
@@ -135,10 +159,47 @@ void main()
         offset = ctypes.c_void_p(0)
         glEnableVertexAttribArray(loc)
         glBindBuffer(GL_ARRAY_BUFFER, self.buffers['colors'])
-        glVertexAttribPointer(loc, size, GL_DOUBLE, False, stride, offset)
-        # uniform color
+        glVertexAttribPointer(loc, size, GL_FLOAT, False, stride, offset)
+        # uniform edge color
         loc = glGetUniformLocation(self.program, "u_color")
         glUniform4f(loc, 1, 1, 1, 1)
+
+    def set_model_matrix(self):
+        I = np.eye(4, dtype=np.float32)
+        loc = glGetUniformLocation(self.program, "model")
+        glUniformMatrix4fv(loc, 1, False, I)
+
+    def set_view_matrix(self):
+        T = np.array(Translation([0, 0, -5]), dtype=np.float32)
+        Rx = np.array(Rotation.from_axis_and_angle([1.0, 0.0, 0.0], radians(-60)), dtype=np.float32)
+        Rz = np.array(Rotation.from_axis_and_angle([0.0, 0.0, 1.0], radians(30)), dtype=np.float32)
+        loc = glGetUniformLocation(self.program, "view")
+        glUniformMatrix4fv(loc, 1, True, T.dot(Rx.dot(Rz)))
+
+    def set_projection_matrix(self):
+        w = self.width()
+        h = self.height()
+        # aspect = self.width() / self.height()
+        # fov = 50
+        # znear = 0.1
+        # zfar = 100
+        # h = znear * tan(pi * fov / 360.0)
+        # w = h * aspect
+        # P = np.zeros((4, 4), dtype=np.float32)
+        # left = -w
+        # right = w
+        # bottom = -h
+        # top = h
+        # P[0, 0] = +2.0 * znear / (right - left)
+        # P[2, 0] = (right + left) / (right - left)
+        # P[1, 1] = +2.0 * znear / (top - bottom)
+        # P[2, 1] = (top + bottom) / (top - bottom)
+        # P[2, 2] = -(zfar + znear) / (zfar - znear)
+        # P[3, 2] = -2.0 * znear * zfar / (zfar - znear)
+        # P[2, 3] = -1.0
+        P = glm.perspective(45.0, w / float(h), 0.1, 100.0)
+        loc = glGetUniformLocation(self.program, "projection")
+        glUniformMatrix4fv(loc, 1, False, P)
 
     def initializeGL(self):
         context = self.context()
@@ -165,6 +226,9 @@ void main()
         self.make_vertex_buffers()
         self.make_element_buffers()
         self.set_attributes()
+        self.set_model_matrix()
+        self.set_view_matrix()
+        self.set_projection_matrix()
 
     def paintGL(self):
         context = self.context()
@@ -173,8 +237,8 @@ void main()
             return
         if glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE:
             return
-        # faces
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        # faces
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, self.buffers['faces'])
         glDisable(GL_BLEND)
         glEnable(GL_DEPTH_TEST)
@@ -189,21 +253,25 @@ void main()
         glDepthMask(GL_FALSE)
         loc = glGetUniformLocation(self.program, "u_color")
         glUniform4f(loc, 0, 0, 0, 1)
+        glLineWidth(3.0)
         glDrawElements(GL_LINES, self.edges.size, GL_UNSIGNED_INT, None)
         glDepthMask(GL_TRUE)
 
-    def resizeEvent(self, event):
-        context = self.context()
-        if context:
-            f = context.functions()
-            w = event.size().width()
-            h = event.size().height()
-            glViewport(0, 0, w, h)
+    # def resizeEvent(self, event):
+    #     super().resizeEvent(event)
+    #     # context = self.context()
+    #     # if context:
+    #     #     f = context.functions()
+    #     #     w = event.size().width()
+    #     #     h = event.size().height()
+    #     #     glViewport(0, 0, w, h)
 
-    def resizGL(self, w, h):
+    def resizeGL(self, w, h):
         context = self.context()
         f = context.functions()
         glViewport(0, 0, w, h)
+        self.set_view_matrix()
+        self.set_projection_matrix()
 
 
 # ==============================================================================
