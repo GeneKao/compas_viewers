@@ -13,7 +13,6 @@ from OpenGL.GLUT import *
 from compas.utilities import hex_to_rgb
 from compas.utilities import flatten
 from compas_viewers.core import GLWidget
-# from compas_viewers.core import OpenGLWidget
 from compas_viewers.core import Grid
 from compas_viewers.core import Axes
 
@@ -39,16 +38,9 @@ class View(GLWidget):
         self.e = 0
         self.f = 0
 
-    # def glInit(self):
-    #     self.initializeGL()
-
     @property
     def meshes(self):
         return self.controller.meshes
-
-    # @property
-    # def colors(self):
-    #     return self.controller.colors
 
     @property
     def settings(self):
@@ -88,7 +80,6 @@ class View(GLWidget):
 
     def make_buffers(self):
         self.buffers = []
-        print(self.controller.colors)
         for m in self.meshes:
             xyz = flist(m.view.xyz)
             vertices = list(m.view.vertices)
@@ -148,9 +139,6 @@ class View(GLWidget):
                 glColorPointer(3, GL_FLOAT, 0, None)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['vertices'])
                 glDrawElements(GL_POINTS, buffer['v'], GL_UNSIGNED_INT, None)
-
-            # if self.settings['normals.on']:
-            #     pass
 
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)

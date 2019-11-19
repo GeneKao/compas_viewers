@@ -48,6 +48,7 @@ class GLWidget(QOpenGLWidget):
     @current.setter
     def current(self, value):
         self._current_view = value
+        self.camera.focus()
 
     def get_error(self):
         return glGetError()
@@ -105,6 +106,7 @@ class GLWidget(QOpenGLWidget):
         glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST)
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST)
         glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST)
+
         self.camera.aim()
         self.camera.focus()
 
@@ -138,15 +140,8 @@ class GLWidget(QOpenGLWidget):
     # resize callback
     # ==========================================================================
 
-    def resizeEvent(self, event):
-        # super(GLWidget, self).resizeEvent(event)
-        w = event.size().width()
-        h = event.size().height()
+    def resizeGL(self, w, h):
         glViewport(0, 0, w, h)
-
-    def resizeGl(self, w, h):
-        glViewport(0, 0, w, h)
-        self.camera.aim()
         self.camera.focus()
 
     # ==========================================================================

@@ -45,7 +45,7 @@ class MultiMeshViewer(App):
     @meshes.setter
     def meshes(self, meshes):
         self.controller.meshes = meshes
-        self.controller.center()
+        # self.controller.center()
         self.view.glInit()
         self.view.make_buffers()
         self.view.updateGL()
@@ -65,27 +65,42 @@ if __name__ == '__main__':
     # the "view" matrix is uniform (same everywhere)
     # the "projection" transformation is uniform
 
+    import random
+
+    from math import radians
+
     from compas.geometry import Box
     from compas.datastructures import Mesh
-    # from compas.datastructures import mesh_subdivide_quad
-    from compas.datastructures import mesh_quads_to_triangles
+    from compas.datastructures import mesh_transform_numpy
+    from compas_viewers.multimeshviewer.model import MeshView
+    from compas.utilities import rgb_to_hex
+    from compas.geometry import Translation
+    from compas.geometry import Rotation
 
     class MeshObject(object):
-        def __init__(self, mesh, color):
+        def __init__(self, mesh, color=None):
             self.data = mesh
+            self.view = MeshView(mesh)
             self.color = color
+            self.xforms = []
 
-    box = Box.from_width_height_depth(5.0, 3.0, 1.0)
-    a = Mesh.from_vertices_and_faces(box.vertices, box.faces)
-    # a = mesh_subdivide_quad(a, k=2)
-    mesh_quads_to_triangles(a)
-
-    box = Box.from_width_height_depth(1.0, 5.0, 3.0)
-    b = Mesh.from_vertices_and_faces(box.vertices, box.faces)
-    # b = mesh_subdivide_quad(b, k=2)
-    mesh_quads_to_triangles(b)
+    meshes = []
+    for i in range(10):
+        vector = [random.randint(0, 10), random.randint(0, 10), random.randint(0, 5)]
+        T = Translation(vector)
+        axis = [0, 0, 1.0]
+        angle = radians(random.randint(0, 180))
+        R = Rotation.from_axis_and_angle(axis, angle)
+        X = T * R
+        w, h, d = random.randint(1, 3), random.randint(1, 3), random.randint(1, 3)
+        box = Box.from_width_height_depth(w, h, d)
+        mesh = Mesh.from_shape(box)
+        mesh_transform_numpy(mesh, X)
+        rgb = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        obj = MeshObject(mesh, color=rgb_to_hex(rgb))
+        meshes.append(obj)
 
     viewer = MultiMeshViewer()
-    viewer.meshes = [MeshObject(a, '#ff0000'), MeshObject(b, '#0000ff')]
+    viewer.meshes = meshes
 
     viewer.show()

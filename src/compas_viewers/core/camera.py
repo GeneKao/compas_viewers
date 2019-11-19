@@ -165,10 +165,11 @@ class Camera(QObject):
         glMatrixMode(GL_MODELVIEW)
         glLoadIdentity()
 
-        glTranslatef(self.tx, self.ty, 0)
-        glTranslatef(0, 0, -self.distance)
-        glTranslatef(self.target[0], self.target[1], self.target[2])
+        # model matrix
 
+        # view matrix
+        glTranslatef(self.tx, self.ty, -self.distance)
+        glTranslatef(self.target[0], self.target[1], self.target[2])
         if self.view.current == self.view.VIEW_PERSPECTIVE:
             glRotatef(self.rx, 1, 0, 0)
             glRotatef(self.rz, 0, 0, 1)
@@ -179,19 +180,17 @@ class Camera(QObject):
             glRotatef(+90, 0, 0, 1)
         elif self.view.current == self.view.VIEW_TOP:
             pass
-
         glTranslatef(-self.target[0], -self.target[1], -self.target[2])
 
     def focus(self):
+        # projection matrix
         glPushAttrib(GL_TRANSFORM_BIT)
         glMatrixMode(GL_PROJECTION)
         glLoadIdentity()
-
         if self.view.current == self.view.VIEW_PERSPECTIVE:
             gluPerspective(self.fov, self.aspect, self.near, self.far)
         else:
             glOrtho(-self.distance, self.distance, -self.distance / self.aspect, self.distance / self.aspect, self.near, self.far)
-
         glPopAttrib()
 
 

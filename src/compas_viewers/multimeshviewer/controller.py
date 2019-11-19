@@ -146,10 +146,7 @@ class Controller(core.controller.Controller):
 
     @meshes.setter
     def meshes(self, meshes):
-        self._meshes = []
-        for mesh in meshes:
-            mesh.view = MeshView(mesh.data)
-            self._meshes.append(mesh)
+        self._meshes = meshes
 
     @property
     def colors(self):
@@ -163,16 +160,14 @@ class Controller(core.controller.Controller):
         # perhaps this should be a bestfit_frame
         # and a frame to frame transformation of all points
         # most certainly use numpy transformations
-        xyz = [_xyz for m in self.meshes for _xyz in m.data.get_vertices_attributes('xyz')]
+        xyz = [_xyz for o in self.meshes for _xyz in o.data.get_vertices_attributes('xyz')]
         cx, cy, cz = centroid_points(xyz)
-        for m in self.meshes:
-            for key, attr in m.data.vertices(True):
+        for o in self.meshes:
+            for key, attr in o.data.vertices(True):
                 attr['x'] -= cx
                 attr['y'] -= cy
                 attr['z'] -= cz
-
-    def adjust_camera(self):
-        pass
+            o.view.mesh = o.data
 
     # ==========================================================================
     # Slots
@@ -266,9 +261,6 @@ class Controller(core.controller.Controller):
         self.view.current = view
         self.view.updateGL()
 
-    # def update_camera_settings(self):
-    #     self.log('Updating the camera settings.')
-
     def capture_image(self):
         result = QtWidgets.QFileDialog.getSaveFileName(caption="File name", dir=HERE)
         if not result:
@@ -278,9 +270,6 @@ class Controller(core.controller.Controller):
         if not ext:
             return
         self.view.capture(filepath, ext[1:])
-
-    # def capture_video(self):
-    #     self.message('Capture Video is under construction...')
 
     # ==========================================================================
     # appearance
@@ -302,14 +291,6 @@ class Controller(core.controller.Controller):
         self.settings['edges.width:value'] = value
         self.view.updateGL()
 
-    # def slide_scale_normals(self, value):
-    #     self.settings['normals.scale:value'] = value
-    #     self.view.updateGL()
-
-    # def edit_scale_normals(self, value):
-    #     self.settings['normals.scale:value'] = value
-    #     self.view.updateGL()
-
     # ==========================================================================
     # visibility
     # ==========================================================================
@@ -326,11 +307,6 @@ class Controller(core.controller.Controller):
         self.settings['vertices.on'] = state == QtCore.Qt.Checked
         self.view.updateGL()
 
-    # def toggle_normals(self, state):
-    #     self.message('Display of face and vertex normals is still under construction...')
-    #     self.settings['normals.on'] = state == QtCore.Qt.Checked
-    #     self.view.updateGL()
-
     # ==========================================================================
     # color
     # ==========================================================================
@@ -346,24 +322,6 @@ class Controller(core.controller.Controller):
         self.view.update_vertex_buffer('edges.color', self.view.array_edges_color)
         self.view.updateGL()
         self.app.main.activateWindow()
-
-    # def change_faces_color_front(self, color):
-    #     self.settings['faces.color:front'] = color
-    #     self.view.update_vertex_buffer('faces.color:front', self.view.array_faces_color_front)
-    #     self.view.updateGL()
-    #     self.app.main.activateWindow()
-
-    # def change_faces_color_back(self, color):
-    #     self.settings['faces.color:back'] = color
-    #     self.view.update_vertex_buffer('faces.color:back', self.view.array_faces_color_back)
-    #     self.view.updateGL()
-    #     self.app.main.activateWindow()
-
-    # def change_normals_color(self, color):
-    #     self.settings['normals.color'] = color
-    #     self.view.update_vertex_buffer('normals.color', self.view.array_normals_color)
-    #     self.view.updateGL()
-    #     self.app.main.activateWindow()
 
     # ==========================================================================
     # camera
@@ -396,40 +354,6 @@ class Controller(core.controller.Controller):
 
     def edit_fov(self, value):
         pass
-
-    # ==========================================================================
-    # tools
-    # ==========================================================================
-
-    # open dialog or panel for additional options
-    # set options and apply
-
-    # def flip_normals(self):
-    #     mesh_flip_cycles(self.mesh)
-    #     # this is a bit of a hack
-    #     # faces of the viewmesh only get calculated at the time when the mesh
-    #     # is assigned to the viewmesh
-    #     self.meshview.mesh = self.mesh
-    #     self.view.update_index_buffer('faces:front', self.view.array_faces_front)
-    #     self.view.update_index_buffer('faces:back', self.view.array_faces_back)
-    #     self.view.updateGL()
-
-    # implement as toggle?
-    # if 'on' the orginal is shown as control mesh (edges only)
-    # and the subdivision surface up to the specified level
-    # def subdivide(self, scheme, k):
-    #     self.mesh = mesh_subdivide(self.mesh, scheme=scheme, k=k)
-    #     self.view.make_buffers()
-    #     self.view.updateGL()
-
-    # def smooth_wo_shrinking(self):
-    #     pass
-
-    # def smooth_area(self):
-    #     pass
-
-    # def smooth_laplacian(self):
-    #     pass
 
 
 # ==============================================================================
