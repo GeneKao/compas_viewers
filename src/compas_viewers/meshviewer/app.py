@@ -7,8 +7,8 @@ from compas_viewers.core import App
 from compas_viewers.meshviewer.view import View
 from compas_viewers.meshviewer.controller import Controller
 
-from compas_viewers.meshviewer import CONFIG
-from compas_viewers.meshviewer import STYLE
+from compas_viewers.meshviewer.config import CONFIG
+from compas_viewers.meshviewer.style import STYLE
 
 
 __all__ = ['MeshViewer']
