@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>compas_viewers</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="../../_static/images/compas.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../../_static/css/prism.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../../_static/css/compas.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/compas-reference.css" />
+
+    
+        <link rel="next" title="GLWidget.__init__" href="compas_viewers.core.GLWidget.__init__.html" />
+    
+    
+    
+        <link rel="prev" title="Controller.opengl_version_info" href="compas_viewers.core.Controller.opengl_version_info.html" />
+    
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</head>
+
+<body data-spy="scroll" data-target="#compas-localnav">
+
+    <nav class="navbar navbar-expand compas-navbar">
+        <a class="navbar-brand" href="/">
+            <img src="../../_static/images/compas_icon_white.png" width="36px" height="36px" alt="compas" />
+        </a>
+
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="../../index.html">COMPAS viewers</a></li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" target="_blank" href="">Github</a></li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://compas-dev.github.io">COMPAS framework</a></li>
+        </ul>
+    </nav>    
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+
+            <main class="col-12 col-md-9 col-xl-8 compas-content" role="main">
+                <div class="container">
+                
+
+                    
+
+                    <div class="detail section" id="glwidget">
+<h1>GLWidget</h1>
+<dl class="class">
+<dt id="compas_viewers.core.GLWidget">
+<em class="property">class </em><code class="sig-prename descclassname">compas_viewers.core.</code><code class="sig-name descname">GLWidget</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PySide2.QtOpenGL.QGLWidget</span></code></p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VIEW_FRONT</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VIEW_LEFT</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VIEW_PERSPECTIVE</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">VIEW_TOP</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">current</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">staticMetaObject</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DrawChildren</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">DrawWindowBackground</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">IgnoreMask</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmDepth</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmDevicePixelRatio</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmDevicePixelRatioScaled</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmDpiX</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmDpiY</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmHeight</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmHeightMM</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmNumColors</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmPhysicalDpiX</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmPhysicalDpiY</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmWidth</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">PdmWidthMM</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">customContextMenuRequested</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">destroyed</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">objectNameChanged</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">painters</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowIconChanged</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowIconTextChanged</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowTitleChanged</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.__init__.html#compas_viewers.core.GLWidget.__init__" title="compas_viewers.core.GLWidget.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>([parent])</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.capture.html#compas_viewers.core.GLWidget.capture" title="compas_viewers.core.GLWidget.capture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">capture</span></code></a>(filename, filetype)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.get_error.html#compas_viewers.core.GLWidget.get_error" title="compas_viewers.core.GLWidget.get_error"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_error</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.initializeGL.html#compas_viewers.core.GLWidget.initializeGL" title="compas_viewers.core.GLWidget.initializeGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initializeGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.keyPressAction.html#compas_viewers.core.GLWidget.keyPressAction" title="compas_viewers.core.GLWidget.keyPressAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyPressAction</span></code></a>(key)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.keyPressEvent.html#compas_viewers.core.GLWidget.keyPressEvent" title="compas_viewers.core.GLWidget.keyPressEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyPressEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.make_index_buffer.html#compas_viewers.core.GLWidget.make_index_buffer" title="compas_viewers.core.GLWidget.make_index_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_index_buffer</span></code></a>(indices[, dynamic])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.make_vertex_buffer.html#compas_viewers.core.GLWidget.make_vertex_buffer" title="compas_viewers.core.GLWidget.make_vertex_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">make_vertex_buffer</span></code></a>(data[, dynamic])</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mouseMoveEvent.html#compas_viewers.core.GLWidget.mouseMoveEvent" title="compas_viewers.core.GLWidget.mouseMoveEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mouseMoveEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mousePressEvent.html#compas_viewers.core.GLWidget.mousePressEvent" title="compas_viewers.core.GLWidget.mousePressEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mousePressEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paint.html#compas_viewers.core.GLWidget.paint" title="compas_viewers.core.GLWidget.paint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paint</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paintGL.html#compas_viewers.core.GLWidget.paintGL" title="compas_viewers.core.GLWidget.paintGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paintGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.resizeGL.html#compas_viewers.core.GLWidget.resizeGL" title="compas_viewers.core.GLWidget.resizeGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resizeGL</span></code></a>(self, w, h)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.update_index_buffer.html#compas_viewers.core.GLWidget.update_index_buffer" title="compas_viewers.core.GLWidget.update_index_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_index_buffer</span></code></a>(name, indices)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.update_vertex_buffer.html#compas_viewers.core.GLWidget.update_vertex_buffer" title="compas_viewers.core.GLWidget.update_vertex_buffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_vertex_buffer</span></code></a>(name, data)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.wheelEvent.html#compas_viewers.core.GLWidget.wheelEvent" title="compas_viewers.core.GLWidget.wheelEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">wheelEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.acceptDrops.html#compas_viewers.core.GLWidget.acceptDrops" title="compas_viewers.core.GLWidget.acceptDrops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">acceptDrops</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.accessibleDescription.html#compas_viewers.core.GLWidget.accessibleDescription" title="compas_viewers.core.GLWidget.accessibleDescription"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessibleDescription</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.accessibleName.html#compas_viewers.core.GLWidget.accessibleName" title="compas_viewers.core.GLWidget.accessibleName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">accessibleName</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.actionEvent.html#compas_viewers.core.GLWidget.actionEvent" title="compas_viewers.core.GLWidget.actionEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">actionEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.actions.html#compas_viewers.core.GLWidget.actions" title="compas_viewers.core.GLWidget.actions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">actions</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.activateWindow.html#compas_viewers.core.GLWidget.activateWindow" title="compas_viewers.core.GLWidget.activateWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">activateWindow</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.addAction.html#compas_viewers.core.GLWidget.addAction" title="compas_viewers.core.GLWidget.addAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addAction</span></code></a>(self, action)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.addActions.html#compas_viewers.core.GLWidget.addActions" title="compas_viewers.core.GLWidget.addActions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">addActions</span></code></a>(self, actions)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.adjustSize.html#compas_viewers.core.GLWidget.adjustSize" title="compas_viewers.core.GLWidget.adjustSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">adjustSize</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.autoBufferSwap.html#compas_viewers.core.GLWidget.autoBufferSwap" title="compas_viewers.core.GLWidget.autoBufferSwap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoBufferSwap</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.autoFillBackground.html#compas_viewers.core.GLWidget.autoFillBackground" title="compas_viewers.core.GLWidget.autoFillBackground"><code class="xref py py-obj docutils literal notranslate"><span class="pre">autoFillBackground</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.backgroundRole.html#compas_viewers.core.GLWidget.backgroundRole" title="compas_viewers.core.GLWidget.backgroundRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backgroundRole</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.backingStore.html#compas_viewers.core.GLWidget.backingStore" title="compas_viewers.core.GLWidget.backingStore"><code class="xref py py-obj docutils literal notranslate"><span class="pre">backingStore</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.baseSize.html#compas_viewers.core.GLWidget.baseSize" title="compas_viewers.core.GLWidget.baseSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">baseSize</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.bindTexture.html#compas_viewers.core.GLWidget.bindTexture" title="compas_viewers.core.GLWidget.bindTexture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">bindTexture</span></code></a>(self, fileName)</p></td>
+<td><p>bindTexture(self, image: PySide2.QtGui.QImage, target: int, format: int, options: PySide2.QtOpenGL.QGLContext.BindOptions) -&gt; int bindTexture(self, image: PySide2.QtGui.QImage, target: int = 3553, format: int = 6408) -&gt; int bindTexture(self, pixmap: PySide2.QtGui.QPixmap, target: int, format: int, options: PySide2.QtOpenGL.QGLContext.BindOptions) -&gt; int bindTexture(self, pixmap: PySide2.QtGui.QPixmap, target: int = 3553, format: int = 6408) -&gt; int</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.blockSignals.html#compas_viewers.core.GLWidget.blockSignals" title="compas_viewers.core.GLWidget.blockSignals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">blockSignals</span></code></a>(self, b)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.changeEvent.html#compas_viewers.core.GLWidget.changeEvent" title="compas_viewers.core.GLWidget.changeEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">changeEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.childAt.html#compas_viewers.core.GLWidget.childAt" title="compas_viewers.core.GLWidget.childAt"><code class="xref py py-obj docutils literal notranslate"><span class="pre">childAt</span></code></a>(self, p)</p></td>
+<td><p>childAt(self, x: int, y: int) -&gt; PySide2.QtWidgets.QWidget</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.childEvent.html#compas_viewers.core.GLWidget.childEvent" title="compas_viewers.core.GLWidget.childEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">childEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.children.html#compas_viewers.core.GLWidget.children" title="compas_viewers.core.GLWidget.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.childrenRect.html#compas_viewers.core.GLWidget.childrenRect" title="compas_viewers.core.GLWidget.childrenRect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">childrenRect</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.childrenRegion.html#compas_viewers.core.GLWidget.childrenRegion" title="compas_viewers.core.GLWidget.childrenRegion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">childrenRegion</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.clearFocus.html#compas_viewers.core.GLWidget.clearFocus" title="compas_viewers.core.GLWidget.clearFocus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clearFocus</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.clearMask.html#compas_viewers.core.GLWidget.clearMask" title="compas_viewers.core.GLWidget.clearMask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">clearMask</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.close.html#compas_viewers.core.GLWidget.close" title="compas_viewers.core.GLWidget.close"><code class="xref py py-obj docutils literal notranslate"><span class="pre">close</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.closeEvent.html#compas_viewers.core.GLWidget.closeEvent" title="compas_viewers.core.GLWidget.closeEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">closeEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.colorCount.html#compas_viewers.core.GLWidget.colorCount" title="compas_viewers.core.GLWidget.colorCount"><code class="xref py py-obj docutils literal notranslate"><span class="pre">colorCount</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.colormap.html#compas_viewers.core.GLWidget.colormap" title="compas_viewers.core.GLWidget.colormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">colormap</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.connect.html#compas_viewers.core.GLWidget.connect" title="compas_viewers.core.GLWidget.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a>(arg__1, arg__2, arg__3, type)</p></td>
+<td><p>connect(arg__1: str, arg__2: typing.Callable, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; bool connect(arg__1: str, arg__2: PySide2.QtCore.QObject, arg__3: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; bool connect(sender: PySide2.QtCore.QObject, signal: PySide2.QtCore.QMetaMethod, receiver: PySide2.QtCore.QObject, method: PySide2.QtCore.QMetaMethod, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection connect(sender: PySide2.QtCore.QObject, signal: str, member: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection connect(sender: PySide2.QtCore.QObject, signal: str, receiver: PySide2.QtCore.QObject, member: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.connectNotify.html#compas_viewers.core.GLWidget.connectNotify" title="compas_viewers.core.GLWidget.connectNotify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connectNotify</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.contentsMargins.html#compas_viewers.core.GLWidget.contentsMargins" title="compas_viewers.core.GLWidget.contentsMargins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contentsMargins</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.contentsRect.html#compas_viewers.core.GLWidget.contentsRect" title="compas_viewers.core.GLWidget.contentsRect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contentsRect</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.context.html#compas_viewers.core.GLWidget.context" title="compas_viewers.core.GLWidget.context"><code class="xref py py-obj docutils literal notranslate"><span class="pre">context</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.contextMenuEvent.html#compas_viewers.core.GLWidget.contextMenuEvent" title="compas_viewers.core.GLWidget.contextMenuEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contextMenuEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.contextMenuPolicy.html#compas_viewers.core.GLWidget.contextMenuPolicy" title="compas_viewers.core.GLWidget.contextMenuPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contextMenuPolicy</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.convertToGLFormat.html#compas_viewers.core.GLWidget.convertToGLFormat" title="compas_viewers.core.GLWidget.convertToGLFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">convertToGLFormat</span></code></a>(img)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.create.html#compas_viewers.core.GLWidget.create" title="compas_viewers.core.GLWidget.create"><code class="xref py py-obj docutils literal notranslate"><span class="pre">create</span></code></a>(self, arg__1, initializeWindow, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.createWinId.html#compas_viewers.core.GLWidget.createWinId" title="compas_viewers.core.GLWidget.createWinId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createWinId</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.createWindowContainer.html#compas_viewers.core.GLWidget.createWindowContainer" title="compas_viewers.core.GLWidget.createWindowContainer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">createWindowContainer</span></code></a>(window, parent, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.cursor.html#compas_viewers.core.GLWidget.cursor" title="compas_viewers.core.GLWidget.cursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cursor</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.customEvent.html#compas_viewers.core.GLWidget.customEvent" title="compas_viewers.core.GLWidget.customEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">customEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.deleteLater.html#compas_viewers.core.GLWidget.deleteLater" title="compas_viewers.core.GLWidget.deleteLater"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deleteLater</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.deleteTexture.html#compas_viewers.core.GLWidget.deleteTexture" title="compas_viewers.core.GLWidget.deleteTexture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deleteTexture</span></code></a>(self, tx_id)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.depth.html#compas_viewers.core.GLWidget.depth" title="compas_viewers.core.GLWidget.depth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">depth</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.destroy.html#compas_viewers.core.GLWidget.destroy" title="compas_viewers.core.GLWidget.destroy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">destroy</span></code></a>(self, destroyWindow, destroySubWindows)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.devType.html#compas_viewers.core.GLWidget.devType" title="compas_viewers.core.GLWidget.devType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">devType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.devicePixelRatio.html#compas_viewers.core.GLWidget.devicePixelRatio" title="compas_viewers.core.GLWidget.devicePixelRatio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">devicePixelRatio</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.devicePixelRatioF.html#compas_viewers.core.GLWidget.devicePixelRatioF" title="compas_viewers.core.GLWidget.devicePixelRatioF"><code class="xref py py-obj docutils literal notranslate"><span class="pre">devicePixelRatioF</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.devicePixelRatioFScale.html#compas_viewers.core.GLWidget.devicePixelRatioFScale" title="compas_viewers.core.GLWidget.devicePixelRatioFScale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">devicePixelRatioFScale</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.disconnect.html#compas_viewers.core.GLWidget.disconnect" title="compas_viewers.core.GLWidget.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>(arg__1)</p></td>
+<td><p>disconnect(arg__1: PySide2.QtCore.QObject, arg__2: str, arg__3: typing.Callable) -&gt; bool disconnect(arg__1: str, arg__2: typing.Callable) -&gt; bool disconnect(receiver: PySide2.QtCore.QObject, member: typing.Union[str, NoneType] = None) -&gt; bool disconnect(sender: PySide2.QtCore.QObject, signal: PySide2.QtCore.QMetaMethod, receiver: PySide2.QtCore.QObject, member: PySide2.QtCore.QMetaMethod) -&gt; bool disconnect(sender: PySide2.QtCore.QObject, signal: str, receiver: PySide2.QtCore.QObject, member: str) -&gt; bool disconnect(signal: str, receiver: PySide2.QtCore.QObject, member: str) -&gt; bool</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.disconnectNotify.html#compas_viewers.core.GLWidget.disconnectNotify" title="compas_viewers.core.GLWidget.disconnectNotify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnectNotify</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.doneCurrent.html#compas_viewers.core.GLWidget.doneCurrent" title="compas_viewers.core.GLWidget.doneCurrent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">doneCurrent</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.doubleBuffer.html#compas_viewers.core.GLWidget.doubleBuffer" title="compas_viewers.core.GLWidget.doubleBuffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">doubleBuffer</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dragEnterEvent.html#compas_viewers.core.GLWidget.dragEnterEvent" title="compas_viewers.core.GLWidget.dragEnterEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dragEnterEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dragLeaveEvent.html#compas_viewers.core.GLWidget.dragLeaveEvent" title="compas_viewers.core.GLWidget.dragLeaveEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dragLeaveEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dragMoveEvent.html#compas_viewers.core.GLWidget.dragMoveEvent" title="compas_viewers.core.GLWidget.dragMoveEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dragMoveEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.drawTexture.html#compas_viewers.core.GLWidget.drawTexture" title="compas_viewers.core.GLWidget.drawTexture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">drawTexture</span></code></a>(self, point, textureId, …)</p></td>
+<td><p>drawTexture(self, target: PySide2.QtCore.QRectF, textureId: int, textureTarget: int = 3553)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dropEvent.html#compas_viewers.core.GLWidget.dropEvent" title="compas_viewers.core.GLWidget.dropEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dropEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dumpObjectInfo.html#compas_viewers.core.GLWidget.dumpObjectInfo" title="compas_viewers.core.GLWidget.dumpObjectInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumpObjectInfo</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dumpObjectTree.html#compas_viewers.core.GLWidget.dumpObjectTree" title="compas_viewers.core.GLWidget.dumpObjectTree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumpObjectTree</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.dynamicPropertyNames.html#compas_viewers.core.GLWidget.dynamicPropertyNames" title="compas_viewers.core.GLWidget.dynamicPropertyNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamicPropertyNames</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.effectiveWinId.html#compas_viewers.core.GLWidget.effectiveWinId" title="compas_viewers.core.GLWidget.effectiveWinId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">effectiveWinId</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.emit.html#compas_viewers.core.GLWidget.emit" title="compas_viewers.core.GLWidget.emit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emit</span></code></a>(self, arg__1, *args)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.ensurePolished.html#compas_viewers.core.GLWidget.ensurePolished" title="compas_viewers.core.GLWidget.ensurePolished"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ensurePolished</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.enterEvent.html#compas_viewers.core.GLWidget.enterEvent" title="compas_viewers.core.GLWidget.enterEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enterEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.event.html#compas_viewers.core.GLWidget.event" title="compas_viewers.core.GLWidget.event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.eventFilter.html#compas_viewers.core.GLWidget.eventFilter" title="compas_viewers.core.GLWidget.eventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eventFilter</span></code></a>(self, watched, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.find.html#compas_viewers.core.GLWidget.find" title="compas_viewers.core.GLWidget.find"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find</span></code></a>(arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.findChild.html#compas_viewers.core.GLWidget.findChild" title="compas_viewers.core.GLWidget.findChild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findChild</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.findChildren.html#compas_viewers.core.GLWidget.findChildren" title="compas_viewers.core.GLWidget.findChildren"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findChildren</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p>findChildren(self, arg__1: type, arg__2: str = ‘’) -&gt; typing.Iterable</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusInEvent.html#compas_viewers.core.GLWidget.focusInEvent" title="compas_viewers.core.GLWidget.focusInEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusInEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusNextChild.html#compas_viewers.core.GLWidget.focusNextChild" title="compas_viewers.core.GLWidget.focusNextChild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusNextChild</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusNextPrevChild.html#compas_viewers.core.GLWidget.focusNextPrevChild" title="compas_viewers.core.GLWidget.focusNextPrevChild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusNextPrevChild</span></code></a>(self, next)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusOutEvent.html#compas_viewers.core.GLWidget.focusOutEvent" title="compas_viewers.core.GLWidget.focusOutEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusOutEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusPolicy.html#compas_viewers.core.GLWidget.focusPolicy" title="compas_viewers.core.GLWidget.focusPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusPolicy</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusPreviousChild.html#compas_viewers.core.GLWidget.focusPreviousChild" title="compas_viewers.core.GLWidget.focusPreviousChild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusPreviousChild</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusProxy.html#compas_viewers.core.GLWidget.focusProxy" title="compas_viewers.core.GLWidget.focusProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusProxy</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.focusWidget.html#compas_viewers.core.GLWidget.focusWidget" title="compas_viewers.core.GLWidget.focusWidget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focusWidget</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.font.html#compas_viewers.core.GLWidget.font" title="compas_viewers.core.GLWidget.font"><code class="xref py py-obj docutils literal notranslate"><span class="pre">font</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.fontInfo.html#compas_viewers.core.GLWidget.fontInfo" title="compas_viewers.core.GLWidget.fontInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fontInfo</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.fontMetrics.html#compas_viewers.core.GLWidget.fontMetrics" title="compas_viewers.core.GLWidget.fontMetrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">fontMetrics</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.foregroundRole.html#compas_viewers.core.GLWidget.foregroundRole" title="compas_viewers.core.GLWidget.foregroundRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">foregroundRole</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.format.html#compas_viewers.core.GLWidget.format" title="compas_viewers.core.GLWidget.format"><code class="xref py py-obj docutils literal notranslate"><span class="pre">format</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.frameGeometry.html#compas_viewers.core.GLWidget.frameGeometry" title="compas_viewers.core.GLWidget.frameGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frameGeometry</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.frameSize.html#compas_viewers.core.GLWidget.frameSize" title="compas_viewers.core.GLWidget.frameSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">frameSize</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.geometry.html#compas_viewers.core.GLWidget.geometry" title="compas_viewers.core.GLWidget.geometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">geometry</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.getContentsMargins.html#compas_viewers.core.GLWidget.getContentsMargins" title="compas_viewers.core.GLWidget.getContentsMargins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">getContentsMargins</span></code></a>(self, left, top, right, …)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.glDraw.html#compas_viewers.core.GLWidget.glDraw" title="compas_viewers.core.GLWidget.glDraw"><code class="xref py py-obj docutils literal notranslate"><span class="pre">glDraw</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.glInit.html#compas_viewers.core.GLWidget.glInit" title="compas_viewers.core.GLWidget.glInit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">glInit</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grab.html#compas_viewers.core.GLWidget.grab" title="compas_viewers.core.GLWidget.grab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grab</span></code></a>(self, rectangle)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grabFrameBuffer.html#compas_viewers.core.GLWidget.grabFrameBuffer" title="compas_viewers.core.GLWidget.grabFrameBuffer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grabFrameBuffer</span></code></a>(self, withAlpha)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grabGesture.html#compas_viewers.core.GLWidget.grabGesture" title="compas_viewers.core.GLWidget.grabGesture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grabGesture</span></code></a>(self, type, flags)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grabKeyboard.html#compas_viewers.core.GLWidget.grabKeyboard" title="compas_viewers.core.GLWidget.grabKeyboard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grabKeyboard</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grabMouse.html#compas_viewers.core.GLWidget.grabMouse" title="compas_viewers.core.GLWidget.grabMouse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grabMouse</span></code></a>(self)</p></td>
+<td><p>grabMouse(self, arg__1: PySide2.QtGui.QCursor)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.grabShortcut.html#compas_viewers.core.GLWidget.grabShortcut" title="compas_viewers.core.GLWidget.grabShortcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">grabShortcut</span></code></a>(self, key, context)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.graphicsEffect.html#compas_viewers.core.GLWidget.graphicsEffect" title="compas_viewers.core.GLWidget.graphicsEffect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graphicsEffect</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.graphicsProxyWidget.html#compas_viewers.core.GLWidget.graphicsProxyWidget" title="compas_viewers.core.GLWidget.graphicsProxyWidget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">graphicsProxyWidget</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hasFocus.html#compas_viewers.core.GLWidget.hasFocus" title="compas_viewers.core.GLWidget.hasFocus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hasFocus</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hasHeightForWidth.html#compas_viewers.core.GLWidget.hasHeightForWidth" title="compas_viewers.core.GLWidget.hasHeightForWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hasHeightForWidth</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hasMouseTracking.html#compas_viewers.core.GLWidget.hasMouseTracking" title="compas_viewers.core.GLWidget.hasMouseTracking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hasMouseTracking</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hasTabletTracking.html#compas_viewers.core.GLWidget.hasTabletTracking" title="compas_viewers.core.GLWidget.hasTabletTracking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hasTabletTracking</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.height.html#compas_viewers.core.GLWidget.height" title="compas_viewers.core.GLWidget.height"><code class="xref py py-obj docutils literal notranslate"><span class="pre">height</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.heightForWidth.html#compas_viewers.core.GLWidget.heightForWidth" title="compas_viewers.core.GLWidget.heightForWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heightForWidth</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.heightMM.html#compas_viewers.core.GLWidget.heightMM" title="compas_viewers.core.GLWidget.heightMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">heightMM</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hide.html#compas_viewers.core.GLWidget.hide" title="compas_viewers.core.GLWidget.hide"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hide</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.hideEvent.html#compas_viewers.core.GLWidget.hideEvent" title="compas_viewers.core.GLWidget.hideEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">hideEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.inherits.html#compas_viewers.core.GLWidget.inherits" title="compas_viewers.core.GLWidget.inherits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inherits</span></code></a>(self, classname)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.initPainter.html#compas_viewers.core.GLWidget.initPainter" title="compas_viewers.core.GLWidget.initPainter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initPainter</span></code></a>(self, painter)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.initializeOverlayGL.html#compas_viewers.core.GLWidget.initializeOverlayGL" title="compas_viewers.core.GLWidget.initializeOverlayGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">initializeOverlayGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.inputMethodEvent.html#compas_viewers.core.GLWidget.inputMethodEvent" title="compas_viewers.core.GLWidget.inputMethodEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inputMethodEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.inputMethodHints.html#compas_viewers.core.GLWidget.inputMethodHints" title="compas_viewers.core.GLWidget.inputMethodHints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inputMethodHints</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.inputMethodQuery.html#compas_viewers.core.GLWidget.inputMethodQuery" title="compas_viewers.core.GLWidget.inputMethodQuery"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inputMethodQuery</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.insertAction.html#compas_viewers.core.GLWidget.insertAction" title="compas_viewers.core.GLWidget.insertAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insertAction</span></code></a>(self, before, action)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.insertActions.html#compas_viewers.core.GLWidget.insertActions" title="compas_viewers.core.GLWidget.insertActions"><code class="xref py py-obj docutils literal notranslate"><span class="pre">insertActions</span></code></a>(self, before, actions)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.installEventFilter.html#compas_viewers.core.GLWidget.installEventFilter" title="compas_viewers.core.GLWidget.installEventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">installEventFilter</span></code></a>(self, filterObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.internalWinId.html#compas_viewers.core.GLWidget.internalWinId" title="compas_viewers.core.GLWidget.internalWinId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">internalWinId</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isActiveWindow.html#compas_viewers.core.GLWidget.isActiveWindow" title="compas_viewers.core.GLWidget.isActiveWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isActiveWindow</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isAncestorOf.html#compas_viewers.core.GLWidget.isAncestorOf" title="compas_viewers.core.GLWidget.isAncestorOf"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isAncestorOf</span></code></a>(self, child)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isEnabled.html#compas_viewers.core.GLWidget.isEnabled" title="compas_viewers.core.GLWidget.isEnabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isEnabled</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isEnabledTo.html#compas_viewers.core.GLWidget.isEnabledTo" title="compas_viewers.core.GLWidget.isEnabledTo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isEnabledTo</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isEnabledToTLW.html#compas_viewers.core.GLWidget.isEnabledToTLW" title="compas_viewers.core.GLWidget.isEnabledToTLW"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isEnabledToTLW</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isFullScreen.html#compas_viewers.core.GLWidget.isFullScreen" title="compas_viewers.core.GLWidget.isFullScreen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isFullScreen</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isHidden.html#compas_viewers.core.GLWidget.isHidden" title="compas_viewers.core.GLWidget.isHidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isHidden</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isLeftToRight.html#compas_viewers.core.GLWidget.isLeftToRight" title="compas_viewers.core.GLWidget.isLeftToRight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isLeftToRight</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isMaximized.html#compas_viewers.core.GLWidget.isMaximized" title="compas_viewers.core.GLWidget.isMaximized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isMaximized</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isMinimized.html#compas_viewers.core.GLWidget.isMinimized" title="compas_viewers.core.GLWidget.isMinimized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isMinimized</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isModal.html#compas_viewers.core.GLWidget.isModal" title="compas_viewers.core.GLWidget.isModal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isModal</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isRightToLeft.html#compas_viewers.core.GLWidget.isRightToLeft" title="compas_viewers.core.GLWidget.isRightToLeft"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isRightToLeft</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isSharing.html#compas_viewers.core.GLWidget.isSharing" title="compas_viewers.core.GLWidget.isSharing"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isSharing</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isSignalConnected.html#compas_viewers.core.GLWidget.isSignalConnected" title="compas_viewers.core.GLWidget.isSignalConnected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isSignalConnected</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isTopLevel.html#compas_viewers.core.GLWidget.isTopLevel" title="compas_viewers.core.GLWidget.isTopLevel"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isTopLevel</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isValid.html#compas_viewers.core.GLWidget.isValid" title="compas_viewers.core.GLWidget.isValid"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isValid</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isVisible.html#compas_viewers.core.GLWidget.isVisible" title="compas_viewers.core.GLWidget.isVisible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isVisible</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isVisibleTo.html#compas_viewers.core.GLWidget.isVisibleTo" title="compas_viewers.core.GLWidget.isVisibleTo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isVisibleTo</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isWidgetType.html#compas_viewers.core.GLWidget.isWidgetType" title="compas_viewers.core.GLWidget.isWidgetType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWidgetType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isWindow.html#compas_viewers.core.GLWidget.isWindow" title="compas_viewers.core.GLWidget.isWindow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWindow</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isWindowModified.html#compas_viewers.core.GLWidget.isWindowModified" title="compas_viewers.core.GLWidget.isWindowModified"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWindowModified</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.isWindowType.html#compas_viewers.core.GLWidget.isWindowType" title="compas_viewers.core.GLWidget.isWindowType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWindowType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.keyReleaseEvent.html#compas_viewers.core.GLWidget.keyReleaseEvent" title="compas_viewers.core.GLWidget.keyReleaseEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyReleaseEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.keyboardGrabber.html#compas_viewers.core.GLWidget.keyboardGrabber" title="compas_viewers.core.GLWidget.keyboardGrabber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">keyboardGrabber</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.killTimer.html#compas_viewers.core.GLWidget.killTimer" title="compas_viewers.core.GLWidget.killTimer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">killTimer</span></code></a>(self, id)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.layout.html#compas_viewers.core.GLWidget.layout" title="compas_viewers.core.GLWidget.layout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layout</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.layoutDirection.html#compas_viewers.core.GLWidget.layoutDirection" title="compas_viewers.core.GLWidget.layoutDirection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">layoutDirection</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.leaveEvent.html#compas_viewers.core.GLWidget.leaveEvent" title="compas_viewers.core.GLWidget.leaveEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">leaveEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.locale.html#compas_viewers.core.GLWidget.locale" title="compas_viewers.core.GLWidget.locale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">locale</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.logicalDpiX.html#compas_viewers.core.GLWidget.logicalDpiX" title="compas_viewers.core.GLWidget.logicalDpiX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logicalDpiX</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.logicalDpiY.html#compas_viewers.core.GLWidget.logicalDpiY" title="compas_viewers.core.GLWidget.logicalDpiY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logicalDpiY</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.lower.html#compas_viewers.core.GLWidget.lower" title="compas_viewers.core.GLWidget.lower"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lower</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.makeCurrent.html#compas_viewers.core.GLWidget.makeCurrent" title="compas_viewers.core.GLWidget.makeCurrent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">makeCurrent</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.makeOverlayCurrent.html#compas_viewers.core.GLWidget.makeOverlayCurrent" title="compas_viewers.core.GLWidget.makeOverlayCurrent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">makeOverlayCurrent</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapFrom.html#compas_viewers.core.GLWidget.mapFrom" title="compas_viewers.core.GLWidget.mapFrom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapFrom</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapFromGlobal.html#compas_viewers.core.GLWidget.mapFromGlobal" title="compas_viewers.core.GLWidget.mapFromGlobal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapFromGlobal</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapFromParent.html#compas_viewers.core.GLWidget.mapFromParent" title="compas_viewers.core.GLWidget.mapFromParent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapFromParent</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapTo.html#compas_viewers.core.GLWidget.mapTo" title="compas_viewers.core.GLWidget.mapTo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapTo</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapToGlobal.html#compas_viewers.core.GLWidget.mapToGlobal" title="compas_viewers.core.GLWidget.mapToGlobal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapToGlobal</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mapToParent.html#compas_viewers.core.GLWidget.mapToParent" title="compas_viewers.core.GLWidget.mapToParent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mapToParent</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mask.html#compas_viewers.core.GLWidget.mask" title="compas_viewers.core.GLWidget.mask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mask</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.maximumHeight.html#compas_viewers.core.GLWidget.maximumHeight" title="compas_viewers.core.GLWidget.maximumHeight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximumHeight</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.maximumSize.html#compas_viewers.core.GLWidget.maximumSize" title="compas_viewers.core.GLWidget.maximumSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximumSize</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.maximumWidth.html#compas_viewers.core.GLWidget.maximumWidth" title="compas_viewers.core.GLWidget.maximumWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">maximumWidth</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.metaObject.html#compas_viewers.core.GLWidget.metaObject" title="compas_viewers.core.GLWidget.metaObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metaObject</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.metric.html#compas_viewers.core.GLWidget.metric" title="compas_viewers.core.GLWidget.metric"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metric</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.minimumHeight.html#compas_viewers.core.GLWidget.minimumHeight" title="compas_viewers.core.GLWidget.minimumHeight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimumHeight</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.minimumSize.html#compas_viewers.core.GLWidget.minimumSize" title="compas_viewers.core.GLWidget.minimumSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimumSize</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.minimumSizeHint.html#compas_viewers.core.GLWidget.minimumSizeHint" title="compas_viewers.core.GLWidget.minimumSizeHint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimumSizeHint</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.minimumWidth.html#compas_viewers.core.GLWidget.minimumWidth" title="compas_viewers.core.GLWidget.minimumWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">minimumWidth</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mouseDoubleClickEvent.html#compas_viewers.core.GLWidget.mouseDoubleClickEvent" title="compas_viewers.core.GLWidget.mouseDoubleClickEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mouseDoubleClickEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mouseGrabber.html#compas_viewers.core.GLWidget.mouseGrabber" title="compas_viewers.core.GLWidget.mouseGrabber"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mouseGrabber</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.mouseReleaseEvent.html#compas_viewers.core.GLWidget.mouseReleaseEvent" title="compas_viewers.core.GLWidget.mouseReleaseEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mouseReleaseEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.move.html#compas_viewers.core.GLWidget.move" title="compas_viewers.core.GLWidget.move"><code class="xref py py-obj docutils literal notranslate"><span class="pre">move</span></code></a>(self, arg__1)</p></td>
+<td><p>move(self, x: int, y: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.moveEvent.html#compas_viewers.core.GLWidget.moveEvent" title="compas_viewers.core.GLWidget.moveEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moveEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.moveToThread.html#compas_viewers.core.GLWidget.moveToThread" title="compas_viewers.core.GLWidget.moveToThread"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moveToThread</span></code></a>(self, thread)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.nativeEvent.html#compas_viewers.core.GLWidget.nativeEvent" title="compas_viewers.core.GLWidget.nativeEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nativeEvent</span></code></a>(self, eventType, message, result)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.nativeParentWidget.html#compas_viewers.core.GLWidget.nativeParentWidget" title="compas_viewers.core.GLWidget.nativeParentWidget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nativeParentWidget</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.nextInFocusChain.html#compas_viewers.core.GLWidget.nextInFocusChain" title="compas_viewers.core.GLWidget.nextInFocusChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nextInFocusChain</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.normalGeometry.html#compas_viewers.core.GLWidget.normalGeometry" title="compas_viewers.core.GLWidget.normalGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalGeometry</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.objectName.html#compas_viewers.core.GLWidget.objectName" title="compas_viewers.core.GLWidget.objectName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">objectName</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.overlayContext.html#compas_viewers.core.GLWidget.overlayContext" title="compas_viewers.core.GLWidget.overlayContext"><code class="xref py py-obj docutils literal notranslate"><span class="pre">overlayContext</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.overrideWindowFlags.html#compas_viewers.core.GLWidget.overrideWindowFlags" title="compas_viewers.core.GLWidget.overrideWindowFlags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">overrideWindowFlags</span></code></a>(self, type)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.overrideWindowState.html#compas_viewers.core.GLWidget.overrideWindowState" title="compas_viewers.core.GLWidget.overrideWindowState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">overrideWindowState</span></code></a>(self, state)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paintEngine.html#compas_viewers.core.GLWidget.paintEngine" title="compas_viewers.core.GLWidget.paintEngine"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paintEngine</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paintEvent.html#compas_viewers.core.GLWidget.paintEvent" title="compas_viewers.core.GLWidget.paintEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paintEvent</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paintOverlayGL.html#compas_viewers.core.GLWidget.paintOverlayGL" title="compas_viewers.core.GLWidget.paintOverlayGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paintOverlayGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.paintingActive.html#compas_viewers.core.GLWidget.paintingActive" title="compas_viewers.core.GLWidget.paintingActive"><code class="xref py py-obj docutils literal notranslate"><span class="pre">paintingActive</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.palette.html#compas_viewers.core.GLWidget.palette" title="compas_viewers.core.GLWidget.palette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">palette</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.parent.html#compas_viewers.core.GLWidget.parent" title="compas_viewers.core.GLWidget.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.parentWidget.html#compas_viewers.core.GLWidget.parentWidget" title="compas_viewers.core.GLWidget.parentWidget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parentWidget</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.physicalDpiX.html#compas_viewers.core.GLWidget.physicalDpiX" title="compas_viewers.core.GLWidget.physicalDpiX"><code class="xref py py-obj docutils literal notranslate"><span class="pre">physicalDpiX</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.physicalDpiY.html#compas_viewers.core.GLWidget.physicalDpiY" title="compas_viewers.core.GLWidget.physicalDpiY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">physicalDpiY</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.pos.html#compas_viewers.core.GLWidget.pos" title="compas_viewers.core.GLWidget.pos"><code class="xref py py-obj docutils literal notranslate"><span class="pre">pos</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.previousInFocusChain.html#compas_viewers.core.GLWidget.previousInFocusChain" title="compas_viewers.core.GLWidget.previousInFocusChain"><code class="xref py py-obj docutils literal notranslate"><span class="pre">previousInFocusChain</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.property.html#compas_viewers.core.GLWidget.property" title="compas_viewers.core.GLWidget.property"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property</span></code></a>(self, name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.qglClearColor.html#compas_viewers.core.GLWidget.qglClearColor" title="compas_viewers.core.GLWidget.qglClearColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qglClearColor</span></code></a>(self, c)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.qglColor.html#compas_viewers.core.GLWidget.qglColor" title="compas_viewers.core.GLWidget.qglColor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">qglColor</span></code></a>(self, c)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.raise_.html#compas_viewers.core.GLWidget.raise_" title="compas_viewers.core.GLWidget.raise_"><code class="xref py py-obj docutils literal notranslate"><span class="pre">raise_</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.receivers.html#compas_viewers.core.GLWidget.receivers" title="compas_viewers.core.GLWidget.receivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receivers</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.rect.html#compas_viewers.core.GLWidget.rect" title="compas_viewers.core.GLWidget.rect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rect</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.redirected.html#compas_viewers.core.GLWidget.redirected" title="compas_viewers.core.GLWidget.redirected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">redirected</span></code></a>(self, offset)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.registerUserData.html#compas_viewers.core.GLWidget.registerUserData" title="compas_viewers.core.GLWidget.registerUserData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registerUserData</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.releaseKeyboard.html#compas_viewers.core.GLWidget.releaseKeyboard" title="compas_viewers.core.GLWidget.releaseKeyboard"><code class="xref py py-obj docutils literal notranslate"><span class="pre">releaseKeyboard</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.releaseMouse.html#compas_viewers.core.GLWidget.releaseMouse" title="compas_viewers.core.GLWidget.releaseMouse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">releaseMouse</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.releaseShortcut.html#compas_viewers.core.GLWidget.releaseShortcut" title="compas_viewers.core.GLWidget.releaseShortcut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">releaseShortcut</span></code></a>(self, id)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.removeAction.html#compas_viewers.core.GLWidget.removeAction" title="compas_viewers.core.GLWidget.removeAction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeAction</span></code></a>(self, action)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.removeEventFilter.html#compas_viewers.core.GLWidget.removeEventFilter" title="compas_viewers.core.GLWidget.removeEventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeEventFilter</span></code></a>(self, obj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.render.html#compas_viewers.core.GLWidget.render" title="compas_viewers.core.GLWidget.render"><code class="xref py py-obj docutils literal notranslate"><span class="pre">render</span></code></a>(self, painter, targetOffset, …)</p></td>
+<td><p>render(self, target: PySide2.QtGui.QPaintDevice, targetOffset: PySide2.QtCore.QPoint = Default(QPoint), sourceRegion: PySide2.QtGui.QRegion = Default(QRegion), renderFlags: PySide2.QtWidgets.QWidget.RenderFlags = Instance(QWidget.RenderFlags(QWidget.DrawWindowBackground | QWidget.DrawChildren)))</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.renderPixmap.html#compas_viewers.core.GLWidget.renderPixmap" title="compas_viewers.core.GLWidget.renderPixmap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renderPixmap</span></code></a>(self, w, h, useContext)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.renderText.html#compas_viewers.core.GLWidget.renderText" title="compas_viewers.core.GLWidget.renderText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">renderText</span></code></a>(self, x, y, z, str, fnt)</p></td>
+<td><p>renderText(self, x: int, y: int, str: str, fnt: PySide2.QtGui.QFont = Default(QFont))</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.repaint.html#compas_viewers.core.GLWidget.repaint" title="compas_viewers.core.GLWidget.repaint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">repaint</span></code></a>(self)</p></td>
+<td><p>repaint(self, arg__1: PySide2.QtCore.QRect) repaint(self, arg__1: PySide2.QtGui.QRegion) repaint(self, x: int, y: int, w: int, h: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.resize.html#compas_viewers.core.GLWidget.resize" title="compas_viewers.core.GLWidget.resize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resize</span></code></a>(self, arg__1)</p></td>
+<td><p>resize(self, w: int, h: int)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.resizeEvent.html#compas_viewers.core.GLWidget.resizeEvent" title="compas_viewers.core.GLWidget.resizeEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resizeEvent</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.resizeOverlayGL.html#compas_viewers.core.GLWidget.resizeOverlayGL" title="compas_viewers.core.GLWidget.resizeOverlayGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">resizeOverlayGL</span></code></a>(self, w, h)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.restoreGeometry.html#compas_viewers.core.GLWidget.restoreGeometry" title="compas_viewers.core.GLWidget.restoreGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restoreGeometry</span></code></a>(self, geometry)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.saveGeometry.html#compas_viewers.core.GLWidget.saveGeometry" title="compas_viewers.core.GLWidget.saveGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saveGeometry</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.scroll.html#compas_viewers.core.GLWidget.scroll" title="compas_viewers.core.GLWidget.scroll"><code class="xref py py-obj docutils literal notranslate"><span class="pre">scroll</span></code></a>(self, dx, dy)</p></td>
+<td><p>scroll(self, dx: int, dy: int, arg__3: PySide2.QtCore.QRect)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.sender.html#compas_viewers.core.GLWidget.sender" title="compas_viewers.core.GLWidget.sender"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sender</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.senderSignalIndex.html#compas_viewers.core.GLWidget.senderSignalIndex" title="compas_viewers.core.GLWidget.senderSignalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">senderSignalIndex</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAcceptDrops.html#compas_viewers.core.GLWidget.setAcceptDrops" title="compas_viewers.core.GLWidget.setAcceptDrops"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAcceptDrops</span></code></a>(self, on)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAccessibleDescription.html#compas_viewers.core.GLWidget.setAccessibleDescription" title="compas_viewers.core.GLWidget.setAccessibleDescription"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAccessibleDescription</span></code></a>(self, description)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAccessibleName.html#compas_viewers.core.GLWidget.setAccessibleName" title="compas_viewers.core.GLWidget.setAccessibleName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAccessibleName</span></code></a>(self, name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAttribute.html#compas_viewers.core.GLWidget.setAttribute" title="compas_viewers.core.GLWidget.setAttribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAttribute</span></code></a>(self, arg__1, on)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAutoBufferSwap.html#compas_viewers.core.GLWidget.setAutoBufferSwap" title="compas_viewers.core.GLWidget.setAutoBufferSwap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAutoBufferSwap</span></code></a>(self, on)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setAutoFillBackground.html#compas_viewers.core.GLWidget.setAutoFillBackground" title="compas_viewers.core.GLWidget.setAutoFillBackground"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setAutoFillBackground</span></code></a>(self, enabled)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setBackgroundRole.html#compas_viewers.core.GLWidget.setBackgroundRole" title="compas_viewers.core.GLWidget.setBackgroundRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setBackgroundRole</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setBaseSize.html#compas_viewers.core.GLWidget.setBaseSize" title="compas_viewers.core.GLWidget.setBaseSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setBaseSize</span></code></a>(self, arg__1)</p></td>
+<td><p>setBaseSize(self, basew: int, baseh: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setColormap.html#compas_viewers.core.GLWidget.setColormap" title="compas_viewers.core.GLWidget.setColormap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setColormap</span></code></a>(self, map)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setContentsMargins.html#compas_viewers.core.GLWidget.setContentsMargins" title="compas_viewers.core.GLWidget.setContentsMargins"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setContentsMargins</span></code></a>(self, left, top, right, …)</p></td>
+<td><p>setContentsMargins(self, margins: PySide2.QtCore.QMargins)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setContextMenuPolicy.html#compas_viewers.core.GLWidget.setContextMenuPolicy" title="compas_viewers.core.GLWidget.setContextMenuPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setContextMenuPolicy</span></code></a>(self, policy)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setCursor.html#compas_viewers.core.GLWidget.setCursor" title="compas_viewers.core.GLWidget.setCursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setCursor</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setDisabled.html#compas_viewers.core.GLWidget.setDisabled" title="compas_viewers.core.GLWidget.setDisabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setDisabled</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setEnabled.html#compas_viewers.core.GLWidget.setEnabled" title="compas_viewers.core.GLWidget.setEnabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setEnabled</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFixedHeight.html#compas_viewers.core.GLWidget.setFixedHeight" title="compas_viewers.core.GLWidget.setFixedHeight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFixedHeight</span></code></a>(self, h)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFixedSize.html#compas_viewers.core.GLWidget.setFixedSize" title="compas_viewers.core.GLWidget.setFixedSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFixedSize</span></code></a>(self, arg__1)</p></td>
+<td><p>setFixedSize(self, w: int, h: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFixedWidth.html#compas_viewers.core.GLWidget.setFixedWidth" title="compas_viewers.core.GLWidget.setFixedWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFixedWidth</span></code></a>(self, w)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFocus.html#compas_viewers.core.GLWidget.setFocus" title="compas_viewers.core.GLWidget.setFocus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFocus</span></code></a>(self)</p></td>
+<td><p>setFocus(self, reason: PySide2.QtCore.Qt.FocusReason)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFocusPolicy.html#compas_viewers.core.GLWidget.setFocusPolicy" title="compas_viewers.core.GLWidget.setFocusPolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFocusPolicy</span></code></a>(self, policy)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFocusProxy.html#compas_viewers.core.GLWidget.setFocusProxy" title="compas_viewers.core.GLWidget.setFocusProxy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFocusProxy</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setFont.html#compas_viewers.core.GLWidget.setFont" title="compas_viewers.core.GLWidget.setFont"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setFont</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setForegroundRole.html#compas_viewers.core.GLWidget.setForegroundRole" title="compas_viewers.core.GLWidget.setForegroundRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setForegroundRole</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setGeometry.html#compas_viewers.core.GLWidget.setGeometry" title="compas_viewers.core.GLWidget.setGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setGeometry</span></code></a>(self, arg__1)</p></td>
+<td><p>setGeometry(self, x: int, y: int, w: int, h: int)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setGraphicsEffect.html#compas_viewers.core.GLWidget.setGraphicsEffect" title="compas_viewers.core.GLWidget.setGraphicsEffect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setGraphicsEffect</span></code></a>(self, effect)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setHidden.html#compas_viewers.core.GLWidget.setHidden" title="compas_viewers.core.GLWidget.setHidden"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setHidden</span></code></a>(self, hidden)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setInputMethodHints.html#compas_viewers.core.GLWidget.setInputMethodHints" title="compas_viewers.core.GLWidget.setInputMethodHints"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setInputMethodHints</span></code></a>(self, hints)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setLayout.html#compas_viewers.core.GLWidget.setLayout" title="compas_viewers.core.GLWidget.setLayout"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLayout</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setLayoutDirection.html#compas_viewers.core.GLWidget.setLayoutDirection" title="compas_viewers.core.GLWidget.setLayoutDirection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLayoutDirection</span></code></a>(self, direction)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setLocale.html#compas_viewers.core.GLWidget.setLocale" title="compas_viewers.core.GLWidget.setLocale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setLocale</span></code></a>(self, locale)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMask.html#compas_viewers.core.GLWidget.setMask" title="compas_viewers.core.GLWidget.setMask"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMask</span></code></a>(self, arg__1)</p></td>
+<td><p>setMask(self, arg__1: PySide2.QtGui.QRegion)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMaximumHeight.html#compas_viewers.core.GLWidget.setMaximumHeight" title="compas_viewers.core.GLWidget.setMaximumHeight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMaximumHeight</span></code></a>(self, maxh)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMaximumSize.html#compas_viewers.core.GLWidget.setMaximumSize" title="compas_viewers.core.GLWidget.setMaximumSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMaximumSize</span></code></a>(self, arg__1)</p></td>
+<td><p>setMaximumSize(self, maxw: int, maxh: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMaximumWidth.html#compas_viewers.core.GLWidget.setMaximumWidth" title="compas_viewers.core.GLWidget.setMaximumWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMaximumWidth</span></code></a>(self, maxw)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMinimumHeight.html#compas_viewers.core.GLWidget.setMinimumHeight" title="compas_viewers.core.GLWidget.setMinimumHeight"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMinimumHeight</span></code></a>(self, minh)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMinimumSize.html#compas_viewers.core.GLWidget.setMinimumSize" title="compas_viewers.core.GLWidget.setMinimumSize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMinimumSize</span></code></a>(self, arg__1)</p></td>
+<td><p>setMinimumSize(self, minw: int, minh: int)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMinimumWidth.html#compas_viewers.core.GLWidget.setMinimumWidth" title="compas_viewers.core.GLWidget.setMinimumWidth"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMinimumWidth</span></code></a>(self, minw)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setMouseTracking.html#compas_viewers.core.GLWidget.setMouseTracking" title="compas_viewers.core.GLWidget.setMouseTracking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setMouseTracking</span></code></a>(self, enable)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setObjectName.html#compas_viewers.core.GLWidget.setObjectName" title="compas_viewers.core.GLWidget.setObjectName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setObjectName</span></code></a>(self, name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setPalette.html#compas_viewers.core.GLWidget.setPalette" title="compas_viewers.core.GLWidget.setPalette"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setPalette</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setParent.html#compas_viewers.core.GLWidget.setParent" title="compas_viewers.core.GLWidget.setParent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setParent</span></code></a>(self, parent)</p></td>
+<td><p>setParent(self, parent: PySide2.QtWidgets.QWidget, f: PySide2.QtCore.Qt.WindowFlags)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setProperty.html#compas_viewers.core.GLWidget.setProperty" title="compas_viewers.core.GLWidget.setProperty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setProperty</span></code></a>(self, name, value)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setShortcutAutoRepeat.html#compas_viewers.core.GLWidget.setShortcutAutoRepeat" title="compas_viewers.core.GLWidget.setShortcutAutoRepeat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setShortcutAutoRepeat</span></code></a>(self, id, enable)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setShortcutEnabled.html#compas_viewers.core.GLWidget.setShortcutEnabled" title="compas_viewers.core.GLWidget.setShortcutEnabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setShortcutEnabled</span></code></a>(self, id, enable)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setSizeIncrement.html#compas_viewers.core.GLWidget.setSizeIncrement" title="compas_viewers.core.GLWidget.setSizeIncrement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setSizeIncrement</span></code></a>(self, arg__1)</p></td>
+<td><p>setSizeIncrement(self, w: int, h: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setSizePolicy.html#compas_viewers.core.GLWidget.setSizePolicy" title="compas_viewers.core.GLWidget.setSizePolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setSizePolicy</span></code></a>(self, arg__1)</p></td>
+<td><p>setSizePolicy(self, horizontal: PySide2.QtWidgets.QSizePolicy.Policy, vertical: PySide2.QtWidgets.QSizePolicy.Policy)</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setStatusTip.html#compas_viewers.core.GLWidget.setStatusTip" title="compas_viewers.core.GLWidget.setStatusTip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setStatusTip</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setStyle.html#compas_viewers.core.GLWidget.setStyle" title="compas_viewers.core.GLWidget.setStyle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setStyle</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setStyleSheet.html#compas_viewers.core.GLWidget.setStyleSheet" title="compas_viewers.core.GLWidget.setStyleSheet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setStyleSheet</span></code></a>(self, styleSheet)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setTabOrder.html#compas_viewers.core.GLWidget.setTabOrder" title="compas_viewers.core.GLWidget.setTabOrder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setTabOrder</span></code></a>(arg__1, arg__2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setTabletTracking.html#compas_viewers.core.GLWidget.setTabletTracking" title="compas_viewers.core.GLWidget.setTabletTracking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setTabletTracking</span></code></a>(self, enable)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setToolTip.html#compas_viewers.core.GLWidget.setToolTip" title="compas_viewers.core.GLWidget.setToolTip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setToolTip</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setToolTipDuration.html#compas_viewers.core.GLWidget.setToolTipDuration" title="compas_viewers.core.GLWidget.setToolTipDuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setToolTipDuration</span></code></a>(self, msec)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setUpdatesEnabled.html#compas_viewers.core.GLWidget.setUpdatesEnabled" title="compas_viewers.core.GLWidget.setUpdatesEnabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setUpdatesEnabled</span></code></a>(self, enable)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setVisible.html#compas_viewers.core.GLWidget.setVisible" title="compas_viewers.core.GLWidget.setVisible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setVisible</span></code></a>(self, visible)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWhatsThis.html#compas_viewers.core.GLWidget.setWhatsThis" title="compas_viewers.core.GLWidget.setWhatsThis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWhatsThis</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowFilePath.html#compas_viewers.core.GLWidget.setWindowFilePath" title="compas_viewers.core.GLWidget.setWindowFilePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowFilePath</span></code></a>(self, filePath)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowFlag.html#compas_viewers.core.GLWidget.setWindowFlag" title="compas_viewers.core.GLWidget.setWindowFlag"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowFlag</span></code></a>(self, arg__1, on)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowFlags.html#compas_viewers.core.GLWidget.setWindowFlags" title="compas_viewers.core.GLWidget.setWindowFlags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowFlags</span></code></a>(self, type)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowIcon.html#compas_viewers.core.GLWidget.setWindowIcon" title="compas_viewers.core.GLWidget.setWindowIcon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowIcon</span></code></a>(self, icon)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowIconText.html#compas_viewers.core.GLWidget.setWindowIconText" title="compas_viewers.core.GLWidget.setWindowIconText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowIconText</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowModality.html#compas_viewers.core.GLWidget.setWindowModality" title="compas_viewers.core.GLWidget.setWindowModality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowModality</span></code></a>(self, windowModality)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowModified.html#compas_viewers.core.GLWidget.setWindowModified" title="compas_viewers.core.GLWidget.setWindowModified"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowModified</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowOpacity.html#compas_viewers.core.GLWidget.setWindowOpacity" title="compas_viewers.core.GLWidget.setWindowOpacity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowOpacity</span></code></a>(self, level)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowRole.html#compas_viewers.core.GLWidget.setWindowRole" title="compas_viewers.core.GLWidget.setWindowRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowRole</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowState.html#compas_viewers.core.GLWidget.setWindowState" title="compas_viewers.core.GLWidget.setWindowState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowState</span></code></a>(self, state)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.setWindowTitle.html#compas_viewers.core.GLWidget.setWindowTitle" title="compas_viewers.core.GLWidget.setWindowTitle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setWindowTitle</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.sharedPainter.html#compas_viewers.core.GLWidget.sharedPainter" title="compas_viewers.core.GLWidget.sharedPainter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sharedPainter</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.show.html#compas_viewers.core.GLWidget.show" title="compas_viewers.core.GLWidget.show"><code class="xref py py-obj docutils literal notranslate"><span class="pre">show</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.showEvent.html#compas_viewers.core.GLWidget.showEvent" title="compas_viewers.core.GLWidget.showEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">showEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.showFullScreen.html#compas_viewers.core.GLWidget.showFullScreen" title="compas_viewers.core.GLWidget.showFullScreen"><code class="xref py py-obj docutils literal notranslate"><span class="pre">showFullScreen</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.showMaximized.html#compas_viewers.core.GLWidget.showMaximized" title="compas_viewers.core.GLWidget.showMaximized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">showMaximized</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.showMinimized.html#compas_viewers.core.GLWidget.showMinimized" title="compas_viewers.core.GLWidget.showMinimized"><code class="xref py py-obj docutils literal notranslate"><span class="pre">showMinimized</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.showNormal.html#compas_viewers.core.GLWidget.showNormal" title="compas_viewers.core.GLWidget.showNormal"><code class="xref py py-obj docutils literal notranslate"><span class="pre">showNormal</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.signalsBlocked.html#compas_viewers.core.GLWidget.signalsBlocked" title="compas_viewers.core.GLWidget.signalsBlocked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalsBlocked</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.size.html#compas_viewers.core.GLWidget.size" title="compas_viewers.core.GLWidget.size"><code class="xref py py-obj docutils literal notranslate"><span class="pre">size</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.sizeHint.html#compas_viewers.core.GLWidget.sizeHint" title="compas_viewers.core.GLWidget.sizeHint"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sizeHint</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.sizeIncrement.html#compas_viewers.core.GLWidget.sizeIncrement" title="compas_viewers.core.GLWidget.sizeIncrement"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sizeIncrement</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.sizePolicy.html#compas_viewers.core.GLWidget.sizePolicy" title="compas_viewers.core.GLWidget.sizePolicy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sizePolicy</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.stackUnder.html#compas_viewers.core.GLWidget.stackUnder" title="compas_viewers.core.GLWidget.stackUnder"><code class="xref py py-obj docutils literal notranslate"><span class="pre">stackUnder</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.startTimer.html#compas_viewers.core.GLWidget.startTimer" title="compas_viewers.core.GLWidget.startTimer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">startTimer</span></code></a>(self, interval, timerType)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.statusTip.html#compas_viewers.core.GLWidget.statusTip" title="compas_viewers.core.GLWidget.statusTip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">statusTip</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.style.html#compas_viewers.core.GLWidget.style" title="compas_viewers.core.GLWidget.style"><code class="xref py py-obj docutils literal notranslate"><span class="pre">style</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.styleSheet.html#compas_viewers.core.GLWidget.styleSheet" title="compas_viewers.core.GLWidget.styleSheet"><code class="xref py py-obj docutils literal notranslate"><span class="pre">styleSheet</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.swapBuffers.html#compas_viewers.core.GLWidget.swapBuffers" title="compas_viewers.core.GLWidget.swapBuffers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">swapBuffers</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.tabletEvent.html#compas_viewers.core.GLWidget.tabletEvent" title="compas_viewers.core.GLWidget.tabletEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tabletEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.testAttribute.html#compas_viewers.core.GLWidget.testAttribute" title="compas_viewers.core.GLWidget.testAttribute"><code class="xref py py-obj docutils literal notranslate"><span class="pre">testAttribute</span></code></a>(self, arg__1)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.thread.html#compas_viewers.core.GLWidget.thread" title="compas_viewers.core.GLWidget.thread"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thread</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.timerEvent.html#compas_viewers.core.GLWidget.timerEvent" title="compas_viewers.core.GLWidget.timerEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timerEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.toolTip.html#compas_viewers.core.GLWidget.toolTip" title="compas_viewers.core.GLWidget.toolTip"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toolTip</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.toolTipDuration.html#compas_viewers.core.GLWidget.toolTipDuration" title="compas_viewers.core.GLWidget.toolTipDuration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">toolTipDuration</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.topLevelWidget.html#compas_viewers.core.GLWidget.topLevelWidget" title="compas_viewers.core.GLWidget.topLevelWidget"><code class="xref py py-obj docutils literal notranslate"><span class="pre">topLevelWidget</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.tr.html#compas_viewers.core.GLWidget.tr" title="compas_viewers.core.GLWidget.tr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tr</span></code></a>(self, arg__1, arg__2, arg__3)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.underMouse.html#compas_viewers.core.GLWidget.underMouse" title="compas_viewers.core.GLWidget.underMouse"><code class="xref py py-obj docutils literal notranslate"><span class="pre">underMouse</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.ungrabGesture.html#compas_viewers.core.GLWidget.ungrabGesture" title="compas_viewers.core.GLWidget.ungrabGesture"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ungrabGesture</span></code></a>(self, type)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.unsetCursor.html#compas_viewers.core.GLWidget.unsetCursor" title="compas_viewers.core.GLWidget.unsetCursor"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsetCursor</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.unsetLayoutDirection.html#compas_viewers.core.GLWidget.unsetLayoutDirection" title="compas_viewers.core.GLWidget.unsetLayoutDirection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsetLayoutDirection</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.unsetLocale.html#compas_viewers.core.GLWidget.unsetLocale" title="compas_viewers.core.GLWidget.unsetLocale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">unsetLocale</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.update.html#compas_viewers.core.GLWidget.update" title="compas_viewers.core.GLWidget.update"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update</span></code></a>(self)</p></td>
+<td><p>update(self, arg__1: PySide2.QtCore.QRect) update(self, arg__1: PySide2.QtGui.QRegion) update(self, x: int, y: int, w: int, h: int)</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.updateGL.html#compas_viewers.core.GLWidget.updateGL" title="compas_viewers.core.GLWidget.updateGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updateGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.updateGeometry.html#compas_viewers.core.GLWidget.updateGeometry" title="compas_viewers.core.GLWidget.updateGeometry"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updateGeometry</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.updateMicroFocus.html#compas_viewers.core.GLWidget.updateMicroFocus" title="compas_viewers.core.GLWidget.updateMicroFocus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updateMicroFocus</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.updateOverlayGL.html#compas_viewers.core.GLWidget.updateOverlayGL" title="compas_viewers.core.GLWidget.updateOverlayGL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updateOverlayGL</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.updatesEnabled.html#compas_viewers.core.GLWidget.updatesEnabled" title="compas_viewers.core.GLWidget.updatesEnabled"><code class="xref py py-obj docutils literal notranslate"><span class="pre">updatesEnabled</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.visibleRegion.html#compas_viewers.core.GLWidget.visibleRegion" title="compas_viewers.core.GLWidget.visibleRegion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visibleRegion</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.whatsThis.html#compas_viewers.core.GLWidget.whatsThis" title="compas_viewers.core.GLWidget.whatsThis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">whatsThis</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.width.html#compas_viewers.core.GLWidget.width" title="compas_viewers.core.GLWidget.width"><code class="xref py py-obj docutils literal notranslate"><span class="pre">width</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.widthMM.html#compas_viewers.core.GLWidget.widthMM" title="compas_viewers.core.GLWidget.widthMM"><code class="xref py py-obj docutils literal notranslate"><span class="pre">widthMM</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.winId.html#compas_viewers.core.GLWidget.winId" title="compas_viewers.core.GLWidget.winId"><code class="xref py py-obj docutils literal notranslate"><span class="pre">winId</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.window.html#compas_viewers.core.GLWidget.window" title="compas_viewers.core.GLWidget.window"><code class="xref py py-obj docutils literal notranslate"><span class="pre">window</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowFilePath.html#compas_viewers.core.GLWidget.windowFilePath" title="compas_viewers.core.GLWidget.windowFilePath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowFilePath</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowFlags.html#compas_viewers.core.GLWidget.windowFlags" title="compas_viewers.core.GLWidget.windowFlags"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowFlags</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowHandle.html#compas_viewers.core.GLWidget.windowHandle" title="compas_viewers.core.GLWidget.windowHandle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowHandle</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowIcon.html#compas_viewers.core.GLWidget.windowIcon" title="compas_viewers.core.GLWidget.windowIcon"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowIcon</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowIconText.html#compas_viewers.core.GLWidget.windowIconText" title="compas_viewers.core.GLWidget.windowIconText"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowIconText</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowModality.html#compas_viewers.core.GLWidget.windowModality" title="compas_viewers.core.GLWidget.windowModality"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowModality</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowOpacity.html#compas_viewers.core.GLWidget.windowOpacity" title="compas_viewers.core.GLWidget.windowOpacity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowOpacity</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowRole.html#compas_viewers.core.GLWidget.windowRole" title="compas_viewers.core.GLWidget.windowRole"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowRole</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowState.html#compas_viewers.core.GLWidget.windowState" title="compas_viewers.core.GLWidget.windowState"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowState</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowTitle.html#compas_viewers.core.GLWidget.windowTitle" title="compas_viewers.core.GLWidget.windowTitle"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowTitle</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.windowType.html#compas_viewers.core.GLWidget.windowType" title="compas_viewers.core.GLWidget.windowType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">windowType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.x.html#compas_viewers.core.GLWidget.x" title="compas_viewers.core.GLWidget.x"><code class="xref py py-obj docutils literal notranslate"><span class="pre">x</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.GLWidget.y.html#compas_viewers.core.GLWidget.y" title="compas_viewers.core.GLWidget.y"><code class="xref py py-obj docutils literal notranslate"><span class="pre">y</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+                    
+                
+                </div>
+            </main>
+
+            <!-- site navigation sidebar -->
+
+            <div class="col-12 col-md-3 col-xl-2 compas-sidebar" role="navigation"> 
+                <div class="navbar-light">
+
+                    <form id="" class="d-flex compas-searchbox" action="../../search.html" method="get">
+                        <input class="form-control" type="text" name="q" placeholder="Search docs" />
+                        <input type="hidden" name="check_keywords" value="yes" />
+                        <input type="hidden" name="area" value="default" />
+
+                        <button class="navbar-toggler d-md-none compas-navigation-toggler" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </form>
+
+                    
+                    
+
+                        <div class="navbar-expand-md">
+                            <div id="compas-navigation" class="collapse navbar-collapse compas-navigation">
+
+                            <ul class="nav flex-column active">
+<li class="nav-item"><a class="nav-link reference internal" href="../../intro.html">Introduction</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../gettingstarted.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../examples.html">Examples</a></li>
+<li class="nav-item active"><a class="nav-link reference internal" href="../../api.html">API Reference</a><ul class="nav active">
+<li class="nav-item active"><a class="nav-link reference internal" href="../compas_viewers.html">compas_viewers</a><ul class="nav active">
+<li class="nav-item active"><a class="nav-link reference internal" href="../compas_viewers.core.html">compas_viewers.core</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../license.html">License</a></li>
+</ul>
+
+
+                            </div>
+                        </div>
+
+                    
+
+                </div>
+            </div>
+
+            <!-- table of contents of main content -->
+            
+            <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+
+                
+
+                <ul class="nav flex-column" id="compas-localnav">
+<li class="nav-item"><a class="nav-link reference internal" href="#">GLWidget</a><ul class="nav">
+</ul>
+</li>
+</ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="bg-dark pb-5">
+        <div class="container text-center pt-5 pb-5 text-muted">
+            
+                Last updated on Nov 28, 2019.
+            
+
+            
+                Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+            
+        </div>
+    </footer>
+
+    
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+            URL_ROOT          : '',
+            VERSION           : '0.1.0',
+            COLLAPSE_INDEX    : false,
+            FILE_SUFFIX       : '.html',
+            HAS_SOURCE        : 'false',
+            SOURCELINK_SUFFIX : '.txt'
+            };
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/searchtools_.js"></script>
+        <!-- <script src="../../_static/js/prism.js"></script> -->
+
+        <script>
+        $(document).ready(function() {
+        $(".language-default code").addClass("python");
+        $(".language-python code").addClass("python");
+        $(".language-bash code").addClass("bash");
+        $(".language-cpp code").addClass("cpp");
+        $(".language-json code").addClass("json");
+        $(".language-none code").addClass("plaintext");
+
+        hljs.initHighlighting();
+        anchors.add();
+        });
+        </script>
+    
+</body>
+</html>

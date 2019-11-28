@@ -5,10 +5,10 @@ from __future__ import division
 from math import sqrt
 
 
-__author__     = ['Mark Kilgard (?)']
-__link__       = 'http://svn.red-bean.com/pyobjc/other/PyOpenGL-2.0.2.01/OpenGL/trackball.py'
-__see__        = ['https://github.com/markkilgard/glut/blob/master/progs/examples/trackball.c']
-__doc__        = """A module which implements a trackball class."""
+__author__ = ['Mark Kilgard (?)']
+__link__ = 'http://svn.red-bean.com/pyobjc/other/PyOpenGL-2.0.2.01/OpenGL/trackball.py'
+__see__ = ['https://github.com/markkilgard/glut/blob/master/progs/examples/trackball.c']
+__doc__ = """A module which implements a trackball class."""
 
 
 class Trackball(object):
@@ -45,7 +45,7 @@ class Trackball(object):
             z = (r / sqrt(2))**2 / sqrt(x**2 + y**2)
         """
         d2 = px**2 + py**2
-        d  = sqrt(d2)
+        d = sqrt(d2)
         if d < self.size * 0.70710678118654752440:
             return sqrt(self.size**2 - d2)
         t = self.size / 1.41421356237309504880

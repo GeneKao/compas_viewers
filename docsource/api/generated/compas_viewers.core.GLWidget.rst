@@ -1,0 +1,426 @@
+.. rst-class:: detail
+
+GLWidget
+============================
+
+.. currentmodule:: compas_viewers.core
+
+.. autoclass:: GLWidget
+
+    
+    
+
+    .. rubric:: Attributes
+
+    .. autosummary::
+    
+        ~GLWidget.VIEW_FRONT
+        ~GLWidget.VIEW_LEFT
+        ~GLWidget.VIEW_PERSPECTIVE
+        ~GLWidget.VIEW_TOP
+        ~GLWidget.current
+        ~GLWidget.staticMetaObject
+
+    .. rubric:: Inherited Attributes
+
+    .. autosummary::
+    
+        ~GLWidget.DrawChildren
+        ~GLWidget.DrawWindowBackground
+        ~GLWidget.IgnoreMask
+        ~GLWidget.PdmDepth
+        ~GLWidget.PdmDevicePixelRatio
+        ~GLWidget.PdmDevicePixelRatioScaled
+        ~GLWidget.PdmDpiX
+        ~GLWidget.PdmDpiY
+        ~GLWidget.PdmHeight
+        ~GLWidget.PdmHeightMM
+        ~GLWidget.PdmNumColors
+        ~GLWidget.PdmPhysicalDpiX
+        ~GLWidget.PdmPhysicalDpiY
+        ~GLWidget.PdmWidth
+        ~GLWidget.PdmWidthMM
+        ~GLWidget.customContextMenuRequested
+        ~GLWidget.destroyed
+        ~GLWidget.objectNameChanged
+        ~GLWidget.painters
+        ~GLWidget.windowIconChanged
+        ~GLWidget.windowIconTextChanged
+        ~GLWidget.windowTitleChanged
+
+    
+    
+
+    
+    
+
+    .. rubric:: Methods
+
+    .. autosummary::
+        :toctree:
+
+    
+        ~GLWidget.__init__
+        ~GLWidget.capture
+        ~GLWidget.get_error
+        ~GLWidget.initializeGL
+        ~GLWidget.keyPressAction
+        ~GLWidget.keyPressEvent
+        ~GLWidget.make_index_buffer
+        ~GLWidget.make_vertex_buffer
+        ~GLWidget.mouseMoveEvent
+        ~GLWidget.mousePressEvent
+        ~GLWidget.paint
+        ~GLWidget.paintGL
+        ~GLWidget.resizeGL
+        ~GLWidget.update_index_buffer
+        ~GLWidget.update_vertex_buffer
+        ~GLWidget.wheelEvent
+
+    .. rubric:: Inherited Methods
+
+    .. autosummary::
+        :toctree:
+
+    
+        ~GLWidget.acceptDrops
+        ~GLWidget.accessibleDescription
+        ~GLWidget.accessibleName
+        ~GLWidget.actionEvent
+        ~GLWidget.actions
+        ~GLWidget.activateWindow
+        ~GLWidget.addAction
+        ~GLWidget.addActions
+        ~GLWidget.adjustSize
+        ~GLWidget.autoBufferSwap
+        ~GLWidget.autoFillBackground
+        ~GLWidget.backgroundRole
+        ~GLWidget.backingStore
+        ~GLWidget.baseSize
+        ~GLWidget.bindTexture
+        ~GLWidget.blockSignals
+        ~GLWidget.changeEvent
+        ~GLWidget.childAt
+        ~GLWidget.childEvent
+        ~GLWidget.children
+        ~GLWidget.childrenRect
+        ~GLWidget.childrenRegion
+        ~GLWidget.clearFocus
+        ~GLWidget.clearMask
+        ~GLWidget.close
+        ~GLWidget.closeEvent
+        ~GLWidget.colorCount
+        ~GLWidget.colormap
+        ~GLWidget.connect
+        ~GLWidget.connectNotify
+        ~GLWidget.contentsMargins
+        ~GLWidget.contentsRect
+        ~GLWidget.context
+        ~GLWidget.contextMenuEvent
+        ~GLWidget.contextMenuPolicy
+        ~GLWidget.convertToGLFormat
+        ~GLWidget.create
+        ~GLWidget.createWinId
+        ~GLWidget.createWindowContainer
+        ~GLWidget.cursor
+        ~GLWidget.customEvent
+        ~GLWidget.deleteLater
+        ~GLWidget.deleteTexture
+        ~GLWidget.depth
+        ~GLWidget.destroy
+        ~GLWidget.devType
+        ~GLWidget.devicePixelRatio
+        ~GLWidget.devicePixelRatioF
+        ~GLWidget.devicePixelRatioFScale
+        ~GLWidget.disconnect
+        ~GLWidget.disconnectNotify
+        ~GLWidget.doneCurrent
+        ~GLWidget.doubleBuffer
+        ~GLWidget.dragEnterEvent
+        ~GLWidget.dragLeaveEvent
+        ~GLWidget.dragMoveEvent
+        ~GLWidget.drawTexture
+        ~GLWidget.dropEvent
+        ~GLWidget.dumpObjectInfo
+        ~GLWidget.dumpObjectTree
+        ~GLWidget.dynamicPropertyNames
+        ~GLWidget.effectiveWinId
+        ~GLWidget.emit
+        ~GLWidget.ensurePolished
+        ~GLWidget.enterEvent
+        ~GLWidget.event
+        ~GLWidget.eventFilter
+        ~GLWidget.find
+        ~GLWidget.findChild
+        ~GLWidget.findChildren
+        ~GLWidget.focusInEvent
+        ~GLWidget.focusNextChild
+        ~GLWidget.focusNextPrevChild
+        ~GLWidget.focusOutEvent
+        ~GLWidget.focusPolicy
+        ~GLWidget.focusPreviousChild
+        ~GLWidget.focusProxy
+        ~GLWidget.focusWidget
+        ~GLWidget.font
+        ~GLWidget.fontInfo
+        ~GLWidget.fontMetrics
+        ~GLWidget.foregroundRole
+        ~GLWidget.format
+        ~GLWidget.frameGeometry
+        ~GLWidget.frameSize
+        ~GLWidget.geometry
+        ~GLWidget.getContentsMargins
+        ~GLWidget.glDraw
+        ~GLWidget.glInit
+        ~GLWidget.grab
+        ~GLWidget.grabFrameBuffer
+        ~GLWidget.grabGesture
+        ~GLWidget.grabKeyboard
+        ~GLWidget.grabMouse
+        ~GLWidget.grabShortcut
+        ~GLWidget.graphicsEffect
+        ~GLWidget.graphicsProxyWidget
+        ~GLWidget.hasFocus
+        ~GLWidget.hasHeightForWidth
+        ~GLWidget.hasMouseTracking
+        ~GLWidget.hasTabletTracking
+        ~GLWidget.height
+        ~GLWidget.heightForWidth
+        ~GLWidget.heightMM
+        ~GLWidget.hide
+        ~GLWidget.hideEvent
+        ~GLWidget.inherits
+        ~GLWidget.initPainter
+        ~GLWidget.initializeOverlayGL
+        ~GLWidget.inputMethodEvent
+        ~GLWidget.inputMethodHints
+        ~GLWidget.inputMethodQuery
+        ~GLWidget.insertAction
+        ~GLWidget.insertActions
+        ~GLWidget.installEventFilter
+        ~GLWidget.internalWinId
+        ~GLWidget.isActiveWindow
+        ~GLWidget.isAncestorOf
+        ~GLWidget.isEnabled
+        ~GLWidget.isEnabledTo
+        ~GLWidget.isEnabledToTLW
+        ~GLWidget.isFullScreen
+        ~GLWidget.isHidden
+        ~GLWidget.isLeftToRight
+        ~GLWidget.isMaximized
+        ~GLWidget.isMinimized
+        ~GLWidget.isModal
+        ~GLWidget.isRightToLeft
+        ~GLWidget.isSharing
+        ~GLWidget.isSignalConnected
+        ~GLWidget.isTopLevel
+        ~GLWidget.isValid
+        ~GLWidget.isVisible
+        ~GLWidget.isVisibleTo
+        ~GLWidget.isWidgetType
+        ~GLWidget.isWindow
+        ~GLWidget.isWindowModified
+        ~GLWidget.isWindowType
+        ~GLWidget.keyReleaseEvent
+        ~GLWidget.keyboardGrabber
+        ~GLWidget.killTimer
+        ~GLWidget.layout
+        ~GLWidget.layoutDirection
+        ~GLWidget.leaveEvent
+        ~GLWidget.locale
+        ~GLWidget.logicalDpiX
+        ~GLWidget.logicalDpiY
+        ~GLWidget.lower
+        ~GLWidget.makeCurrent
+        ~GLWidget.makeOverlayCurrent
+        ~GLWidget.mapFrom
+        ~GLWidget.mapFromGlobal
+        ~GLWidget.mapFromParent
+        ~GLWidget.mapTo
+        ~GLWidget.mapToGlobal
+        ~GLWidget.mapToParent
+        ~GLWidget.mask
+        ~GLWidget.maximumHeight
+        ~GLWidget.maximumSize
+        ~GLWidget.maximumWidth
+        ~GLWidget.metaObject
+        ~GLWidget.metric
+        ~GLWidget.minimumHeight
+        ~GLWidget.minimumSize
+        ~GLWidget.minimumSizeHint
+        ~GLWidget.minimumWidth
+        ~GLWidget.mouseDoubleClickEvent
+        ~GLWidget.mouseGrabber
+        ~GLWidget.mouseReleaseEvent
+        ~GLWidget.move
+        ~GLWidget.moveEvent
+        ~GLWidget.moveToThread
+        ~GLWidget.nativeEvent
+        ~GLWidget.nativeParentWidget
+        ~GLWidget.nextInFocusChain
+        ~GLWidget.normalGeometry
+        ~GLWidget.objectName
+        ~GLWidget.overlayContext
+        ~GLWidget.overrideWindowFlags
+        ~GLWidget.overrideWindowState
+        ~GLWidget.paintEngine
+        ~GLWidget.paintEvent
+        ~GLWidget.paintOverlayGL
+        ~GLWidget.paintingActive
+        ~GLWidget.palette
+        ~GLWidget.parent
+        ~GLWidget.parentWidget
+        ~GLWidget.physicalDpiX
+        ~GLWidget.physicalDpiY
+        ~GLWidget.pos
+        ~GLWidget.previousInFocusChain
+        ~GLWidget.property
+        ~GLWidget.qglClearColor
+        ~GLWidget.qglColor
+        ~GLWidget.raise_
+        ~GLWidget.receivers
+        ~GLWidget.rect
+        ~GLWidget.redirected
+        ~GLWidget.registerUserData
+        ~GLWidget.releaseKeyboard
+        ~GLWidget.releaseMouse
+        ~GLWidget.releaseShortcut
+        ~GLWidget.removeAction
+        ~GLWidget.removeEventFilter
+        ~GLWidget.render
+        ~GLWidget.renderPixmap
+        ~GLWidget.renderText
+        ~GLWidget.repaint
+        ~GLWidget.resize
+        ~GLWidget.resizeEvent
+        ~GLWidget.resizeOverlayGL
+        ~GLWidget.restoreGeometry
+        ~GLWidget.saveGeometry
+        ~GLWidget.scroll
+        ~GLWidget.sender
+        ~GLWidget.senderSignalIndex
+        ~GLWidget.setAcceptDrops
+        ~GLWidget.setAccessibleDescription
+        ~GLWidget.setAccessibleName
+        ~GLWidget.setAttribute
+        ~GLWidget.setAutoBufferSwap
+        ~GLWidget.setAutoFillBackground
+        ~GLWidget.setBackgroundRole
+        ~GLWidget.setBaseSize
+        ~GLWidget.setColormap
+        ~GLWidget.setContentsMargins
+        ~GLWidget.setContextMenuPolicy
+        ~GLWidget.setCursor
+        ~GLWidget.setDisabled
+        ~GLWidget.setEnabled
+        ~GLWidget.setFixedHeight
+        ~GLWidget.setFixedSize
+        ~GLWidget.setFixedWidth
+        ~GLWidget.setFocus
+        ~GLWidget.setFocusPolicy
+        ~GLWidget.setFocusProxy
+        ~GLWidget.setFont
+        ~GLWidget.setForegroundRole
+        ~GLWidget.setGeometry
+        ~GLWidget.setGraphicsEffect
+        ~GLWidget.setHidden
+        ~GLWidget.setInputMethodHints
+        ~GLWidget.setLayout
+        ~GLWidget.setLayoutDirection
+        ~GLWidget.setLocale
+        ~GLWidget.setMask
+        ~GLWidget.setMaximumHeight
+        ~GLWidget.setMaximumSize
+        ~GLWidget.setMaximumWidth
+        ~GLWidget.setMinimumHeight
+        ~GLWidget.setMinimumSize
+        ~GLWidget.setMinimumWidth
+        ~GLWidget.setMouseTracking
+        ~GLWidget.setObjectName
+        ~GLWidget.setPalette
+        ~GLWidget.setParent
+        ~GLWidget.setProperty
+        ~GLWidget.setShortcutAutoRepeat
+        ~GLWidget.setShortcutEnabled
+        ~GLWidget.setSizeIncrement
+        ~GLWidget.setSizePolicy
+        ~GLWidget.setStatusTip
+        ~GLWidget.setStyle
+        ~GLWidget.setStyleSheet
+        ~GLWidget.setTabOrder
+        ~GLWidget.setTabletTracking
+        ~GLWidget.setToolTip
+        ~GLWidget.setToolTipDuration
+        ~GLWidget.setUpdatesEnabled
+        ~GLWidget.setVisible
+        ~GLWidget.setWhatsThis
+        ~GLWidget.setWindowFilePath
+        ~GLWidget.setWindowFlag
+        ~GLWidget.setWindowFlags
+        ~GLWidget.setWindowIcon
+        ~GLWidget.setWindowIconText
+        ~GLWidget.setWindowModality
+        ~GLWidget.setWindowModified
+        ~GLWidget.setWindowOpacity
+        ~GLWidget.setWindowRole
+        ~GLWidget.setWindowState
+        ~GLWidget.setWindowTitle
+        ~GLWidget.sharedPainter
+        ~GLWidget.show
+        ~GLWidget.showEvent
+        ~GLWidget.showFullScreen
+        ~GLWidget.showMaximized
+        ~GLWidget.showMinimized
+        ~GLWidget.showNormal
+        ~GLWidget.signalsBlocked
+        ~GLWidget.size
+        ~GLWidget.sizeHint
+        ~GLWidget.sizeIncrement
+        ~GLWidget.sizePolicy
+        ~GLWidget.stackUnder
+        ~GLWidget.startTimer
+        ~GLWidget.statusTip
+        ~GLWidget.style
+        ~GLWidget.styleSheet
+        ~GLWidget.swapBuffers
+        ~GLWidget.tabletEvent
+        ~GLWidget.testAttribute
+        ~GLWidget.thread
+        ~GLWidget.timerEvent
+        ~GLWidget.toolTip
+        ~GLWidget.toolTipDuration
+        ~GLWidget.topLevelWidget
+        ~GLWidget.tr
+        ~GLWidget.underMouse
+        ~GLWidget.ungrabGesture
+        ~GLWidget.unsetCursor
+        ~GLWidget.unsetLayoutDirection
+        ~GLWidget.unsetLocale
+        ~GLWidget.update
+        ~GLWidget.updateGL
+        ~GLWidget.updateGeometry
+        ~GLWidget.updateMicroFocus
+        ~GLWidget.updateOverlayGL
+        ~GLWidget.updatesEnabled
+        ~GLWidget.visibleRegion
+        ~GLWidget.whatsThis
+        ~GLWidget.width
+        ~GLWidget.widthMM
+        ~GLWidget.winId
+        ~GLWidget.window
+        ~GLWidget.windowFilePath
+        ~GLWidget.windowFlags
+        ~GLWidget.windowHandle
+        ~GLWidget.windowIcon
+        ~GLWidget.windowIconText
+        ~GLWidget.windowModality
+        ~GLWidget.windowOpacity
+        ~GLWidget.windowRole
+        ~GLWidget.windowState
+        ~GLWidget.windowTitle
+        ~GLWidget.windowType
+        ~GLWidget.x
+        ~GLWidget.y
+
+    
+    

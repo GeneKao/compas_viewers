@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>compas_viewers</title>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="../../_static/images/compas.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/styles/default.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../../_static/css/prism.css" /> -->
+    <link rel="stylesheet" type="text/css" href="../../_static/css/compas.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/compas-reference.css" />
+
+    
+        <link rel="next" title="Camera.__init__" href="compas_viewers.core.Camera.__init__.html" />
+    
+    
+    
+        <link rel="prev" title="Axes.draw" href="compas_viewers.core.Axes.draw.html" />
+    
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</head>
+
+<body data-spy="scroll" data-target="#compas-localnav">
+
+    <nav class="navbar navbar-expand compas-navbar">
+        <a class="navbar-brand" href="/">
+            <img src="../../_static/images/compas_icon_white.png" width="36px" height="36px" alt="compas" />
+        </a>
+
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="../../index.html">COMPAS viewers</a></li>
+        </ul>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" target="_blank" href="">Github</a></li>
+            <li class="nav-item"><a class="nav-link" target="_blank" href="https://compas-dev.github.io">COMPAS framework</a></li>
+        </ul>
+    </nav>    
+
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+
+            <main class="col-12 col-md-9 col-xl-8 compas-content" role="main">
+                <div class="container">
+                
+
+                    
+
+                    <div class="detail section" id="camera">
+<h1>Camera</h1>
+<dl class="class">
+<dt id="compas_viewers.core.Camera">
+<em class="property">class </em><code class="sig-prename descclassname">compas_viewers.core.</code><code class="sig-name descname">Camera</code><span class="sig-paren">(</span><em class="sig-param">view</em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PySide2.QtCore.QObject</span></code></p>
+<p class="rubric">Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">aspect</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">distance_delta</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">far</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">fov</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">near</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotation_delta</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rx</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">rz</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">staticMetaObject</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited Attributes</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">destroyed</span></code></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">objectNameChanged</span></code></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.__init__.html#compas_viewers.core.Camera.__init__" title="compas_viewers.core.Camera.__init__"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__init__</span></code></a>(view)</p></td>
+<td><p>Initialize self.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.aim.html#compas_viewers.core.Camera.aim" title="compas_viewers.core.Camera.aim"><code class="xref py py-obj docutils literal notranslate"><span class="pre">aim</span></code></a>()</p></td>
+<td><p>Aim the camera.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.focus.html#compas_viewers.core.Camera.focus" title="compas_viewers.core.Camera.focus"><code class="xref py py-obj docutils literal notranslate"><span class="pre">focus</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.rotate.html#compas_viewers.core.Camera.rotate" title="compas_viewers.core.Camera.rotate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rotate</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.translate.html#compas_viewers.core.Camera.translate" title="compas_viewers.core.Camera.translate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">translate</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.zoom.html#compas_viewers.core.Camera.zoom" title="compas_viewers.core.Camera.zoom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoom</span></code></a>([steps])</p></td>
+<td><p>Zoom in.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.zoom_extents.html#compas_viewers.core.Camera.zoom_extents" title="compas_viewers.core.Camera.zoom_extents"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoom_extents</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.zoom_in.html#compas_viewers.core.Camera.zoom_in" title="compas_viewers.core.Camera.zoom_in"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoom_in</span></code></a>([steps])</p></td>
+<td><p>Zoom in.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.zoom_out.html#compas_viewers.core.Camera.zoom_out" title="compas_viewers.core.Camera.zoom_out"><code class="xref py py-obj docutils literal notranslate"><span class="pre">zoom_out</span></code></a>([steps])</p></td>
+<td><p>Zoom out.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Inherited Methods</p>
+<table class="longtable docutils align-default">
+<colgroup>
+<col style="width: 10%" />
+<col style="width: 90%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.blockSignals.html#compas_viewers.core.Camera.blockSignals" title="compas_viewers.core.Camera.blockSignals"><code class="xref py py-obj docutils literal notranslate"><span class="pre">blockSignals</span></code></a>(self, b)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.childEvent.html#compas_viewers.core.Camera.childEvent" title="compas_viewers.core.Camera.childEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">childEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.children.html#compas_viewers.core.Camera.children" title="compas_viewers.core.Camera.children"><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.connect.html#compas_viewers.core.Camera.connect" title="compas_viewers.core.Camera.connect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connect</span></code></a>(arg__1, arg__2, arg__3, type)</p></td>
+<td><p>connect(arg__1: str, arg__2: typing.Callable, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; bool connect(arg__1: str, arg__2: PySide2.QtCore.QObject, arg__3: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; bool connect(sender: PySide2.QtCore.QObject, signal: PySide2.QtCore.QMetaMethod, receiver: PySide2.QtCore.QObject, method: PySide2.QtCore.QMetaMethod, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection connect(sender: PySide2.QtCore.QObject, signal: str, member: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection connect(sender: PySide2.QtCore.QObject, signal: str, receiver: PySide2.QtCore.QObject, member: str, type: PySide2.QtCore.Qt.ConnectionType = PySide2.QtCore.Qt.ConnectionType.AutoConnection) -&gt; PySide2.QtCore.QMetaObject.Connection</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.connectNotify.html#compas_viewers.core.Camera.connectNotify" title="compas_viewers.core.Camera.connectNotify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">connectNotify</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.customEvent.html#compas_viewers.core.Camera.customEvent" title="compas_viewers.core.Camera.customEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">customEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.deleteLater.html#compas_viewers.core.Camera.deleteLater" title="compas_viewers.core.Camera.deleteLater"><code class="xref py py-obj docutils literal notranslate"><span class="pre">deleteLater</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.disconnect.html#compas_viewers.core.Camera.disconnect" title="compas_viewers.core.Camera.disconnect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnect</span></code></a>(arg__1)</p></td>
+<td><p>disconnect(arg__1: PySide2.QtCore.QObject, arg__2: str, arg__3: typing.Callable) -&gt; bool disconnect(arg__1: str, arg__2: typing.Callable) -&gt; bool disconnect(receiver: PySide2.QtCore.QObject, member: typing.Union[str, NoneType] = None) -&gt; bool disconnect(sender: PySide2.QtCore.QObject, signal: PySide2.QtCore.QMetaMethod, receiver: PySide2.QtCore.QObject, member: PySide2.QtCore.QMetaMethod) -&gt; bool disconnect(sender: PySide2.QtCore.QObject, signal: str, receiver: PySide2.QtCore.QObject, member: str) -&gt; bool disconnect(signal: str, receiver: PySide2.QtCore.QObject, member: str) -&gt; bool</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.disconnectNotify.html#compas_viewers.core.Camera.disconnectNotify" title="compas_viewers.core.Camera.disconnectNotify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">disconnectNotify</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.dumpObjectInfo.html#compas_viewers.core.Camera.dumpObjectInfo" title="compas_viewers.core.Camera.dumpObjectInfo"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumpObjectInfo</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.dumpObjectTree.html#compas_viewers.core.Camera.dumpObjectTree" title="compas_viewers.core.Camera.dumpObjectTree"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dumpObjectTree</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.dynamicPropertyNames.html#compas_viewers.core.Camera.dynamicPropertyNames" title="compas_viewers.core.Camera.dynamicPropertyNames"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dynamicPropertyNames</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.emit.html#compas_viewers.core.Camera.emit" title="compas_viewers.core.Camera.emit"><code class="xref py py-obj docutils literal notranslate"><span class="pre">emit</span></code></a>(self, arg__1, *args)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.event.html#compas_viewers.core.Camera.event" title="compas_viewers.core.Camera.event"><code class="xref py py-obj docutils literal notranslate"><span class="pre">event</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.eventFilter.html#compas_viewers.core.Camera.eventFilter" title="compas_viewers.core.Camera.eventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">eventFilter</span></code></a>(self, watched, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.findChild.html#compas_viewers.core.Camera.findChild" title="compas_viewers.core.Camera.findChild"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findChild</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.findChildren.html#compas_viewers.core.Camera.findChildren" title="compas_viewers.core.Camera.findChildren"><code class="xref py py-obj docutils literal notranslate"><span class="pre">findChildren</span></code></a>(self, arg__1, arg__2)</p></td>
+<td><p>findChildren(self, arg__1: type, arg__2: str = ‘’) -&gt; typing.Iterable</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.inherits.html#compas_viewers.core.Camera.inherits" title="compas_viewers.core.Camera.inherits"><code class="xref py py-obj docutils literal notranslate"><span class="pre">inherits</span></code></a>(self, classname)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.installEventFilter.html#compas_viewers.core.Camera.installEventFilter" title="compas_viewers.core.Camera.installEventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">installEventFilter</span></code></a>(self, filterObj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.isSignalConnected.html#compas_viewers.core.Camera.isSignalConnected" title="compas_viewers.core.Camera.isSignalConnected"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isSignalConnected</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.isWidgetType.html#compas_viewers.core.Camera.isWidgetType" title="compas_viewers.core.Camera.isWidgetType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWidgetType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.isWindowType.html#compas_viewers.core.Camera.isWindowType" title="compas_viewers.core.Camera.isWindowType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">isWindowType</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.killTimer.html#compas_viewers.core.Camera.killTimer" title="compas_viewers.core.Camera.killTimer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">killTimer</span></code></a>(self, id)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.metaObject.html#compas_viewers.core.Camera.metaObject" title="compas_viewers.core.Camera.metaObject"><code class="xref py py-obj docutils literal notranslate"><span class="pre">metaObject</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.moveToThread.html#compas_viewers.core.Camera.moveToThread" title="compas_viewers.core.Camera.moveToThread"><code class="xref py py-obj docutils literal notranslate"><span class="pre">moveToThread</span></code></a>(self, thread)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.objectName.html#compas_viewers.core.Camera.objectName" title="compas_viewers.core.Camera.objectName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">objectName</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.parent.html#compas_viewers.core.Camera.parent" title="compas_viewers.core.Camera.parent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">parent</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.property.html#compas_viewers.core.Camera.property" title="compas_viewers.core.Camera.property"><code class="xref py py-obj docutils literal notranslate"><span class="pre">property</span></code></a>(self, name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.receivers.html#compas_viewers.core.Camera.receivers" title="compas_viewers.core.Camera.receivers"><code class="xref py py-obj docutils literal notranslate"><span class="pre">receivers</span></code></a>(self, signal)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.registerUserData.html#compas_viewers.core.Camera.registerUserData" title="compas_viewers.core.Camera.registerUserData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">registerUserData</span></code></a>()</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.removeEventFilter.html#compas_viewers.core.Camera.removeEventFilter" title="compas_viewers.core.Camera.removeEventFilter"><code class="xref py py-obj docutils literal notranslate"><span class="pre">removeEventFilter</span></code></a>(self, obj)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.sender.html#compas_viewers.core.Camera.sender" title="compas_viewers.core.Camera.sender"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sender</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.senderSignalIndex.html#compas_viewers.core.Camera.senderSignalIndex" title="compas_viewers.core.Camera.senderSignalIndex"><code class="xref py py-obj docutils literal notranslate"><span class="pre">senderSignalIndex</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.setObjectName.html#compas_viewers.core.Camera.setObjectName" title="compas_viewers.core.Camera.setObjectName"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setObjectName</span></code></a>(self, name)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.setParent.html#compas_viewers.core.Camera.setParent" title="compas_viewers.core.Camera.setParent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setParent</span></code></a>(self, parent)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.setProperty.html#compas_viewers.core.Camera.setProperty" title="compas_viewers.core.Camera.setProperty"><code class="xref py py-obj docutils literal notranslate"><span class="pre">setProperty</span></code></a>(self, name, value)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.signalsBlocked.html#compas_viewers.core.Camera.signalsBlocked" title="compas_viewers.core.Camera.signalsBlocked"><code class="xref py py-obj docutils literal notranslate"><span class="pre">signalsBlocked</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.startTimer.html#compas_viewers.core.Camera.startTimer" title="compas_viewers.core.Camera.startTimer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">startTimer</span></code></a>(self, interval, timerType)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.thread.html#compas_viewers.core.Camera.thread" title="compas_viewers.core.Camera.thread"><code class="xref py py-obj docutils literal notranslate"><span class="pre">thread</span></code></a>(self)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="compas_viewers.core.Camera.timerEvent.html#compas_viewers.core.Camera.timerEvent" title="compas_viewers.core.Camera.timerEvent"><code class="xref py py-obj docutils literal notranslate"><span class="pre">timerEvent</span></code></a>(self, event)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="compas_viewers.core.Camera.tr.html#compas_viewers.core.Camera.tr" title="compas_viewers.core.Camera.tr"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tr</span></code></a>(self, arg__1, arg__2, arg__3)</p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+                    
+                
+                </div>
+            </main>
+
+            <!-- site navigation sidebar -->
+
+            <div class="col-12 col-md-3 col-xl-2 compas-sidebar" role="navigation"> 
+                <div class="navbar-light">
+
+                    <form id="" class="d-flex compas-searchbox" action="../../search.html" method="get">
+                        <input class="form-control" type="text" name="q" placeholder="Search docs" />
+                        <input type="hidden" name="check_keywords" value="yes" />
+                        <input type="hidden" name="area" value="default" />
+
+                        <button class="navbar-toggler d-md-none compas-navigation-toggler" type="button" data-toggle="collapse" data-target="#compas-navigation" aria-controls="compas-navigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </form>
+
+                    
+                    
+
+                        <div class="navbar-expand-md">
+                            <div id="compas-navigation" class="collapse navbar-collapse compas-navigation">
+
+                            <ul class="nav flex-column active">
+<li class="nav-item"><a class="nav-link reference internal" href="../../intro.html">Introduction</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../gettingstarted.html">Getting Started</a></li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../examples.html">Examples</a></li>
+<li class="nav-item active"><a class="nav-link reference internal" href="../../api.html">API Reference</a><ul class="nav active">
+<li class="nav-item active"><a class="nav-link reference internal" href="../compas_viewers.html">compas_viewers</a><ul class="nav active">
+<li class="nav-item active"><a class="nav-link reference internal" href="../compas_viewers.core.html">compas_viewers.core</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="nav-item"><a class="nav-link reference internal" href="../../license.html">License</a></li>
+</ul>
+
+
+                            </div>
+                        </div>
+
+                    
+
+                </div>
+            </div>
+
+            <!-- table of contents of main content -->
+            
+            <div class="d-none d-xl-block col-xl-2 compas-toc" role="toc">
+
+                
+
+                <ul class="nav flex-column" id="compas-localnav">
+<li class="nav-item"><a class="nav-link reference internal" href="#">Camera</a><ul class="nav">
+</ul>
+</li>
+</ul>
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer class="bg-dark pb-5">
+        <div class="container text-center pt-5 pb-5 text-muted">
+            
+                Last updated on Nov 28, 2019.
+            
+
+            
+                Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+            
+        </div>
+    </footer>
+
+    
+        <script type="text/javascript">
+            var DOCUMENTATION_OPTIONS = {
+            URL_ROOT          : '',
+            VERSION           : '0.1.0',
+            COLLAPSE_INDEX    : false,
+            FILE_SUFFIX       : '.html',
+            HAS_SOURCE        : 'false',
+            SOURCELINK_SUFFIX : '.txt'
+            };
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.0.0/anchor.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.9/highlight.min.js"></script>
+
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/js/searchtools_.js"></script>
+        <!-- <script src="../../_static/js/prism.js"></script> -->
+
+        <script>
+        $(document).ready(function() {
+        $(".language-default code").addClass("python");
+        $(".language-python code").addClass("python");
+        $(".language-bash code").addClass("bash");
+        $(".language-cpp code").addClass("cpp");
+        $(".language-json code").addClass("json");
+        $(".language-none code").addClass("plaintext");
+
+        hljs.initHighlighting();
+        anchors.add();
+        });
+        </script>
+    
+</body>
+</html>
