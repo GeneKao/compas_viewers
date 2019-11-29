@@ -1,15 +1,11 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
 from math import cos
 from math import sin
 from math import pi
 
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-from OpenGL.GLE import *
-from OpenGL.GL import *
+from OpenGL.GLUT import *  # noqa: F401 F403
+from OpenGL.GLU import *  # noqa: F401 F403
+from OpenGL.GLE import *  # noqa: F401 F403
+from OpenGL.GL import *  # noqa: F401 F403
 
 from compas.geometry import normalize_vector
 from compas.geometry import cross_vectors
@@ -151,25 +147,25 @@ def draw_line_array(vertices, indices, colors):
 # ==============================================================================
 
 
-def draw_points(points, color=None, size=1):
-    color = color if color else (0.0, 0.0, 0.0)
-    glColor3f(*color)
-    glPointSize(size)
-    glBegin(GL_POINTS)
-    for x, y, z in iter(points):
-        glVertex3f(x, y, z)
-    glEnd()
+# def draw_points(points, color=None, size=1):
+#     color = color if color else (0.0, 0.0, 0.0)
+#     glColor3f(*color)
+#     glPointSize(size)
+#     glBegin(GL_POINTS)
+#     for x, y, z in iter(points):
+#         glVertex3f(x, y, z)
+#     glEnd()
 
 
-def draw_lines(lines, color=None, linewidth=1):
-    color = color if color else (0.0, 0.0, 0.0)
-    glColor3f(*color)
-    glLineWidth(linewidth)
-    glBegin(GL_LINES)
-    for a, b in iter(lines):
-        glVertex3f(*a)
-        glVertex3f(*b)
-    glEnd()
+# def draw_lines(lines, color=None, linewidth=1):
+#     color = color if color else (0.0, 0.0, 0.0)
+#     glColor3f(*color)
+#     glLineWidth(linewidth)
+#     glBegin(GL_LINES)
+#     for a, b in iter(lines):
+#         glVertex3f(*a)
+#         glVertex3f(*b)
+#     glEnd()
 
 
 def draw_faces(faces, color=None):
@@ -202,7 +198,7 @@ def draw_circle(circle, color=None, n=100):
     uvw = [normalize_vector(u), normalize_vector(v), normalize_vector(w)]
 
     color = color if color else (1.0, 0.0, 0.0, 0.5)
-    sector = 2 * pi  / n
+    sector = 2 * pi / n
 
     glColor4f(*color)
 
@@ -234,9 +230,9 @@ def draw_circle(circle, color=None, n=100):
 
 def draw_points(points):
     for attr in points:
-        pos   = attr['pos']
+        pos = attr['pos']
         color = attr['color']
-        size  = attr['size']
+        size = attr['size']
         glColor3f(*color)
         glPointSize(size)
         glBegin(GL_POINTS)
@@ -248,7 +244,7 @@ def draw_points(points):
 def draw_lines(lines):
     for attr in lines:
         start = attr['start']
-        end   = attr['end']
+        end = attr['end']
         color = attr['color']
         width = attr['width']
         glColor3f(*color)
@@ -261,11 +257,11 @@ def draw_lines(lines):
 
 def draw_polygons(polygons):
     for attr in polygons:
-        points      = attr['points']
+        points = attr['points']
         color_front = attr['color.front']
-        color_back  = attr['color.back']
+        color_back = attr['color.back']
         color_wires = attr.get('color.wires', (0.0, 0.0, 0.0, 1.0))
-        wires_on    = attr.get('wires_on', False)
+        wires_on = attr.get('wires_on', False)
         # front faces
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)
         glColor4f(*color_front)
@@ -298,8 +294,8 @@ def draw_polygons(polygons):
 
 def draw_texts(texts):
     for attr in texts:
-        text  = attr['text']
-        pos   = attr['pos']
+        text = attr['text']
+        pos = attr['pos']
         color = attr['color']
         shift = attr['shift']
         glColor4f(color[0], color[1], color[2], color[3])

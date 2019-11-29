@@ -1,14 +1,6 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-
-from math import cos
-from math import sin
-from math import pi
+from OpenGL.GL import *  # noqa: F401 F403
+from OpenGL.GLUT import *  # noqa: F401 F403
+from OpenGL.GLU import *  # noqa: F401 F403
 
 from PySide2.QtCore import QObject
 from PySide2.QtCore import Signal

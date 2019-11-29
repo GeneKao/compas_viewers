@@ -1,15 +1,6 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-from OpenGL.GL import *
-
-from compas.utilities import flatten
-
-from compas_viewers.core.buffers import make_vertex_buffer
-from compas_viewers.core.buffers import make_index_buffer
+from OpenGL.GLUT import *  # noqa: F401 F403
+from OpenGL.GLU import *  # noqa: F401 F403
+from OpenGL.GL import *  # noqa: F401 F403
 
 
 __all__ = ['Grid']

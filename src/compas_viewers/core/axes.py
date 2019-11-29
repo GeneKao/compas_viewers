@@ -1,10 +1,6 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
-from OpenGL.GL import *
+from OpenGL.GLUT import *  # noqa: F401 F403
+from OpenGL.GLU import *  # noqa: F401 F403
+from OpenGL.GL import *  # noqa: F401 F403
 
 
 __all__ = ['Axes']

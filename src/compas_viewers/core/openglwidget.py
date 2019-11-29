@@ -1,15 +1,11 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
 from PySide2 import QtCore
 from PySide2 import QtGui
-from PySide2 import QtOpenGL
+# from PySide2 import QtOpenGL
 from PySide2 import QtWidgets
 
-from OpenGL.GL import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
+from OpenGL.GL import *  # noqa: F401 F403
+from OpenGL.GLUT import *  # noqa: F401 F403
+from OpenGL.GLU import *  # noqa: F401 F403
 
 from compas_viewers.core import Camera
 from compas_viewers.core import Mouse
@@ -98,7 +94,7 @@ class OpenGLWidget(QtWidgets.QOpenGLWidget):
     def initializeGL(self):
         context = self.context()
         gl = context.functions()
-        gl.initializeOpenGLFunctions();
+        gl.initializeOpenGLFunctions()
 
         fmt = self.format()
         print(fmt.options())
