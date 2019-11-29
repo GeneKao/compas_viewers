@@ -1,18 +1,14 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
 from functools import partial
 
 from random import random
 
-from OpenGL.GL import *
-from OpenGL.GLU import *
-from OpenGL.GLUT import *
+from OpenGL.GL import *    # noqa: F401 F403
+from OpenGL.GLU import *   # noqa: F401 F403
+from OpenGL.GLUT import *  # noqa: F401 F403
 
-import compas
 from compas.utilities import hex_to_rgb
 from compas.utilities import flatten
+
 from compas_viewers.core import GLWidget
 # from compas_viewers.core import OpenGLWidget
 from compas_viewers.core import Grid
@@ -54,8 +50,6 @@ class View(GLWidget):
     # ==========================================================================
     # arrays
     # ==========================================================================
-
-    # move this to model?
 
     @property
     def array_xyz(self):
@@ -127,15 +121,15 @@ class View(GLWidget):
 
     def make_buffers(self):
         self.buffers = {
-            'xyz'              : self.make_vertex_buffer(self.array_xyz),
-            'vertices'         : self.make_index_buffer(self.array_vertices),
-            'edges'            : self.make_index_buffer(self.array_edges),
-            'faces:front'      : self.make_index_buffer(self.array_faces_front),
-            'faces:back'       : self.make_index_buffer(self.array_faces_back),
-            'vertices.color'   : self.make_vertex_buffer(self.array_vertices_color, dynamic=True),
-            'edges.color'      : self.make_vertex_buffer(self.array_edges_color, dynamic=True),
+            'xyz': self.make_vertex_buffer(self.array_xyz),
+            'vertices': self.make_index_buffer(self.array_vertices),
+            'edges': self.make_index_buffer(self.array_edges),
+            'faces:front': self.make_index_buffer(self.array_faces_front),
+            'faces:back': self.make_index_buffer(self.array_faces_back),
+            'vertices.color': self.make_vertex_buffer(self.array_vertices_color, dynamic=True),
+            'edges.color': self.make_vertex_buffer(self.array_edges_color, dynamic=True),
             'faces.color:front': self.make_vertex_buffer(self.array_faces_color_front, dynamic=True),
-            'faces.color:back' : self.make_vertex_buffer(self.array_faces_color_back, dynamic=True),
+            'faces.color:back': self.make_vertex_buffer(self.array_faces_color_back, dynamic=True),
         }
         self.n = len(self.array_xyz)
         self.v = len(self.array_vertices)

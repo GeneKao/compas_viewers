@@ -6,7 +6,16 @@ from __future__ import division
 from compas.utilities import pairwise
 
 
-__all__ = ['MeshView']
+__all__ = ['MeshView', 'MeshObject']
+
+
+class MeshObject(object):
+
+    def __init__(self, mesh, color=None):
+        self.data = mesh
+        self.view = MeshView(mesh)
+        self.color = color or '#cccccc'
+        self.xforms = []
 
 
 class MeshView(object):

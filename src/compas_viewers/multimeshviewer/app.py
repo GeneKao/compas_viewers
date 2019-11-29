@@ -4,11 +4,13 @@ from __future__ import division
 
 from compas_viewers.core import App
 
+from compas_viewers.multimeshviewer.model import MeshObject
 from compas_viewers.multimeshviewer.view import View
 from compas_viewers.multimeshviewer.controller import Controller
 
-from compas_viewers.multimeshviewer import CONFIG
-from compas_viewers.multimeshviewer import STYLE
+from compas_viewers.multimeshviewer.settings import SETTINGS
+from compas_viewers.multimeshviewer.ui import UI
+from compas_viewers.multimeshviewer.style import STYLE
 
 
 __all__ = ['MultiMeshViewer']
@@ -18,7 +20,7 @@ class MultiMeshViewer(App):
     """"""
 
     def __init__(self):
-        super().__init__(CONFIG, STYLE)
+        super().__init__(SETTINGS, UI, STYLE)
         self.controller = Controller(self)
         self.view = View(self.controller)
         self.view.camera.events.rotX.connect(self.controller.on_rotX)
@@ -44,12 +46,16 @@ class MultiMeshViewer(App):
 
     @meshes.setter
     def meshes(self, meshes):
-        self.controller.meshes = meshes
+        temp = []
+        for mesh in meshes:
+            if not isinstance(mesh, MeshObject):
+                mesh = MeshObject(mesh)
+            temp.append(mesh)
+        self.controller.meshes = temp
         # self.controller.center()
         self.view.glInit()
         self.view.make_buffers()
         self.view.updateGL()
-
 
 # ==============================================================================
 # Main
@@ -72,19 +78,12 @@ if __name__ == '__main__':
     from compas.geometry import Box
     from compas.datastructures import Mesh
     from compas.datastructures import mesh_transform_numpy
-    from compas_viewers.multimeshviewer.model import MeshView
     from compas.utilities import rgb_to_hex
     from compas.geometry import Translation
     from compas.geometry import Rotation
 
-    class MeshObject(object):
-        def __init__(self, mesh, color=None):
-            self.data = mesh
-            self.view = MeshView(mesh)
-            self.color = color
-            self.xforms = []
-
     meshes = []
+
     for i in range(10):
         vector = [random.randint(0, 10), random.randint(0, 10), random.randint(0, 5)]
         T = Translation(vector)

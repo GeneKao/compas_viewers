@@ -1,125 +1,24 @@
-
-CONFIG = {
+UI = {
     'menubar': [
         {
             'type': 'menu',
             'text': 'View',
-            'items': [
-                {
-                    'type': 'menu',
-                    'text': 'Set View',
-                    'items': [
-                        {
-                            'type': 'radio',
-                            'items': [
-                                {
-                                    'text': 'Perspective',
-                                    'action': 'set_view',
-                                    'args': [1],
-                                    'checked': True
-                                },
-                                {
-                                    'text': 'Front',
-                                    'action': 'set_view',
-                                    'args': [2],
-                                    'checked': False
-                                },
-                                {
-                                    'text': 'Left',
-                                    'action': 'set_view',
-                                    'args': [3],
-                                    'checked': False
-                                },
-                                {
-                                    'text': 'Top',
-                                    'action': 'set_view',
-                                    'args': [4],
-                                    'checked': False
-                                },
-                            ]
-                        }
-                    ]
-                },
-                {'type': 'separator'},
-                {'text': 'Camera', 'action': 'update_camera_settings'},
-                {'type': 'separator'},
-                {'text': 'Capture Image', 'action': 'capture_image'},
-                {'text': 'Capture Video', 'action': 'capture_video'},
-                {'type': 'separator'}
-            ]
+            'items': []
         },
         {
             'type': 'menu',
             'text': 'Mesh',
-            'items': [
-                {'text': 'From OBJ', 'action': 'from_obj'},
-                {'text': 'From JSON', 'action': 'from_json'},
-                {'text': 'From STL', 'action': 'from_stl'},
-                {'text': 'From PLY', 'action': 'from_ply'},
-                {'type': 'separator'},
-                {'text': 'To OBJ', 'action': 'to_obj'},
-                {'text': 'To JSON', 'action': 'to_json'},
-                {'text': 'To STL', 'action': 'to_stl'},
-                {'text': 'To PLY', 'action': 'to_ply'},
-                {'type': 'separator'},
-                {
-                    'type': 'menu',
-                    'text': 'Polyhedrons',
-                    'items': [
-                        {'text': 'Tetrahedron', 'action': 'from_polyhedron', 'args': [4]},
-                        {'text': 'Hexahedron', 'action': 'from_polyhedron', 'args': [6]},
-                        {'text': 'Octahedron', 'action': 'from_polyhedron', 'args': [8]},
-                        {'text': 'Dodecahedron', 'action': 'from_polyhedron', 'args': [12]},
-                    ]
-                },
-                {'type': 'separator'},
-            ]
+            'items': []
         },
         {
             'type': 'menu',
             'text': 'Tools',
-            'items': [
-                {'text': 'Flip Normals', 'action': 'flip_normals'},
-                {'type': 'separator'},
-                {
-                    'type': 'menu',
-                    'text': 'Subdivision',
-                    'items': [
-                        {'text': 'Catmull-Clark', 'action': 'subdivide', 'args': ['catmullclark', 1]}
-                    ]
-                }
-            ]
+            'items': []
         },
         {
             'type': 'menu',
             'text': 'OpenGL',
-            'items': [
-                {'text': 'Version Info', 'action': 'opengl_version_info'},
-                {'type': 'separator'},
-                {
-                    'type': 'radio',
-                    'items': [
-                        {
-                            'text': 'Version 2.1',
-                            'action': 'opengl_set_version',
-                            'args': [(2, 1)],
-                            'checked': True
-                        },
-                        {
-                            'text': 'Version 3.3',
-                            'action': 'opengl_set_version',
-                            'args': [(3, 3)],
-                            'checked': False
-                        },
-                        {
-                            'text': 'Version 4.1',
-                            'action': 'opengl_set_version',
-                            'args': [(4, 1)],
-                            'checked': False
-                        }
-                    ]
-                },
-            ]
+            'items': []
         },
         {
             'type': 'menu',
@@ -162,7 +61,6 @@ CONFIG = {
                 {'type': 'checkbox', 'text': 'vertices', 'action': 'toggle_vertices', 'state': True, },
                 {'type': 'checkbox', 'text': 'edges', 'action': 'toggle_edges', 'state': True, },
                 {'type': 'checkbox', 'text': 'faces', 'action': 'toggle_faces', 'state': True, },
-                {'type': 'checkbox', 'text': 'normals', 'action': 'toggle_normals', 'state': False, },
             ]
         },
         {
@@ -183,20 +81,6 @@ CONFIG = {
                     'action': 'change_edges_color',
                     'size': (16, 16),
                 },
-                # {
-                #     'type'  : 'colorbutton',
-                #     'text'  : 'color faces (front)',
-                #     'value' : Controller.settings['faces.color:front'],
-                #     'action': 'change_faces_color_front',
-                #     'size'  : (16, 16),
-                # },
-                # {
-                #     'type'  : 'colorbutton',
-                #     'text'  : 'color faces (back)',
-                #     'value' : Controller.settings['faces.color:back'],
-                #     'action': 'change_faces_color_back',
-                #     'size'  : (16, 16),
-                # },
             ]
         },
         {

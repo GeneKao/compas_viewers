@@ -1,13 +1,10 @@
-from __future__ import print_function
-from __future__ import absolute_import
-from __future__ import division
-
 from compas_viewers.core import App
 
 from compas_viewers.meshviewer.view import View
 from compas_viewers.meshviewer.controller import Controller
 
-from compas_viewers.meshviewer.config import CONFIG
+from compas_viewers.meshviewer.settings import SETTINGS
+from compas_viewers.meshviewer.ui import UI
 from compas_viewers.meshviewer.style import STYLE
 
 
@@ -18,7 +15,7 @@ class MeshViewer(App):
     """"""
 
     def __init__(self):
-        super(MeshViewer, self).__init__(CONFIG, STYLE)
+        super(MeshViewer, self).__init__(SETTINGS, UI, STYLE)
         self.controller = Controller(self)
         self.view = View(self.controller)
         self.view.camera.events.rotX.connect(self.controller.on_rotX)

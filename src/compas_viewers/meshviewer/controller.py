@@ -3,12 +3,11 @@ import os
 from functools import partial
 
 from PySide2 import QtCore
-from PySide2 import QtGui
 from PySide2 import QtWidgets
 
-from OpenGL.GL import *
-from OpenGL.GLU import *
-from OpenGL.GLUT import *
+from OpenGL.GL import *    # noqa: F401 F403
+from OpenGL.GLU import *   # noqa: F401 F403
+from OpenGL.GLUT import *  # noqa: F401 F403
 
 import compas
 
@@ -66,75 +65,15 @@ def flist(items):
 
 
 class Controller(core.controller.Controller):
-    settings = core.controller.Controller.settings or {}
-
-    settings['vertices.size:value'] = 1
-    settings['vertices.size:minval'] = 1
-    settings['vertices.size:maxval'] = 100
-    settings['vertices.size:step'] = 1
-    settings['vertices.size:scale'] = 0.1
-
-    settings['edges.width:value'] = 1
-    settings['edges.width:minval'] = 1
-    settings['edges.width:maxval'] = 100
-    settings['edges.width:step'] = 1
-    settings['edges.width:scale'] = 0.1
-
-    settings['normals.scale:value'] = 1
-    settings['normals.scale:minval'] = 1
-    settings['normals.scale:maxval'] = 100
-    settings['normals.scale:step'] = 1
-    settings['normals.scale:scale'] = 0.1
-
-    settings['vertices.color'] = '#222222'
-    settings['edges.color'] = '#666666'
-    settings['faces.color:front'] = '#cccccc'
-    settings['faces.color:back'] = '#ff5e99'
-    settings['normals.color'] = '#0092d2'
-
-    settings['vertices.on'] = True
-    settings['edges.on'] = True
-    settings['faces.on'] = True
-
-    settings['normals.on'] = False
-
-    settings['vertices.labels.on'] = False
-    settings['edges.labels.on'] = False
-    settings['faces.labels.on'] = False
-
-    settings['camera.elevation:value'] = -10
-    settings['camera.elevation:minval'] = -180
-    settings['camera.elevation:maxval'] = +180
-    settings['camera.elevation:step'] = +1
-    settings['camera.elevation:scale'] = +1
-
-    settings['camera.azimuth:value'] = +30
-    settings['camera.azimuth:minval'] = -180
-    settings['camera.azimuth:maxval'] = +180
-    settings['camera.azimuth:step'] = +1
-    settings['camera.azimuth:scale'] = +1
-
-    settings['camera.distance:value'] = +10
-    settings['camera.distance:minval'] = 0
-    settings['camera.distance:maxval'] = +100
-    settings['camera.distance:step'] = +1
-    settings['camera.distance:scale'] = +1
-    settings['camera.distance:delta'] = +0.05
-
-    settings['camera.fov:value'] = 50
-    settings['camera.fov:minval'] = 10
-    settings['camera.fov:maxval'] = 170
-    settings['camera.fov:step'] = +1
-    settings['camera.fov:scale'] = +1
-
-    settings['camera.rotation:delta'] = +0.5
-    settings['camera.near:value'] = 0.1
-    settings['camera.far:value'] = 1000
 
     def __init__(self, app):
         super(Controller, self).__init__(app)
         self._mesh = None
         self._meshview = None
+
+    @property
+    def settings(self):
+        return self.app.settings
 
     @property
     def view(self):

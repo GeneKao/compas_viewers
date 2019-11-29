@@ -27,9 +27,10 @@ class MainWindow(QtWidgets.QMainWindow):
 class App(QtWidgets.QApplication):
     """"""
 
-    def __init__(self, config=None, style=None):
+    def __init__(self, settings=None, ui=None, style=None):
         QtWidgets.QApplication.__init__(self, sys.argv)
-        self.config = config or {}
+        self.settings = settings or {}
+        self.ui = ui or {}
         if style:
             self.setStyleSheet(style)
 
@@ -76,33 +77,33 @@ class App(QtWidgets.QApplication):
         self.statusbar.showMessage('Ready')
 
     def init_menubar(self):
-        if 'menubar' not in self.config:
+        if 'menubar' not in self.ui:
             return
-        if not self.config['menubar']:
+        if not self.ui['menubar']:
             return
         self.menubar = self.main.menuBar()
         self.menubar.setContentsMargins(0, 0, 0, 0)
-        self.add_menubar_items(self.config['menubar'], self.menubar, 0)
+        self.add_menubar_items(self.ui['menubar'], self.menubar, 0)
 
     def init_toolbar(self):
-        if 'toolbar' not in self.config:
+        if 'toolbar' not in self.ui:
             return
-        if not self.config['toolbar']:
+        if not self.ui['toolbar']:
             return
         self.toolbar = self.main.addToolBar('Tools')
         self.toolbar.setMovable(False)
         self.toolbar.setObjectName('Tools')
         self.toolbar.setIconSize(QtCore.QSize(24, 24))
         self.toolbar.setContentsMargins(0, 0, 0, 0)
-        self.add_toolbar_items(self.config['toolbar'], self.toolbar)
+        self.add_toolbar_items(self.ui['toolbar'], self.toolbar)
 
     # make this resizable
     # rename this to controls
     # add true sidebar
     def init_sidebar(self):
-        if 'sidebar' not in self.config:
+        if 'sidebar' not in self.ui:
             return
-        if not self.config['sidebar']:
+        if not self.ui['sidebar']:
             return
         self.sidebar = QtWidgets.QDockWidget()
         self.sidebar.setObjectName('Sidebar')
@@ -118,12 +119,12 @@ class App(QtWidgets.QApplication):
         layout.setSpacing(0)
         widget.setLayout(layout)
         self.sidebar.setWidget(widget)
-        self.add_sidebar_items(self.config['sidebar'], layout)
+        self.add_sidebar_items(self.ui['sidebar'], layout)
         layout.addStretch()
 
     # make this into something that can be toggled
     def init_console(self):
-        if 'console' not in self.config:
+        if 'console' not in self.ui:
             return
         self.console = QtWidgets.QDockWidget()
         self.console.setObjectName('Console')
