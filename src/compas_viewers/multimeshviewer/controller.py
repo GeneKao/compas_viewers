@@ -82,14 +82,6 @@ class Controller(core.controller.Controller):
     def meshes(self, meshes):
         self._meshes = meshes
 
-    @property
-    def colors(self):
-        return self._colors
-
-    @colors.setter
-    def colors(self, colors):
-        self._colors = colors
-
     def center(self):
         # perhaps this should be a bestfit_frame
         # and a frame to frame transformation of all points
