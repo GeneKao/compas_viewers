@@ -5,6 +5,7 @@ from OpenGL.GLU import *  # noqa: F401 F403
 from PySide2.QtCore import QObject
 from PySide2.QtCore import Signal
 
+import math
 
 __all__ = ['Camera']
 
@@ -139,10 +140,41 @@ class Camera(QObject):
     def translate(self):
         """"""
         # should be reimplemented per view
-        dx = self.view.mouse.dx()
-        dy = self.view.mouse.dy()
-        self.tx += self.tdelta * dx
-        self.ty -= self.tdelta * dy
+        if self.view.current == self.view.VIEW_PERSPECTIVE:
+            dx = self.view.mouse.dx() * math.cos(math.radians(self.rz)) - self.view.mouse.dy() * math.sin(math.radians(self.rz)) * math.cos(math.radians(self.rx))
+            dy = self.view.mouse.dy() * math.cos(math.radians(self.rz)) * math.cos(math.radians(self.rx)) + self.view.mouse.dx() * math.sin(math.radians(self.rz))
+            dz = self.view.mouse.dy() * math.sin(math.radians(self.rx)) * 0.01
+
+            dx *= self.distance / 10.
+            dy *= self.distance / 10.
+            dz *= self.distance / 10.
+
+            self.tx += self.tdelta * dx
+            self.ty -= self.tdelta * dy
+            self.target[0] = -self.tx
+            self.target[1] = -self.ty
+            self.target[2] -= dz
+            self.distance -= dz
+
+        elif self.view.current == self.view.VIEW_TOP:
+            dx = self.view.mouse.dx()
+            dy = self.view.mouse.dy()
+
+            dx *= self.distance / 10.
+            dy *= self.distance / 10.
+
+            self.tx += self.tdelta * dx
+            self.ty -= self.tdelta * dy
+
+        elif self.view.current == self.view.VIEW_LEFT or self.view.current == self.view.VIEW_FRONT:
+            dx = self.view.mouse.dx()
+            dz = self.view.mouse.dy() * 0.01
+
+            dx *= self.distance / 10.
+            dz *= self.distance / 10.
+
+            self.tx += self.tdelta * dx
+            self.target[2] += dz
 
     def aim(self):
         """Aim the camera.
