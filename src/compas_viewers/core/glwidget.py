@@ -180,7 +180,16 @@ class GLWidget(QOpenGLWidget):
         self.keyPressAction(key)
         self.update()
 
+    def keyReleaseEvent(self, event):
+        super(GLWidget, self).keyReleaseEvent(event)
+        key = event.key()
+        self.keyReleaseAction(key)
+        self.update()
+
     def keyPressAction(self, key):
+        raise NotImplementedError
+
+    def keyReleaseAction(self, key):
         raise NotImplementedError
 
     # ==========================================================================
