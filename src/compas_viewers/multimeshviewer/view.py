@@ -41,6 +41,10 @@ class View(GLWidget):
         self.e = 0
         self.f = 0
 
+        self.selecting = False
+        self.deselecting = False
+        self.selected = set()
+
     @property
     def meshes(self):
         return self.controller.meshes
@@ -70,6 +74,58 @@ class View(GLWidget):
         self.display_lists.append(index)
 
     # ==========================================================================
+    # selecting
+    # ==========================================================================
+
+    def mousePressEvent(self, event):
+        super(View, self).mousePressEvent(event)
+        if self.isActiveWindow() and self.underMouse():
+            self.mouse.last_pos = event.pos()
+            x = self.mouse.last_pos.x()
+            y = self.mouse.last_pos.y()
+
+            if self.mouse.buttons['left']:
+                rgb = self.instance_map[y][x]
+                selected_hex = rgb_to_hex(rgb)
+
+                if selected_hex in self.intances:
+                    for hex_key in self.intances:
+                        if selected_hex == hex_key:
+                            if not self.deselecting:
+                                self.select_mesh(self.intances[hex_key])
+                            else:
+                                self.deselect_mesh(self.intances[hex_key])
+                        elif not self.selecting and not self.deselecting:
+                            self.deselect_mesh(self.intances[hex_key])
+                    print('selected:', self.selected)
+
+    def keyPressAction(self, key):
+        print(key)
+        if key == 16777248:
+            self.selecting = True
+            print('start selecting')
+        elif key == 16777249:
+            self.deselecting = True
+            print('start deselecting')
+
+    def keyReleaseAction(self, key):
+        if key == 16777248:
+            self.selecting = False
+            print('stop selecting')
+        elif key == 16777249:
+            self.deselecting = False
+            print('stop deselecting')
+
+    def select_mesh(self, mesh):
+        self.selected.add(mesh)
+        mesh.widget.setSelected(True)
+
+    def deselect_mesh(self, mesh):
+        if mesh in self.selected:
+            self.selected.remove(mesh)
+        mesh.widget.setSelected(False)
+
+    # ==========================================================================
     # painting
     # ==========================================================================
 
@@ -83,18 +139,6 @@ class View(GLWidget):
 
         glEnable(GL_DEPTH_TEST)
         self.draw_buffers()
-
-    def mousePressEvent(self, event):
-        if self.isActiveWindow() and self.underMouse():
-            self.mouse.last_pos = event.pos()
-            x = self.mouse.last_pos.x()
-            y = self.mouse.last_pos.y()
-
-            if True:
-                rgb = self.instance_map[y][x]
-                selected_hex = rgb_to_hex(rgb)
-                for hex_key in self.intances:
-                    self.intances[hex_key].widget.setSelected(selected_hex == hex_key)
 
     def make_buffers(self):
 

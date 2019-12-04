@@ -78,6 +78,8 @@ class Manager(object):
             trail = self.find_selected_item(item)
             mid = trail[0][0]
             meshobject = self._items[mid]
+            if meshobject not in self.app.view.selected:
+                self.app.view.selected.add(meshobject)
             mesh = meshobject.data
             if len(trail) > 0:
                 pass
