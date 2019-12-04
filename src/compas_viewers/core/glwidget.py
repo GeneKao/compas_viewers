@@ -163,6 +163,16 @@ class GLWidget(QOpenGLWidget):
         if self.isActiveWindow() and self.underMouse():
             self.mouse.last_pos = event.pos()
 
+            if event.buttons() & QtCore.Qt.LeftButton:
+                self.mouse.buttons['left'] = True
+            elif event.buttons() & QtCore.Qt.RightButton:
+                self.mouse.buttons['right'] = True
+
+    def mouseReleaseEvent(self, event):
+        if self.isActiveWindow() and self.underMouse():
+            self.mouse.buttons['left'] = False
+            self.mouse.buttons['right'] = False
+
     def wheelEvent(self, event):
         if self.isActiveWindow() and self.underMouse():
             degrees = event.delta() / 8

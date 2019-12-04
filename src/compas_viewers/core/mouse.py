@@ -11,6 +11,7 @@ class Mouse(object):
         self.view = view
         self.pos = QtCore.QPoint()
         self.last_pos = QtCore.QPoint()
+        self.buttons = {'left': False, 'right': False}
 
     def dx(self):
         return self.pos.x() - self.last_pos.x()
