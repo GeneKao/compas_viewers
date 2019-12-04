@@ -1,6 +1,6 @@
 import compas
 from compas.datastructures import Mesh
-from compas_viewers import MeshViewer
+from compas_viewers.meshviewer import MeshViewer
 
 
 viewer = MeshViewer()
