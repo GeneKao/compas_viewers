@@ -155,36 +155,4 @@ class MultiMeshViewer(App):
 
 if __name__ == '__main__':
 
-    import random
-
-    from math import radians
-
-    from compas.geometry import Box
-    from compas.datastructures import Mesh
-    from compas.datastructures import mesh_transform_numpy
-    from compas.utilities import rgb_to_hex
-    from compas.geometry import Translation
-    from compas.geometry import Rotation
-
-    meshes = []
-
-    for i in range(10):
-        vector = [random.randint(0, 10), random.randint(0, 10), random.randint(0, 5)]
-        T = Translation(vector)
-        axis = [0, 0, 1.0]
-        angle = radians(random.randint(0, 180))
-        R = Rotation.from_axis_and_angle(axis, angle)
-        X = T * R
-        w, h, d = random.randint(1, 3), random.randint(1, 3), random.randint(1, 3)
-        box = Box.from_width_height_depth(w, h, d)
-        mesh = Mesh.from_shape(box)
-        mesh_transform_numpy(mesh, X)
-        # rgb = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-        rgb = (210, 210, 210)
-        obj = MeshObject(mesh, color=rgb_to_hex(rgb))
-        meshes.append(obj)
-
-    viewer = MultiMeshViewer()
-    viewer.meshes = meshes
-
-    viewer.show()
+    pass

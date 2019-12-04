@@ -10,6 +10,8 @@ It also implements this base functionality in the following pre-configured viewe
 
 The goal is to provide an environment for testing and prototyping code for 3D applications without restrictions on functionality due to limited availability of Python packages or external libraries (as for example in IronPython), and without the need for integration in CAD software.
 
+**Note that the functionality in this package is under active development and still quite experimental and therefore subject to frequent change.**
+
 ## Installation
 
 The recommended way to install `compas_viewers` is with [Anaconda/conda](https://conda.io/docs/) in a dedicated environment.
