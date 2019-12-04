@@ -1,6 +1,14 @@
 # COMPAS viewers
 
-Standalone viewers for COMPAS based on PySide2 and PyOpenGL
+Standalone viewers for COMPAS based on PySide2 and PyOpenGL.
+
+The package provides base functionality for making viewers and minimal CAD-style applications.
+It also implements this base functionality in the following pre-configured viewers/apps:
+
+* `MeshViewer`: A viewer for individual COMPAS meshes.
+* `MultiMeshViewer`: A viewer for multiple mesh objects with a first draft of an object manager for selecting and working with individual mesh objects.
+
+The goal is to provide an environment for testing and prototyping code for 3D applications without restrictions on functionality due to limited availability of Python packages or external libraries (as for example in IronPython), and without the need for integration in CAD software.
 
 ## Installation
 
@@ -61,7 +69,7 @@ To verify your installation, start Python from the command line and run the foll
 
 ## Getting started
 
-## Questions and feedback
+Have a look at [the examples](https://github.com/compas-dev/compas_viewers/tree/master/examples) to get going.
 
 ## Issue tracker
 
@@ -69,6 +77,8 @@ If you find a bug, please help us solve it by [filing a report](https://github.c
 
 ## Contributing
 
-## Changelog
+Contributions are very welcome and highly appreciated. Also feature requests or suggestions for future development are helpful.
 
 ## License
+
+`compas_viewers` is released under the MIT License.

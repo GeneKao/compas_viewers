@@ -1,5 +1,4 @@
-# http://editorconfig.org
-
+# EditorConfig is awesome: http://EditorConfig.org
 root = true
 
 [*]
@@ -11,11 +10,10 @@ indent_size = 4
 charset = utf-8
 max_line_length = 180
 
-[*.bat]
-indent_style = tab
+[*.{bat,cmd,ps1}]
 end_of_line = crlf
 
-[*.{md,diff,patch}]
+[*.md]
 trim_trailing_whitespace = false
 
 [Makefile]
