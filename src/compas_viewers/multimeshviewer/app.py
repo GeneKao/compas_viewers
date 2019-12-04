@@ -47,6 +47,7 @@ class Manager(object):
         meshitems = []
         for item in items:
             meshitem = QtWidgets.QTreeWidgetItem()
+            item.widget = meshitem
             meshitem.setText(0, "Mesh")
             meshitems.append(meshitem)
             # vertices
@@ -79,9 +80,7 @@ class Manager(object):
             meshobject = self._items[mid]
             mesh = meshobject.data
             if len(trail) > 0:
-                for m in self._items:
-                    m.color = '#cccccc'
-                meshobject.color = '#ff0000'
+                pass
             if len(trail) > 1:
                 pass
             if len(trail) > 2:

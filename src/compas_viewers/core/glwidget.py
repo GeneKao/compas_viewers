@@ -138,6 +138,8 @@ class GLWidget(QOpenGLWidget):
 
     def resizeGL(self, w, h):
         glViewport(0, 0, w, h)
+        self.GL_width = w
+        self.GL_height = h
         self.camera.focus()
 
     # ==========================================================================
