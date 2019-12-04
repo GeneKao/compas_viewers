@@ -100,7 +100,6 @@ class View(GLWidget):
                     print('selected:', self.selected)
 
     def keyPressAction(self, key):
-        print(key)
         if key == 16777248:
             self.selecting = True
             print('start selecting')
