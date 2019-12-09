@@ -53,6 +53,8 @@ The recommended way to install `compas_viewers` is with [Anaconda/conda](https:/
    conda install PySide2 PyOpenGL
    ```
 
+   > <https://block.arch.ethz.ch/blog/2016/10/pyopengl-glut-error/>
+
 5. Install `compas_viewers`
 
    ```bash
