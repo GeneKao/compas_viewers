@@ -139,13 +139,19 @@ class View(GLWidget):
         glEnable(GL_DEPTH_TEST)
         self.draw_buffers()
 
+    def random_hex(self):
+        while True:
+            unique_hex = '#%02x%02x%02x' % (randint(0, 255), randint(0, 255), randint(0, 255))
+            if unique_hex not in self.intances:
+                return unique_hex
+
     def make_buffers(self):
 
         # create instances map only at first time
         if not hasattr(self, 'intances'):
             self.intances = {}
             for m in self.meshes:
-                m.instance_color = '#%02x%02x%02x' % (randint(0, 255), randint(0, 255), randint(0, 255))
+                m.instance_color = self.random_hex()
                 self.intances[m.instance_color] = m
 
         self.buffers = []
