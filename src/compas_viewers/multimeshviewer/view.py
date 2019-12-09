@@ -247,6 +247,13 @@ class View(GLWidget):
 
         instance_buffer = glReadPixels(0, 0, self.GL_width, self.GL_height, OpenGL.GL.GL_RGB, OpenGL.GL.GL_UNSIGNED_BYTE)
         instance = np.frombuffer(instance_buffer, dtype=np.uint8).reshape(self.GL_height, self.GL_width, 3)
+
+        # for heigh-res screens
+        size = self.size()
+        ratioH = int(self.GL_height / size.height())
+        ratioW = int(self.GL_width / size.width())
+        instance = instance[::ratioH,::ratioW,:]
+
         instance = np.flip(instance, 0)
         self.instance_map = instance
 
