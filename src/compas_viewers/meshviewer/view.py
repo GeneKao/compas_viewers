@@ -81,7 +81,7 @@ class View(GLWidget):
 
     @property
     def array_faces_color_front(self):
-        return flist([random(), random(), random()] for key in self.mesh.xyz)
+        return flist(hex_to_rgb(self.settings['faces.color:front']) for key in self.mesh.xyz)
 
     @property
     def array_faces_color_back(self):
