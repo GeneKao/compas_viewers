@@ -99,6 +99,7 @@ class Controller(core.controller.Controller):
             attr['x'] -= cx
             attr['y'] -= cy
             attr['z'] -= cz
+        self._meshview = MeshView(self.mesh)
 
     def adjust_camera(self):
         pass

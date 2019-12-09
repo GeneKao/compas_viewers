@@ -1,7 +1,0 @@
-{
-    "python.pythonPath": "/Users/vanmelet/anaconda3/envs/viewers/bin/python",
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.linting.enabled": true,
-    "restructuredtext.confPath": "${workspaceFolder}/docsource/conf.py"
-}
