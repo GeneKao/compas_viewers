@@ -33,6 +33,7 @@ class GLWidget(QOpenGLWidget):
 
         self.camera = Camera(self)
         self.mouse = Mouse(self)
+        self.keys = {'shift': False}
         self.clear_color = QtGui.QColor.fromRgb(255, 255, 255)
         self.display_lists = []
         self.buffers = []
@@ -150,11 +151,16 @@ class GLWidget(QOpenGLWidget):
         if self.isActiveWindow() and self.underMouse():
             self.mouse.pos = event.pos()
 
-            if event.buttons() & QtCore.Qt.LeftButton:
-                self.camera.rotate()
-                self.mouse.last_pos = event.pos()
-                self.update()
-            elif event.buttons() & QtCore.Qt.RightButton:
+            if event.buttons() & QtCore.Qt.RightButton:
+                if self.keys['shift']:
+                    self.camera.translate()
+                    self.mouse.last_pos = event.pos()
+                    self.update()
+                else:
+                    self.camera.rotate()
+                    self.mouse.last_pos = event.pos()
+                    self.update()
+            if event.buttons() & QtCore.Qt.MiddleButton:
                 self.camera.translate()
                 self.mouse.last_pos = event.pos()
                 self.update()
@@ -187,17 +193,24 @@ class GLWidget(QOpenGLWidget):
     def keyPressEvent(self, event):
         super(GLWidget, self).keyPressEvent(event)
         key = event.key()
+        if key == 16777248:
+            self.keys['shift'] = True
         self.keyPressAction(key)
         self.update()
 
     def keyReleaseEvent(self, event):
         super(GLWidget, self).keyReleaseEvent(event)
         key = event.key()
+        if key == 16777248:
+            self.keys['shift'] = False
         self.keyReleaseAction(key)
         self.update()
 
     def keyPressAction(self, key):
-        raise NotImplementedError
+        pass
+
+    def keyReleaseAction(self, key):
+        pass
 
     def keyReleaseAction(self, key):
         raise NotImplementedError
