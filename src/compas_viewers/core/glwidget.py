@@ -139,6 +139,8 @@ class GLWidget(QOpenGLWidget):
 
     def resizeGL(self, w, h):
         glViewport(0, 0, w, h)
+        self.GL_width = w
+        self.GL_height = h
         self.camera.focus()
 
     # ==========================================================================
@@ -166,6 +168,16 @@ class GLWidget(QOpenGLWidget):
     def mousePressEvent(self, event):
         if self.isActiveWindow() and self.underMouse():
             self.mouse.last_pos = event.pos()
+
+            if event.buttons() & QtCore.Qt.LeftButton:
+                self.mouse.buttons['left'] = True
+            elif event.buttons() & QtCore.Qt.RightButton:
+                self.mouse.buttons['right'] = True
+
+    def mouseReleaseEvent(self, event):
+        if self.isActiveWindow() and self.underMouse():
+            self.mouse.buttons['left'] = False
+            self.mouse.buttons['right'] = False
 
     def wheelEvent(self, event):
         if self.isActiveWindow() and self.underMouse():
@@ -199,6 +211,9 @@ class GLWidget(QOpenGLWidget):
 
     def keyReleaseAction(self, key):
         pass
+
+    def keyReleaseAction(self, key):
+        raise NotImplementedError
 
     # ==========================================================================
     # helpers

@@ -5,17 +5,20 @@ from __future__ import division
 from functools import partial
 
 from random import random
+from random import randint
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
 from compas.utilities import hex_to_rgb
+from compas.utilities import rgb_to_hex
+
 from compas.utilities import flatten
 from compas_viewers.core import GLWidget
 from compas_viewers.core import Grid
 from compas_viewers.core import Axes
-
+import numpy as np
 
 __all__ = ['View']
 
@@ -37,6 +40,10 @@ class View(GLWidget):
         self.v = 0
         self.e = 0
         self.f = 0
+
+        self.selecting = False
+        self.deselecting = False
+        self.selected = set()
 
     @property
     def meshes(self):
@@ -67,10 +74,64 @@ class View(GLWidget):
         self.display_lists.append(index)
 
     # ==========================================================================
+    # selecting
+    # ==========================================================================
+
+    def mousePressEvent(self, event):
+        super(View, self).mousePressEvent(event)
+        if self.isActiveWindow() and self.underMouse():
+            self.mouse.last_pos = event.pos()
+            x = self.mouse.last_pos.x()
+            y = self.mouse.last_pos.y()
+
+            if self.mouse.buttons['left']:
+                rgb = self.instance_map[y][x]
+                selected_hex = rgb_to_hex(rgb)
+
+                if selected_hex in self.intances:
+                    for hex_key in self.intances:
+                        if selected_hex == hex_key:
+                            if not self.deselecting:
+                                self.select_mesh(self.intances[hex_key])
+                            else:
+                                self.deselect_mesh(self.intances[hex_key])
+                        elif not self.selecting and not self.deselecting:
+                            self.deselect_mesh(self.intances[hex_key])
+                    print('selected:', self.selected)
+
+    def keyPressAction(self, key):
+        if key == 16777248:
+            self.selecting = True
+            print('start selecting')
+        elif key == 16777249:
+            self.deselecting = True
+            print('start deselecting')
+
+    def keyReleaseAction(self, key):
+        if key == 16777248:
+            self.selecting = False
+            print('stop selecting')
+        elif key == 16777249:
+            self.deselecting = False
+            print('stop deselecting')
+
+    def select_mesh(self, mesh):
+        self.selected.add(mesh)
+        mesh.widget.setSelected(True)
+
+    def deselect_mesh(self, mesh):
+        if mesh in self.selected:
+            self.selected.remove(mesh)
+        mesh.widget.setSelected(False)
+
+    # ==========================================================================
     # painting
     # ==========================================================================
 
     def paint(self):
+
+        self.draw_instances()
+
         glDisable(GL_DEPTH_TEST)
         for dl in self.display_lists:
             glCallList(dl)
@@ -78,7 +139,21 @@ class View(GLWidget):
         glEnable(GL_DEPTH_TEST)
         self.draw_buffers()
 
+    def random_hex(self):
+        while True:
+            unique_hex = '#%02x%02x%02x' % (randint(0, 255), randint(0, 255), randint(0, 255))
+            if unique_hex not in self.intances:
+                return unique_hex
+
     def make_buffers(self):
+
+        # create instances map only at first time
+        if not hasattr(self, 'intances'):
+            self.intances = {}
+            for m in self.meshes:
+                m.instance_color = self.random_hex()
+                self.intances[m.instance_color] = m
+
         self.buffers = []
         for m in self.meshes:
             xyz = flist(m.view.xyz)
@@ -88,8 +163,17 @@ class View(GLWidget):
             faces_back = flist(face[::-1] for face in m.view.faces)
             vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
             edges_color = flist(hex_to_rgb('#333333') for key in m.view.edges)
-            faces_color = flist(hex_to_rgb(m.color) for key in m.view.xyz)
-            faces_color_back = flist(hex_to_rgb(m.color) for key in m.view.xyz)
+
+            if m.widget.isSelected():
+                # default selection color
+                face_color = '#ffff00'
+            else:
+                face_color = m.color
+
+            faces_color = flist(hex_to_rgb(face_color) for key in m.view.xyz)
+            faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)
+            instance_color = flist(hex_to_rgb(m.instance_color) for key in m.view.xyz)
+
             self.buffers.append({
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
@@ -100,6 +184,7 @@ class View(GLWidget):
                 'edges.color': self.make_vertex_buffer(edges_color, dynamic=True),
                 'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
                 'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
+                'instance.color': self.make_vertex_buffer(instance_color),
                 'n': len(xyz),
                 'v': len(vertices),
                 'e': len(edges),
@@ -142,6 +227,44 @@ class View(GLWidget):
 
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)
+
+    def draw_instances(self):
+        # save out a instance map in background
+        if not self.buffers:
+            return
+        for buffer in self.buffers:
+            glEnableClientState(GL_VERTEX_ARRAY)
+            glEnableClientState(GL_COLOR_ARRAY)
+            glBindBuffer(GL_ARRAY_BUFFER, buffer['xyz'])
+            glVertexPointer(3, GL_FLOAT, 0, None)
+
+            glBindBuffer(GL_ARRAY_BUFFER, buffer['instance.color'])
+            glColorPointer(3, GL_FLOAT, 0, None)
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['faces'])
+            glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
+
+            glBindBuffer(GL_ARRAY_BUFFER, buffer['instance.color'])
+            glColorPointer(3, GL_FLOAT, 0, None)
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['faces:back'])
+            glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
+
+            glDisableClientState(GL_COLOR_ARRAY)
+            glDisableClientState(GL_VERTEX_ARRAY)
+
+        instance_buffer = glReadPixels(0, 0, self.GL_width, self.GL_height, OpenGL.GL.GL_RGB, OpenGL.GL.GL_UNSIGNED_BYTE)
+        instance = np.frombuffer(instance_buffer, dtype=np.uint8).reshape(self.GL_height, self.GL_width, 3)
+
+        # for heigh-res screens
+        size = self.size()
+        ratioH = int(self.GL_height / size.height())
+        ratioW = int(self.GL_width / size.width())
+        instance = instance[::ratioH,::ratioW,:]
+
+        instance = np.flip(instance, 0)
+        self.instance_map = instance
+
+        glClearColor(1.0, 1.0, 1.0, 1.0)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
 
 # ==============================================================================
