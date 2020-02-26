@@ -120,6 +120,7 @@ class MultiMeshViewer(App):
         self.view.glInit()
         self.view.setup_grid()
         self.view.setup_axes()
+        self.view.setFocus()
 
     def init_sidebar2(self):
         self.sidebar2 = QtWidgets.QDockWidget()
