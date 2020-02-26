@@ -107,8 +107,6 @@ class View(GLWidget):
                     for item in list(self.selected):
                         self.deselect(item)
 
-        print(self.current)
-
 
     def keyPressAction(self, key):
         if key == SHIFT:
