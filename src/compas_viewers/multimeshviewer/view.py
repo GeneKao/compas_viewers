@@ -24,6 +24,9 @@ __all__ = ['View']
 
 hex_to_rgb = partial(hex_to_rgb, normalize=True)
 
+SHIFT = 16777248
+CTRL = 16777249
+
 
 def flist(items):
     return list(flatten(items))
@@ -87,6 +90,7 @@ class View(GLWidget):
                 rgb = self.instance_map[y][x]
                 selected_hex = rgb_to_hex(rgb)
 
+                # when clicked on objects
                 if selected_hex in self.intances:
                     for hex_key in self.intances:
                         if selected_hex == hex_key:
@@ -98,19 +102,27 @@ class View(GLWidget):
                             self.deselect(self.intances[hex_key])
                     print('selected:', self.selected)
 
+                # when clicked on blank area
+                elif not self.selecting and not self.deselecting:
+                    for item in list(self.selected):
+                        self.deselect(item)
+
+        print(self.current)
+
+
     def keyPressAction(self, key):
-        if key == 16777248:
+        if key == SHIFT:
             self.selecting = True
             print('start selecting')
-        elif key == 16777249:
+        elif key == CTRL:
             self.deselecting = True
             print('start deselecting')
 
     def keyReleaseAction(self, key):
-        if key == 16777248:
+        if key == SHIFT:
             self.selecting = False
             print('stop selecting')
-        elif key == 16777249:
+        elif key == CTRL:
             self.deselecting = False
             print('stop deselecting')
 
