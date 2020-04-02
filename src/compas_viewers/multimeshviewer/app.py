@@ -149,6 +149,12 @@ class MultiMeshViewer(App):
         self.view.make_buffers()
         self.view.updateGL()
 
+    # def add(self, mesh, name=None, color=None):
+    #     obj = MeshObject(mesh, color=color)
+    #     meshes = self.meshes
+    #     meshes.append(obj)
+    #     self.meshes = meshes
+
 
 # ==============================================================================
 # Main

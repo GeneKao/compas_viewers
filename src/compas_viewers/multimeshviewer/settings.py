@@ -34,26 +34,26 @@ SETTINGS['vertices.labels.on'] = False
 SETTINGS['edges.labels.on'] = False
 SETTINGS['faces.labels.on'] = False
 
-SETTINGS['camera.elevation:value'] = -10
+SETTINGS['camera.elevation:value'] = -65
 SETTINGS['camera.elevation:minval'] = -180
 SETTINGS['camera.elevation:maxval'] = +180
 SETTINGS['camera.elevation:step'] = +1
 SETTINGS['camera.elevation:scale'] = +1
 
-SETTINGS['camera.azimuth:value'] = +30
+SETTINGS['camera.azimuth:value'] = +35
 SETTINGS['camera.azimuth:minval'] = -180
 SETTINGS['camera.azimuth:maxval'] = +180
 SETTINGS['camera.azimuth:step'] = +1
 SETTINGS['camera.azimuth:scale'] = +1
 
-SETTINGS['camera.distance:value'] = +10
+SETTINGS['camera.distance:value'] = +25
 SETTINGS['camera.distance:minval'] = 0
 SETTINGS['camera.distance:maxval'] = +100
 SETTINGS['camera.distance:step'] = +1
 SETTINGS['camera.distance:scale'] = +1
 SETTINGS['camera.distance:delta'] = +0.05
 
-SETTINGS['camera.fov:value'] = 50
+SETTINGS['camera.fov:value'] = 35
 SETTINGS['camera.fov:minval'] = 10
 SETTINGS['camera.fov:maxval'] = 170
 SETTINGS['camera.fov:step'] = +1
