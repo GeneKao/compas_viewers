@@ -89,12 +89,12 @@ class Manager(object):
                 if trail[1][0] == 0:
                     # vertex
                     key = int(item.text(0))
-                    attr = {name: mesh.get_vertex_attribute(key, name) for name in mesh.default_vertex_attributes.keys()}
+                    attr = mesh.vertex_attributes(key)
                     print("Mesh {}: Vertex {} => {}".format(mid, key, attr))
                 else:
                     # edge
                     key = int(item.text(0))
-                    attr = {name: mesh.get_edge_attribute(key, name) for name in mesh.default_edge_attributes.keys()}
+                    attr = mesh.edge_attributes(key)
                     print("Mesh {}: Edge {} => {}".format(mid, key, attr))
         self.app.view.make_buffers()
         self.app.view.updateGL()
@@ -120,6 +120,7 @@ class MultiMeshViewer(App):
         self.view.glInit()
         self.view.setup_grid()
         self.view.setup_axes()
+        self.view.setFocus()
 
     def init_sidebar2(self):
         self.sidebar2 = QtWidgets.QDockWidget()
