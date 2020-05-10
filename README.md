@@ -14,53 +14,24 @@ The goal is to provide an environment for testing and prototyping code for 3D ap
 
 ## Installation
 
-The recommended way to install `compas_viewers` is with [Anaconda/conda](https://conda.io/docs/) in a dedicated environment.
+`compas_viewers` can be installed from source using pip in a Python environment with COMPAS, PySide2, and PyOpenGL.
 
-1. Create an environment
+```bash
+conda create -n viewers python=3.7 COMPAS">=0.15.6" PySide2 PyOpenGL --yes
+conda activate viewers
+pip install path/to/compas_viewers
+```
 
-   If you don't have an environment set up, create a new one first.
+### Windows
 
-   ```bash
-   conda create -n viewers python=3.7
-   ```
+Installation of PyOpenGL on Windows is known to be problematic.
+The wheels provided by Christophe Gohlke seems to be the most reliable option: <https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyopengl>
+Note tha you have to choose the wheel that is compatible with your Python version.
 
-2. Activate environment
-
-   Activate the environment in which you want to install `compas_viewers`.
-
-   ```bash
-   conda activate viewers
-   ```
-
-3. Install COMPAS
-
-   `compas_viewers` builds upon `compas`, so make sure you have a recent version installed in the environment.
-
-   ```bash
-   conda install COMPAS
-   ```
-
-   Or install `compas` from source.
-
-   ```bash
-   cd path/to/compas
-   pip install -e .
-   ```
-
-4. Install requirements
-
-   ```bash
-   conda install PySide2 PyOpenGL
-   ```
-
-   > <https://block.arch.ethz.ch/blog/2016/10/pyopengl-glut-error/>
-
-5. Install `compas_viewers`
-
-   ```bash
-   cd path/to/compas_viewers
-   pip install -e .
-   ```
+```bash
+conda activate viewers
+pip install https://www.lfd.uci.edu/~gohlke/pythonlibs/PyOpenGL_accelerate‑3.1.5‑cp37‑cp37m‑win_amd64.whl
+```
 
 ## Verify installation
 
@@ -73,7 +44,7 @@ To verify your installation, start Python from the command line and run the foll
 
 ## Getting started
 
-Have a look at [the examples](https://github.com/compas-dev/compas_viewers/tree/master/examples) to get going.
+Basic example scripts are availble in the `examples` folder.
 
 ## Issue tracker
 
@@ -81,7 +52,8 @@ If you find a bug, please help us solve it by [filing a report](https://github.c
 
 ## Contributing
 
-Contributions are very welcome and highly appreciated. Also feature requests or suggestions for future development are helpful.
+Contributions are very welcome and highly appreciated.
+Also feature requests or suggestions for future development are helpful.
 
 ## License
 

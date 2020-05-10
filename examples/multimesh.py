@@ -28,4 +28,5 @@ for i in range(10):
 
 viewer = MultiMeshViewer()
 viewer.meshes = meshes
+viewer.zoom_extents()
 viewer.show()
