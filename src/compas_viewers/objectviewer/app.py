@@ -43,27 +43,35 @@ class Manager(object):
         self.widget.itemSelectionChanged.connect(self.on_item_selection_changed)
 
     def set_items(self, items):
+
+        sceneitem = QtWidgets.QTreeWidgetItem()
+        sceneitem.setText(0, 'scene')
+        self.widget.addTopLevelItems([sceneitem])
+        sceneitem.setExpanded(True)
+
         self._items = items
-        meshitems = []
+        nodeitems = []
         for item in items:
-            meshitem = QtWidgets.QTreeWidgetItem()
-            item.widget = meshitem
-            meshitem.setText(0, "Mesh")
-            meshitems.append(meshitem)
-            # vertices
-            verticesitem = QtWidgets.QTreeWidgetItem(meshitem)
-            verticesitem.setText(0, "Vertices")
+            nodeitem = QtWidgets.QTreeWidgetItem(sceneitem)
+            item.widget = nodeitem
+            nodeitem.setText(0, item.__class__.__name__)
+            nodeitems.append(nodeitem)
 
-            if hasattr(item,'datastructure'):
-                geometry = item.datastructure
+            # TODO: show attributes in a pop up window 
+            # # vertices
+            # verticesitem = QtWidgets.QTreeWidgetItem(nodeitem)
+            # verticesitem.setText(0, "Vertices")
 
-                for key in geometry.vertices():
-                    vertexitem = QtWidgets.QTreeWidgetItem(verticesitem)
-                    vertexitem.setText(0, "{}".format(key))
-            # edges
-            edgesitem = QtWidgets.QTreeWidgetItem(meshitem)
-            edgesitem.setText(0, "Edges")
-        self.widget.addTopLevelItems(meshitems)
+            # if hasattr(item,'datastructure'):
+            #     geometry = item.datastructure
+
+            #     for key in geometry.vertices():
+            #         vertexitem = QtWidgets.QTreeWidgetItem(verticesitem)
+            #         vertexitem.setText(0, "{}".format(key))
+            # # edges
+            # edgesitem = QtWidgets.QTreeWidgetItem(nodeitem)
+            # edgesitem.setText(0, "Edges")
+        # self.widget.addTopLevelItems(nodeitems)
 
     def find_selected_item(self, item):
         index = self.widget.indexFromItem(item)
@@ -81,28 +89,34 @@ class Manager(object):
         for item in self.widget.selectedItems():
             trail = self.find_selected_item(item)
             mid = trail[0][0]
-            meshobject = self._items[mid]
-            if meshobject not in self.app.view.selected:
-                self.app.view.selected.add(meshobject)
-            mesh = meshobject.datastructure
-            if len(trail) > 0:
-                pass
-            if len(trail) > 1:
-                pass
-            if len(trail) > 2:
-                if trail[1][0] == 0:
-                    # vertex
-                    key = int(item.text(0))
-                    attr = mesh.vertex_attributes(key)
-                    print("Mesh {}: Vertex {} => {}".format(mid, key, attr))
-                else:
-                    # edge
-                    key = int(item.text(0))
-                    attr = mesh.edge_attributes(key)
-                    print("Mesh {}: Edge {} => {}".format(mid, key, attr))
+            node = self._items[mid]
+            if node not in self.app.view.selected:
+                self.app.view.selected.add(node)
+
+            # mesh = meshobject.datastructure
+            # if len(trail) > 0:
+            #     pass
+            # if len(trail) > 1:
+            #     pass
+            # if len(trail) > 2:
+            #     if trail[1][0] == 0:
+            #         # vertex
+            #         key = int(item.text(0))
+            #         attr = mesh.vertex_attributes(key)
+            #         print("Mesh {}: Vertex {} => {}".format(mid, key, attr))
+            #     else:
+            #         # edge
+            #         key = int(item.text(0))
+            #         attr = mesh.edge_attributes(key)
+            #         print("Mesh {}: Edge {} => {}".format(mid, key, attr))
         self.app.view.make_buffers()
         self.app.view.updateGL()
 
+class ObjectProperty(QtWidgets.QWidget):
+    def start(self):
+        self.resize(250, 150)
+        self.setWindowTitle('ObjectProperty')
+        self.show()
 
 class ObjectViewer(App):
     """"""
@@ -152,7 +166,7 @@ class ObjectViewer(App):
         # self._update_items()
 
     def update(self):
-        self.manager.set_items(self.view.meshes)
+        self.manager.set_items(self.view.nodes)
         self.view.glInit()
         self.view.make_buffers()
         self.view.updateGL()

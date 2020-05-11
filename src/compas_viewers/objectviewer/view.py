@@ -48,7 +48,7 @@ class View(GLWidget):
         self.selected = set()
 
     @property
-    def meshes(self):
+    def nodes(self):
         return [self.controller.scene.nodes[key] for key in self.controller.scene.nodes]
 
     @property
@@ -165,7 +165,7 @@ class View(GLWidget):
         # create instances map only at first time
         if not hasattr(self, 'intances'):
             self.intances = {}
-            for i, m in enumerate(self.meshes):
+            for i, m in enumerate(self.nodes):
                 m.instance_color = self.random_hex()
                 self.intances[m.instance_color] = m
 
@@ -195,26 +195,30 @@ class View(GLWidget):
 
 
         self.buffers = []
-        for m in self.meshes:
+        for m in self.nodes:
             xyz = flist(m.view.xyz)
             vertices = list(m.view.vertices)
             edges = flist(m.view.edges)
             faces = flist(m.view.faces)
             faces_back = flist(face[::-1] for face in m.view.faces)
-            vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
             vertices_instance_color = flist(hex_to_rgb(vc) for vc in m.vertices_instance_color)
-            edges_color = flist(hex_to_rgb('#333333') for key in m.view.edges)
             edges_instance_color = flist(hex_to_rgb(c) for c in m.edges_instance_color)
+            instance_color = flist(hex_to_rgb(m.instance_color) for key in m.view.xyz)
 
             if m.widget.isSelected():
                 # default selection color
+                vertices_color = '#ffff00'
                 face_color = '#ffff00'
+                edges_color = '#ffff00'
             else:
+                vertices_color = '#000000'
+                edges_color = '#000000'
                 face_color = m.settings.get("color", "#cccccc")
 
+            vertices_color = flist(hex_to_rgb(vertices_color) for key in m.view.vertices)
+            edges_color = flist(hex_to_rgb(edges_color) for key in edges)
             faces_color = flist(hex_to_rgb(face_color) for key in m.view.xyz)
-            faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)
-            instance_color = flist(hex_to_rgb(m.instance_color) for key in m.view.xyz)
+            faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)            
 
             self.buffers.append({
                 'xyz': self.make_vertex_buffer(xyz),

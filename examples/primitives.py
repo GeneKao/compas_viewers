@@ -16,22 +16,22 @@ for i in range(10):
         Point(random.uniform(0, 10), random.uniform(0, 10), random.uniform(0, 10)),
         Point(random.uniform(0, 10), random.uniform(0, 10), random.uniform(0, 10))
     )
-    viewer.add(line, settings = {'color': rgb_to_hex((210, 210, 210))})
+    viewer.add(line)
 
 
 point = Point(0,0,0)
-viewer.add(point, settings = {'color': rgb_to_hex((210, 210, 210))})
+viewer.add(point)
 
 
 polyline = Polyline([[2,0,0], [1,0,0], [1,1,0], [1,1,1]])
-viewer.add(polyline, settings = {'color': rgb_to_hex((210, 210, 210))})
+viewer.add(polyline)
 
 
 plane = Plane([0, 0, 2], [1, 1, 1])
-viewer.add(plane, settings = {'color': rgb_to_hex((210, 210, 210))})
+viewer.add(plane)
 
 circle = Circle( Plane([0, 0, 3], [1, 1, 1]), 1)
-viewer.add(circle, settings = {'color': rgb_to_hex((210, 210, 210))})
+viewer.add(circle)
 
 
 viewer.update()
