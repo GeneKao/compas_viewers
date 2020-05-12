@@ -36,7 +36,7 @@ class PlaneView(PrimitiveView):
         x_axis = np.array([1,0,0])
         z_axis = np.array(self.primitive.normal)
         z_axis /= np.linalg.norm(z_axis)
-        if np.linalg.norm(x_axis - z_axis) == 0:
+        if np.linalg.norm(x_axis - z_axis) <= 0.1 or np.linalg.norm(x_axis - z_axis) >= 1.9:
             x_axis = np.array([0,1,0])
         y_axis = np.cross(z_axis,x_axis)
         x_axis = np.cross(y_axis,z_axis)

@@ -9,6 +9,10 @@ from .objects.lineobject import LineObject
 from .objects.polylineobject import PolylineObject
 from .objects.planeobject import PlaneObject
 from .objects.circleobject import CircleObject
+from .objects.coneobject import ConeObject
+from .objects.polyhedronobject import PolyhedronObject
+from .objects.arrowobject import ArrowObject
+from .shapes.arrow import Arrow
 
 
 from .app import ObjectViewer
