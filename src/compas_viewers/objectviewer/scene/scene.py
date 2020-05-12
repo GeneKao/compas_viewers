@@ -35,6 +35,13 @@ class Scene(object):
         else:
             return selected
 
+    def traverse(self, recursive=True):
+        for key in self.nodes:
+            if recursive:
+                for node in self.nodes[key].traverse():
+                    yield node
+            else:
+                yield self.nodes[key]
     # def update(self):
     #     compas_rhino.rs.EnableRedraw(False)
     #     for _id in self.nodes:

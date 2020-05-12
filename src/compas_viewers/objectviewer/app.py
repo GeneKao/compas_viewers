@@ -42,36 +42,24 @@ class Manager(object):
         self.parent.setWidget(self.widget)
         self.widget.itemSelectionChanged.connect(self.on_item_selection_changed)
 
-    def set_items(self, items):
+    def set_items(self, nodes):
 
         sceneitem = QtWidgets.QTreeWidgetItem()
         sceneitem.setText(0, 'scene')
         self.widget.addTopLevelItems([sceneitem])
         sceneitem.setExpanded(True)
 
-        self._items = items
-        nodeitems = []
-        for item in items:
-            nodeitem = QtWidgets.QTreeWidgetItem(sceneitem)
-            item.widget = nodeitem
-            nodeitem.setText(0, item.__class__.__name__)
-            nodeitems.append(nodeitem)
+        self._items = nodes
+        for node in nodes:
+            self._add_node_item(node, sceneitem)
 
-            # TODO: show attributes in a pop up window 
-            # # vertices
-            # verticesitem = QtWidgets.QTreeWidgetItem(nodeitem)
-            # verticesitem.setText(0, "Vertices")
-
-            # if hasattr(item,'datastructure'):
-            #     geometry = item.datastructure
-
-            #     for key in geometry.vertices():
-            #         vertexitem = QtWidgets.QTreeWidgetItem(verticesitem)
-            #         vertexitem.setText(0, "{}".format(key))
-            # # edges
-            # edgesitem = QtWidgets.QTreeWidgetItem(nodeitem)
-            # edgesitem.setText(0, "Edges")
-        # self.widget.addTopLevelItems(nodeitems)
+    def _add_node_item(self, node, parent):
+        nodeitem = QtWidgets.QTreeWidgetItem(parent)
+        nodeitem.setText(0, node.__class__.__name__)
+        node.widget = nodeitem
+        
+        for child_node in node.children:
+            self._add_node_item(child_node, nodeitem)
 
     def find_selected_item(self, item):
         index = self.widget.indexFromItem(item)
@@ -166,7 +154,7 @@ class ObjectViewer(App):
         # self._update_items()
 
     def update(self):
-        self.manager.set_items(self.view.nodes)
+        self.manager.set_items(list(self.controller.scene.traverse(recursive=False)))
         self.view.glInit()
         self.view.make_buffers()
         self.view.updateGL()

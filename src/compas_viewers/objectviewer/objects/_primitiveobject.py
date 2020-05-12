@@ -4,14 +4,18 @@ from __future__ import division
 
 
 from compas.utilities import pairwise
+from .node import Node
 
 
 __all__ = ['PrimitiveView', 'PrimitiveObject']
 
 
-class PrimitiveObject(object):
+class PrimitiveObject(Node):
 
     def __init__(self, scene, primitive, name=None, visible=True, settings={}, **kwargs):
+        
+        super(PrimitiveObject, self).__init__()
+
         self.scene = scene
         self.primitive = primitive
         self.name = name

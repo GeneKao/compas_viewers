@@ -49,7 +49,10 @@ class View(GLWidget):
 
     @property
     def nodes(self):
-        return [self.controller.scene.nodes[key] for key in self.controller.scene.nodes]
+
+        # print(list(self.controller.scene.traverse()))
+        # return [self.controller.scene.nodes[key] for key in self.controller.scene.nodes]
+        return self.controller.scene.traverse()
 
     @property
     def settings(self):

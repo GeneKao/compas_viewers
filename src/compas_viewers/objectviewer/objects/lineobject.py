@@ -6,6 +6,7 @@ from __future__ import division
 from compas.utilities import pairwise
 from ._primitiveobject import PrimitiveObject
 from ._primitiveobject import PrimitiveView
+from .pointobject import PointObject
 
 
 __all__ = ['LineView', 'LineObject']
@@ -13,18 +14,25 @@ __all__ = ['LineView', 'LineObject']
 
 class LineObject(PrimitiveObject):
 
-    def __init__(self, scene, primitive, name=None, visible=True, settings={}, **kwargs):
-        super(LineObject,self).__init__(scene, primitive, **kwargs)
-        self.view = LineView(primitive)
+    def __init__(self, scene, line, **kwargs):
+
+        super(LineObject,self).__init__(scene, line, **kwargs)
+        
+        self.start = PointObject(scene, line.start)
+        self.end = PointObject(scene, line.end)
+        self.add(self.start)
+        self.add(self.end)
+
+        self.view = LineView(line)
 
 class LineView(PrimitiveView):
 
-    def __init__(self, primitive):
+    def __init__(self, line):
         self._primitive = None
         self._xyz = None
         self._vertices = None
         self._faces = None
-        self.primitive = primitive
+        self.primitive = line
 
     @property
     def xyz(self):
@@ -32,7 +40,7 @@ class LineView(PrimitiveView):
 
     @property
     def vertices(self):
-        return [0, 1]
+        return []
 
     @property
     def faces(self):
