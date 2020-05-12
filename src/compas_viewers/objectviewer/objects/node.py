@@ -12,10 +12,11 @@ class Node(object):
     """"""
 
     def __init__(self):
-        self.children = set()
+        self.children = []
 
     def add(self, node):
-        self.children.add(node)
+        if node not in self.children:
+            self.children.append(node)
 
     def remove(self, node):
         self.children.remove(node)

@@ -44,6 +44,22 @@ class PrimitiveView(object):
         self.primitive = primitive
 
     @property
+    def xyz(self):
+        return self._xyz
+
+    @property
+    def vertices(self):
+        return []
+
+    @property
+    def faces(self):
+        return []
+
+    @property
+    def edges(self):
+        return []
+
+    @property
     def primitive(self):
         return self._primitive
 

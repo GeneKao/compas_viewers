@@ -18,28 +18,9 @@ class PointObject(PrimitiveObject):
 
 class PointView(PrimitiveView):
 
-    def __init__(self, primitive):
-        self._primitive = None
-        self._xyz = None
-        self._vertices = None
-        self._faces = None
-        self.primitive = primitive
-
-    @property
-    def xyz(self):
-        return self._xyz
-
     @property
     def vertices(self):
         return [0]
-
-    @property
-    def faces(self):
-        return []
-
-    @property
-    def edges(self):
-        return []
 
     @property
     def primitive(self):

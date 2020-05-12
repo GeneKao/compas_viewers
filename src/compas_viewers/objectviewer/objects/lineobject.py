@@ -27,25 +27,6 @@ class LineObject(PrimitiveObject):
 
 class LineView(PrimitiveView):
 
-    def __init__(self, line):
-        self._primitive = None
-        self._xyz = None
-        self._vertices = None
-        self._faces = None
-        self.primitive = line
-
-    @property
-    def xyz(self):
-        return self._xyz
-
-    @property
-    def vertices(self):
-        return []
-
-    @property
-    def faces(self):
-        return []
-
     @property
     def edges(self):
         return [[0, 1]]
