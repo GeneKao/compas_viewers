@@ -20,7 +20,9 @@ from __future__ import print_function
 from .scene import Scene
 
 from compas.datastructures import Mesh
+from compas.datastructures import Network
 from compas_viewers.objectviewer import MeshObject
+from compas_viewers.objectviewer import NetworkObject
 
 from compas.geometry import Point
 from compas.geometry import Line
@@ -42,6 +44,7 @@ from compas_viewers.objectviewer import ArrowObject
 from compas_viewers.objectviewer import Arrow
 
 Scene.register(Mesh, MeshObject)
+Scene.register(Network, NetworkObject)
 Scene.register(Point, PointObject)
 Scene.register(Line, LineObject)
 Scene.register(Polyline, PolylineObject)

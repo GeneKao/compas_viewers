@@ -69,7 +69,11 @@ class Scene(object):
 
     @staticmethod
     def build(scene, item, **kwargs):
-        wrapper = _ITEM_WRAPPER[type(item)]
+        # wrapper = _ITEM_WRAPPER[type(item)]
+        wrapper = None
+        for key in _ITEM_WRAPPER:
+            if isinstance(item, key):
+                wrapper = _ITEM_WRAPPER[key]
         return wrapper(scene, item, **kwargs)
 
     @property

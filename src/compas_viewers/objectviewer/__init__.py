@@ -3,6 +3,7 @@ from __future__ import absolute_import
 from __future__ import division
 
 from .objects.meshobject import MeshObject
+from .objects.networkobject import NetworkObject
 
 from .objects.pointobject import PointObject
 from .objects.lineobject import LineObject
