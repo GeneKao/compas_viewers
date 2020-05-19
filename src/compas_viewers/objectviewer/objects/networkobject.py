@@ -54,6 +54,10 @@ class NetworkView(object):
         return [key_index[key] for key in self.network.nodes()]
 
     @property
+    def vertices_color(self):
+        return [color or (0, 0, 0) for color in self.network.nodes_attribute('color')]
+
+    @property
     def faces(self):
         return self._faces
 

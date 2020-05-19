@@ -210,15 +210,18 @@ class View(GLWidget):
 
             if m.widget.isSelected():
                 # default selection color
-                vertices_color = '#ffff00'
+                vertices_color = flist(hex_to_rgb('#ffff00') for key in m.view.vertices)
                 face_color = '#ffff00'
                 edges_color = '#ffff00'
+
             else:
-                vertices_color = '#000000'
+                if hasattr(m.view,'vertices_color'):
+                    vertices_color = flist(vc for vc in m.view.vertices_color)
+                else:
+                    vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
                 edges_color = '#000000'
                 face_color = m.settings.get("color", "#cccccc")
 
-            vertices_color = flist(hex_to_rgb(vertices_color) for key in m.view.vertices)
             edges_color = flist(hex_to_rgb(edges_color) for key in edges)
             faces_color = flist(hex_to_rgb(face_color) for key in m.view.xyz)
             faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)            
