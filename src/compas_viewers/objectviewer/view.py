@@ -199,49 +199,48 @@ class View(GLWidget):
 
 
         self.buffers = []
-        for m in self.nodes:
-            xyz = flist(m.view.xyz)
-            vertices = list(m.view.vertices)
-            edges = flist(m.view.edges)
-            faces = flist(m.view.faces)
-            faces_back = flist(face[::-1] for face in m.view.faces)
-            vertices_instance_color = flist(hex_to_rgb(vc) for vc in m.vertices_instance_color)
-            edges_instance_color = flist(hex_to_rgb(c) for c in m.edges_instance_color)
-            instance_color = flist(hex_to_rgb(m.instance_color) for key in m.view.xyz)
+        for node in self.nodes:
+            xyz = flist(node.view.xyz)
+            vertices = list(node.view.vertices)
+            edges = flist(node.view.edges)
+            faces = flist(node.view.faces)
+            faces_back = flist(face[::-1] for face in node.view.faces)
+            vertices_instance_color = flist(hex_to_rgb(vc) for vc in node.vertices_instance_color)
+            edges_instance_color = flist(hex_to_rgb(c) for c in node.edges_instance_color)
+            instance_color = flist(hex_to_rgb(node.instance_color) for key in node.view.xyz)
 
-            if hasattr(m.view,'vertices_color'):
-                vertices_color = flist(vc for vc in m.view.vertices_color)
+            if hasattr(node.view,'vertices_color'):
+                vertices_color = flist(vc for vc in node.view.vertices_color)
             else:
-                vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
+                vertices_color = flist(hex_to_rgb('#000000') for key in node.view.vertices)
             edges_color = '#000000'
-            face_color = m.settings.get("color", "#cccccc")
+            face_color = node.settings.get("color", "#cccccc")
 
             edges_color = flist(hex_to_rgb(edges_color) for key in edges)
-            faces_color = flist(hex_to_rgb(face_color) for key in m.view.xyz)
-            faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)            
+            faces_color = flist(hex_to_rgb(face_color) for key in node.view.xyz)
+            faces_color_back = flist(hex_to_rgb(face_color) for key in node.view.xyz)            
 
 
-            vertices_selected_color = flist(hex_to_rgb('#999900') for key in m.view.vertices)
+            vertices_selected_color = flist(hex_to_rgb('#999900') for key in node.view.vertices)
             edges_selected_color = flist(hex_to_rgb('#aaaa00') for key in edges)
-            faces_selected_color = flist(hex_to_rgb('#ffff00') for key in m.view.xyz)
-            faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in m.view.xyz)      
-
+            faces_selected_color = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
+            faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)      
 
             self.buffers.append({
 
-                'isSelected': lambda: m.widget.isSelected(),
+                'isSelected': node.widget.isSelected,
 
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
                 'edges': self.make_index_buffer(edges),
-                'edges.instance': self.make_index_buffer(m.edge_instance),
+                'edges.instance': self.make_index_buffer(node.edge_instance),
                 'faces': self.make_index_buffer(faces),
                 'faces:back': self.make_index_buffer(faces_back),
                 'vertices.color': self.make_vertex_buffer(vertices_color, dynamic=True),
                 'vertices.instance.color': self.make_vertex_buffer(vertices_instance_color, dynamic=True),
                 'vertices.selected.color': self.make_vertex_buffer(vertices_selected_color, dynamic=True),
                 'edges.color': self.make_vertex_buffer(edges_color, dynamic=True),
-                'edges.xyz': self.make_vertex_buffer(m.edge_xyz),
+                'edges.xyz': self.make_vertex_buffer(node.edge_xyz),
                 'edges.instance.color': self.make_vertex_buffer(edges_instance_color, dynamic=True),
                 'edges.selected.color': self.make_vertex_buffer(edges_selected_color, dynamic=True),
                 'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
