@@ -97,7 +97,7 @@ class Manager(object):
             #         key = int(item.text(0))
             #         attr = mesh.edge_attributes(key)
             #         print("Mesh {}: Edge {} => {}".format(mid, key, attr))
-        self.app.view.make_buffers()
+        # self.app.view.make_buffers()
         self.app.view.updateGL()
 
 class ObjectProperty(QtWidgets.QWidget):

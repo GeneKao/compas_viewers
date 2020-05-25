@@ -156,6 +156,7 @@ class View(GLWidget):
 
         glEnable(GL_DEPTH_TEST)
         self.draw_buffers()
+        self.draw_rotation_center()
 
     def random_hex(self):
         while True:
@@ -208,25 +209,28 @@ class View(GLWidget):
             edges_instance_color = flist(hex_to_rgb(c) for c in m.edges_instance_color)
             instance_color = flist(hex_to_rgb(m.instance_color) for key in m.view.xyz)
 
-            if m.widget.isSelected():
-                # default selection color
-                vertices_color = flist(hex_to_rgb('#ffff00') for key in m.view.vertices)
-                face_color = '#ffff00'
-                edges_color = '#ffff00'
-
+            if hasattr(m.view,'vertices_color'):
+                vertices_color = flist(vc for vc in m.view.vertices_color)
             else:
-                if hasattr(m.view,'vertices_color'):
-                    vertices_color = flist(vc for vc in m.view.vertices_color)
-                else:
-                    vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
-                edges_color = '#000000'
-                face_color = m.settings.get("color", "#cccccc")
+                vertices_color = flist(hex_to_rgb('#000000') for key in m.view.vertices)
+            edges_color = '#000000'
+            face_color = m.settings.get("color", "#cccccc")
 
             edges_color = flist(hex_to_rgb(edges_color) for key in edges)
             faces_color = flist(hex_to_rgb(face_color) for key in m.view.xyz)
             faces_color_back = flist(hex_to_rgb(face_color) for key in m.view.xyz)            
 
+
+            vertices_selected_color = flist(hex_to_rgb('#999900') for key in m.view.vertices)
+            edges_selected_color = flist(hex_to_rgb('#aaaa00') for key in edges)
+            faces_selected_color = flist(hex_to_rgb('#ffff00') for key in m.view.xyz)
+            faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in m.view.xyz)      
+
+
             self.buffers.append({
+
+                'isSelected': lambda: m.widget.isSelected(),
+
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
                 'edges': self.make_index_buffer(edges),
@@ -235,11 +239,15 @@ class View(GLWidget):
                 'faces:back': self.make_index_buffer(faces_back),
                 'vertices.color': self.make_vertex_buffer(vertices_color, dynamic=True),
                 'vertices.instance.color': self.make_vertex_buffer(vertices_instance_color, dynamic=True),
+                'vertices.selected.color': self.make_vertex_buffer(vertices_selected_color, dynamic=True),
                 'edges.color': self.make_vertex_buffer(edges_color, dynamic=True),
                 'edges.xyz': self.make_vertex_buffer(m.edge_xyz),
                 'edges.instance.color': self.make_vertex_buffer(edges_instance_color, dynamic=True),
+                'edges.selected.color': self.make_vertex_buffer(edges_selected_color, dynamic=True),
                 'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
                 'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
+                'faces.selected.color': self.make_vertex_buffer(faces_selected_color, dynamic=True),
+                'faces.selected.color:back': self.make_vertex_buffer(faces_selected_color_back, dynamic=True),
                 'instance.color': self.make_vertex_buffer(instance_color),
                 'n': len(xyz),
                 'v': len(vertices),
@@ -256,27 +264,41 @@ class View(GLWidget):
             glBindBuffer(GL_ARRAY_BUFFER, buffer['xyz'])
             glVertexPointer(3, GL_FLOAT, 0, None)
 
+            selected = buffer['isSelected']()
+
             if self.settings['faces.on']:
-                glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.color'])
+                if selected:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.selected.color'])
+                else:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.color'])
                 glColorPointer(3, GL_FLOAT, 0, None)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['faces'])
                 glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
 
-                glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.color:back'])
+                if selected:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.selected.color:back'])
+                else:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.color:back'])
                 glColorPointer(3, GL_FLOAT, 0, None)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['faces:back'])
                 glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
 
             if self.settings['edges.on']:
                 glLineWidth(self.settings['edges.width:value'])
-                glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.color'])
+                if selected:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.selected.color'])
+                else:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.color'])
                 glColorPointer(3, GL_FLOAT, 0, None)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['edges'])
                 glDrawElements(GL_LINES, buffer['e'], GL_UNSIGNED_INT, None)
 
             if self.settings['vertices.on']:
                 glPointSize(self.settings['vertices.size:value'])
-                glBindBuffer(GL_ARRAY_BUFFER, buffer['vertices.color'])
+                if selected:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['vertices.selected.color'])
+                else:
+                    glBindBuffer(GL_ARRAY_BUFFER, buffer['vertices.color'])
                 glColorPointer(3, GL_FLOAT, 0, None)
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['vertices'])
                 glDrawElements(GL_POINTS, buffer['v'], GL_UNSIGNED_INT, None)
@@ -284,6 +306,10 @@ class View(GLWidget):
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)
         
+        
+
+    def draw_rotation_center(self):
+
         if self.mouse.buttons['right']:
 
             self.sphere_buffer = {
@@ -307,8 +333,6 @@ class View(GLWidget):
 
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)
-
-
 
     def draw_instances(self):
         # save out a instance map in background

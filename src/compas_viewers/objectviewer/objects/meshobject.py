@@ -4,20 +4,17 @@ from __future__ import division
 
 
 from compas.utilities import pairwise
+from .node import Node
 
 
 __all__ = ['MeshView', 'MeshObject']
 
 
-class MeshObject(object):
-
-    # def __init__(self, mesh, color=None):
-    #     self.data = mesh
-    #     self.view = MeshView(mesh)
-    #     self.color = color or '#cccccc'
-    #     self.xforms = []
+class MeshObject(Node):
 
     def __init__(self, scene, datastructure, name=None, visible=True, settings={}, **kwargs):
+
+        super(MeshObject, self).__init__()
         self.scene = scene
         self.datastructure = datastructure
         self.name = name
