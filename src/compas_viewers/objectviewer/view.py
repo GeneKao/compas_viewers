@@ -51,6 +51,7 @@ class View(GLWidget):
         self.selecting = False
         self.deselecting = False
         self.selected = set()
+        self.use_shaders = True
 
     @property
     def nodes(self):
@@ -228,10 +229,8 @@ class View(GLWidget):
             faces_selected_color = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
             faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
 
-            self.buffers.append({
-
+            buffer = {
                 'isSelected': node.widget.isSelected,
-
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
                 'edges': self.make_index_buffer(edges),
@@ -245,23 +244,32 @@ class View(GLWidget):
                 'edges.xyz': self.make_vertex_buffer(node.edge_xyz),
                 'edges.instance.color': self.make_vertex_buffer(edges_instance_color, dynamic=True),
                 'edges.selected.color': self.make_vertex_buffer(edges_selected_color, dynamic=True),
-                'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
-                'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
-                'faces.selected.color': self.make_vertex_buffer(faces_selected_color, dynamic=True),
-                'faces.selected.color:back': self.make_vertex_buffer(faces_selected_color_back, dynamic=True),
                 'instance.color': self.make_vertex_buffer(instance_color),
                 'n': len(xyz),
                 'v': len(vertices),
                 'e': len(edges),
-                'f': len(faces)})
+                'f': len(faces)
+                }
 
-        self.create_shader()
+            if not self.use_shaders:
+                buffer.update({
+                    'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
+                    'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
+                    'faces.selected.color': self.make_vertex_buffer(faces_selected_color, dynamic=True),
+                    'faces.selected.color:back': self.make_vertex_buffer(faces_selected_color_back, dynamic=True),
+                })
+
+            self.buffers.append(buffer)
+
+        if self.use_shaders:
+            self.create_shader()
 
     def draw_buffers(self):
         if not self.buffers:
             return
 
         for buffer in self.buffers:
+            glDisable(GL_POLYGON_SMOOTH)
             glEnableClientState(GL_VERTEX_ARRAY)
             glEnableClientState(GL_COLOR_ARRAY)
             glBindBuffer(GL_ARRAY_BUFFER, buffer['xyz'])
@@ -269,7 +277,7 @@ class View(GLWidget):
 
             selected = buffer['isSelected']()
 
-            if self.settings['faces.on']:
+            if self.settings['faces.on'] and not self.use_shaders:
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.selected.color'])
                 else:
@@ -287,6 +295,7 @@ class View(GLWidget):
                 glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
 
             if self.settings['edges.on']:
+                glDisable(GL_LINE_SMOOTH)
                 glLineWidth(self.settings['edges.width:value'])
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.selected.color'])
@@ -309,7 +318,8 @@ class View(GLWidget):
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)
 
-        self.draw_shader()
+        if self.use_shaders:
+            self.draw_shader()
 
     def draw_rotation_center(self):
 
@@ -407,20 +417,19 @@ class View(GLWidget):
         '''
         fshader = '''#version 120
         varying vec3 ec_pos;
+        uniform vec3 face_color;
+
         void main(){
 
             vec3 light = vec3(0.5, 0.2, 1.0);
             light = normalize(light);
 
-            vec4 color = vec4( 1,0,0,1 );
             vec3 ec_normal = normalize(cross(dFdx(ec_pos), dFdy(ec_pos)));
 
             float dProd = max(0.0,
                     dot(ec_normal, light));
 
-            color = vec4(ec_normal, 1);
-            //color = vec4(dProd, dProd, dProd, 1);
-            gl_FragColor = color;
+            gl_FragColor = vec4(face_color * dProd, 1);
             
         }
 
@@ -429,65 +438,60 @@ class View(GLWidget):
         # compile our shaders
         VERTEX_SHADER = shaders.compileShader(vshader, GL_VERTEX_SHADER)
         FRAGMENT_SHADER = shaders.compileShader(fshader, GL_FRAGMENT_SHADER)
-        self.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
-        # create a vbo (stored actual data for our triangles)
 
-        # for node in self.nodes:
-        #     xyz = np.array(node.view.xyz)[:3]
+        for node in self.nodes:
 
-        # vertices = np.array([[1.78149199, 0.32750149, 0.],
-        #                      [1.32750149, 1.21850801, 0.],
-        #                      [2.21850801, 1.67249851, 0.]],'f')
-        # print(vertices.dtype)
-        
-        # # vertices = np.array([[1.78, 0.327, 0.],
-        # #                      [1.32, 1.21, 0.],
-        # #                      [2.21, 1.67, 0.]],'f')
+            node.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
+            node.shader_uniforms = {
+                'face_color': glGetUniformLocation( node.shader, 'face_color' )
+            }
 
-        # # vertices = xyz
-
-        vertices = np.concatenate([np.array(node.view.xyz, dtype=np.float32) for node in self.nodes])
-        faces = np.concatenate([np.array(node.view.faces) for node in self.nodes])
-        print(faces.shape)
-        
-        vertex_buffer = [[ [node.view.xyz[index] for index in face] for face in node.view.faces] for node in self.nodes]
-        vertex_buffer = np.array(vertex_buffer, dtype=np.float32)
-        print(vertex_buffer.shape)
-        vertex_buffer = np.reshape(vertex_buffer,(vertex_buffer.shape[0]*vertex_buffer.shape[1]*vertex_buffer.shape[2],vertex_buffer.shape[3]))
-        self.vertex_buffer = vertex_buffer
-
-        print(np.array(vertex_buffer).shape)
-
-        self.vbo = vbo.VBO(vertex_buffer)
+            vertex_buffer = [ [node.view.xyz[index] for index in face] for face in node.view.faces]
+            vertex_buffer = np.array(vertex_buffer, dtype=np.float32)
+            if len(vertex_buffer.shape) == 3:
+                vertex_buffer = np.reshape(vertex_buffer,(vertex_buffer.shape[0]*vertex_buffer.shape[1],vertex_buffer.shape[2]))
+                vertex_buffer = np.concatenate((vertex_buffer,vertex_buffer[::-1]))
+                node.vertex_buffer = vertex_buffer
+                node.vbo = vbo.VBO(vertex_buffer)
 
     def draw_shader(self):
-        '''render the geometry of the scene'''
-        # tell opengl to use our shader
-        shaders.glUseProgram(self.shader)
-        try:
-            # bind data into gpu
-            self.vbo.bind()
+
+        if not self.settings['faces.on']:
+            return
+        
+        for node in self.nodes:
+            if not hasattr(node,'vbo'):
+                continue
+            shaders.glUseProgram(node.shader)
             try:
-                # tells opengl to access vertex once
-                # we call a draw function
-                glDisable(GL_POLYGON_SMOOTH)
-                glEnableClientState(GL_VERTEX_ARRAY)
-                
-                # point at our vbo data
-                glVertexPointerf(self.vbo)
-                # actually tell opengl to draw
-                # the stuff in the VBO as a series
-                # of triangles
-                glDrawArrays(GL_TRIANGLES, 0, self.vertex_buffer.shape[0])
+                # bind data into gpu
+                node.vbo.bind()
+                try:
+                    # tells opengl to access vertex once
+                    # we call a draw function
+                    glDisable(GL_POLYGON_SMOOTH)
+                    glEnableClientState(GL_VERTEX_ARRAY)
+                    
+                    # point at our vbo data
+                    glVertexPointerf(node.vbo)
+                    # actually tell opengl to draw
+                    # the stuff in the VBO as a series
+                    # of triangles
+                    if node.widget.isSelected():
+                        glUniform3f( node.shader_uniforms['face_color'],1,1,0)
+                    else:
+                        glUniform3f( node.shader_uniforms['face_color'],1,1,1)
+    
+                    glDrawArrays(GL_TRIANGLES, 0, node.vertex_buffer.shape[0])
+                finally:
+                    # cleanup, unbind the our data from gpu ram
+                    # and tell opengl that it should not
+                    # expect vertex arrays anymore
+                    node.vbo.unbind()
+                    glDisableClientState(GL_VERTEX_ARRAY)
             finally:
-                # cleanup, unbind the our data from gpu ram
-                # and tell opengl that it should not
-                # expect vertex arrays anymore
-                self.vbo.unbind()
-                glDisableClientState(GL_VERTEX_ARRAY)
-        finally:
-            # stop using our shader
-            shaders.glUseProgram(0)
+                # stop using our shader
+                shaders.glUseProgram(0)
 
 # ==============================================================================
 # Main
