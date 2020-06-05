@@ -10,6 +10,11 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from OpenGL.GLUT import *
 
+# get shaders
+from OpenGL.GL import shaders
+# import the vertext buffer object
+from OpenGL.arrays import vbo
+
 from compas.utilities import hex_to_rgb
 from compas.utilities import rgb_to_hex
 
@@ -46,6 +51,7 @@ class View(GLWidget):
         self.selecting = False
         self.deselecting = False
         self.selected = set()
+        self.use_shaders = True
 
     @property
     def nodes(self):
@@ -109,7 +115,6 @@ class View(GLWidget):
                 elif not self.selecting and not self.deselecting:
                     for item in list(self.selected):
                         self.deselect(item)
-
 
     def keyPressAction(self, key):
         if key == SHIFT:
@@ -184,9 +189,9 @@ class View(GLWidget):
                 m.edge_instance = []
                 m.edges_instance_color = []
                 m.edge_xyz = []
-                for j,e in enumerate(edges):
+                for j, e in enumerate(edges):
 
-                    v1,v2 = e
+                    v1, v2 = e
                     m.edge_xyz.extend(m.view.xyz[v1])
                     m.edge_xyz.extend(m.view.xyz[v2])
 
@@ -196,7 +201,6 @@ class View(GLWidget):
                     m.edges_instance_color.append(_hex)
                     m.edges_instance_color.append(_hex)
                     self.intances[_hex] = {'edge': e, 'mesh': i}
-
 
         self.buffers = []
         for node in self.nodes:
@@ -209,7 +213,7 @@ class View(GLWidget):
             edges_instance_color = flist(hex_to_rgb(c) for c in node.edges_instance_color)
             instance_color = flist(hex_to_rgb(node.instance_color) for key in node.view.xyz)
 
-            if hasattr(node.view,'vertices_color'):
+            if hasattr(node.view, 'vertices_color'):
                 vertices_color = flist(vc for vc in node.view.vertices_color)
             else:
                 vertices_color = flist(hex_to_rgb('#000000') for key in node.view.vertices)
@@ -218,18 +222,15 @@ class View(GLWidget):
 
             edges_color = flist(hex_to_rgb(edges_color) for key in edges)
             faces_color = flist(hex_to_rgb(face_color) for key in node.view.xyz)
-            faces_color_back = flist(hex_to_rgb(face_color) for key in node.view.xyz)            
-
+            faces_color_back = flist(hex_to_rgb(face_color) for key in node.view.xyz)
 
             vertices_selected_color = flist(hex_to_rgb('#999900') for key in node.view.vertices)
             edges_selected_color = flist(hex_to_rgb('#aaaa00') for key in edges)
             faces_selected_color = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
-            faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)      
+            faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
 
-            self.buffers.append({
-
+            buffer = {
                 'isSelected': node.widget.isSelected,
-
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
                 'edges': self.make_index_buffer(edges),
@@ -243,21 +244,32 @@ class View(GLWidget):
                 'edges.xyz': self.make_vertex_buffer(node.edge_xyz),
                 'edges.instance.color': self.make_vertex_buffer(edges_instance_color, dynamic=True),
                 'edges.selected.color': self.make_vertex_buffer(edges_selected_color, dynamic=True),
-                'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
-                'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
-                'faces.selected.color': self.make_vertex_buffer(faces_selected_color, dynamic=True),
-                'faces.selected.color:back': self.make_vertex_buffer(faces_selected_color_back, dynamic=True),
                 'instance.color': self.make_vertex_buffer(instance_color),
                 'n': len(xyz),
                 'v': len(vertices),
                 'e': len(edges),
-                'f': len(faces)})
+                'f': len(faces)
+                }
+
+            if not self.use_shaders:
+                buffer.update({
+                    'faces.color': self.make_vertex_buffer(faces_color, dynamic=True),
+                    'faces.color:back': self.make_vertex_buffer(faces_color_back, dynamic=True),
+                    'faces.selected.color': self.make_vertex_buffer(faces_selected_color, dynamic=True),
+                    'faces.selected.color:back': self.make_vertex_buffer(faces_selected_color_back, dynamic=True),
+                })
+
+            self.buffers.append(buffer)
+
+        if self.use_shaders:
+            self.create_shader()
 
     def draw_buffers(self):
         if not self.buffers:
             return
 
         for buffer in self.buffers:
+            glDisable(GL_POLYGON_SMOOTH)
             glEnableClientState(GL_VERTEX_ARRAY)
             glEnableClientState(GL_COLOR_ARRAY)
             glBindBuffer(GL_ARRAY_BUFFER, buffer['xyz'])
@@ -265,7 +277,7 @@ class View(GLWidget):
 
             selected = buffer['isSelected']()
 
-            if self.settings['faces.on']:
+            if self.settings['faces.on'] and not self.use_shaders:
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.selected.color'])
                 else:
@@ -283,6 +295,7 @@ class View(GLWidget):
                 glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
 
             if self.settings['edges.on']:
+                glDisable(GL_LINE_SMOOTH)
                 glLineWidth(self.settings['edges.width:value'])
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.selected.color'])
@@ -304,8 +317,9 @@ class View(GLWidget):
 
             glDisableClientState(GL_COLOR_ARRAY)
             glDisableClientState(GL_VERTEX_ARRAY)
-        
-        
+
+        if self.use_shaders:
+            self.draw_shader()
 
     def draw_rotation_center(self):
 
@@ -314,7 +328,7 @@ class View(GLWidget):
             self.sphere_buffer = {
                 'xyz': self.make_vertex_buffer(self.camera.target),
                 'vertices': self.make_index_buffer([0]),
-                'vertices.color': self.make_vertex_buffer([0.7,1,0], dynamic=True),
+                'vertices.color': self.make_vertex_buffer([0.7, 1, 0], dynamic=True),
                 'v': 1
             }
 
@@ -380,7 +394,7 @@ class View(GLWidget):
         size = self.size()
         ratioH = int(self.GL_height / size.height())
         ratioW = int(self.GL_width / size.width())
-        instance = instance[::ratioH,::ratioW,:]
+        instance = instance[::ratioH, ::ratioW, :]
 
         instance = np.flip(instance, 0)
         self.instance_map = instance
@@ -388,10 +402,101 @@ class View(GLWidget):
         glClearColor(1.0, 1.0, 1.0, 1.0)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
+    def create_shader(self):
+        # create a vertex and fragment shader
+        # apparently verterx shaders only need
+        # to return a gl_Position, an fragment
+        # shaders only need to return a color
+        vshader = '''#version 120
+        varying vec3 ec_pos;
+
+        void main(){
+            gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+            ec_pos = (gl_ModelViewMatrix * gl_Vertex).xyz;
+        }
+        '''
+        fshader = '''#version 120
+        varying vec3 ec_pos;
+        uniform vec3 face_color;
+
+        void main(){
+
+            vec3 light = vec3(0.5, 0.2, 1.0);
+            light = normalize(light);
+
+            vec3 ec_normal = normalize(cross(dFdx(ec_pos), dFdy(ec_pos)));
+
+            float dProd = max(0.0,
+                    dot(ec_normal, light));
+
+            gl_FragColor = vec4(face_color * dProd, 1);
+            
+        }
+
+        
+        '''
+        # compile our shaders
+        VERTEX_SHADER = shaders.compileShader(vshader, GL_VERTEX_SHADER)
+        FRAGMENT_SHADER = shaders.compileShader(fshader, GL_FRAGMENT_SHADER)
+
+        for node in self.nodes:
+
+            node.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
+            node.shader_uniforms = {
+                'face_color': glGetUniformLocation( node.shader, 'face_color' )
+            }
+
+            vertex_buffer = [ [node.view.xyz[index] for index in face] for face in node.view.faces]
+            vertex_buffer = np.array(vertex_buffer, dtype=np.float32)
+            if len(vertex_buffer.shape) == 3:
+                vertex_buffer = np.reshape(vertex_buffer,(vertex_buffer.shape[0]*vertex_buffer.shape[1],vertex_buffer.shape[2]))
+                vertex_buffer = np.concatenate((vertex_buffer,vertex_buffer[::-1]))
+                node.vertex_buffer = vertex_buffer
+                node.vbo = vbo.VBO(vertex_buffer)
+
+    def draw_shader(self):
+
+        if not self.settings['faces.on']:
+            return
+        
+        for node in self.nodes:
+            if not hasattr(node,'vbo'):
+                continue
+            shaders.glUseProgram(node.shader)
+            try:
+                # bind data into gpu
+                node.vbo.bind()
+                try:
+                    # tells opengl to access vertex once
+                    # we call a draw function
+                    glDisable(GL_POLYGON_SMOOTH)
+                    glEnableClientState(GL_VERTEX_ARRAY)
+                    
+                    # point at our vbo data
+                    glVertexPointerf(node.vbo)
+                    # actually tell opengl to draw
+                    # the stuff in the VBO as a series
+                    # of triangles
+                    if node.widget.isSelected():
+                        glUniform3f( node.shader_uniforms['face_color'],1,1,0)
+                    else:
+                        glUniform3f( node.shader_uniforms['face_color'],1,1,1)
+    
+                    glDrawArrays(GL_TRIANGLES, 0, node.vertex_buffer.shape[0])
+                finally:
+                    # cleanup, unbind the our data from gpu ram
+                    # and tell opengl that it should not
+                    # expect vertex arrays anymore
+                    node.vbo.unbind()
+                    glDisableClientState(GL_VERTEX_ARRAY)
+            finally:
+                # stop using our shader
+                shaders.glUseProgram(0)
 
 # ==============================================================================
 # Main
 # ==============================================================================
+
 
 if __name__ == '__main__':
 
