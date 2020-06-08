@@ -16,8 +16,9 @@ class PolylineObject(PrimitiveObject):
     def __init__(self, scene, polyline, **kwargs):
         super(PolylineObject,self).__init__(scene, polyline, **kwargs)
         self.points = [PointObject(scene, point) for point in polyline.points]
-        for point in self.points:
-            self.add(point)
+        # disable nesting for now
+        # for point in self.points:
+        #     self.add(point)
         self.view = PolylineView(polyline)
 
 class PolylineView(PrimitiveView):
