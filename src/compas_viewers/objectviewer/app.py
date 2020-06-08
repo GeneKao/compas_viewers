@@ -109,7 +109,7 @@ class ObjectProperty(QtWidgets.QWidget):
 class ObjectViewer(App):
     """"""
 
-    def __init__(self):
+    def __init__(self, grid=True, axis=True):
         super().__init__(SETTINGS, UI, STYLE)
         self.controller = Controller(self)
         self.view = View(self.controller)
@@ -124,8 +124,10 @@ class ObjectViewer(App):
         self.manager = Manager(self.sidebar2, self)
 
         self.view.glInit()
-        self.view.setup_grid()
-        self.view.setup_axes()
+        if grid:
+            self.view.setup_grid()
+        if axis:
+            self.view.setup_axes()
         self.view.setFocus()
 
     def init_sidebar2(self):
