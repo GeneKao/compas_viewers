@@ -16,7 +16,6 @@ circle = Circle(plane, 0.5)
 cone = Cone(circle, 1)
 viewer.add(cone)
 
-
 polyhedron = Polyhedron(4)
 viewer.add(polyhedron)
 
