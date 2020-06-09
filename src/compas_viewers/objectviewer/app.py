@@ -44,22 +44,22 @@ class Manager(object):
 
     def set_items(self, nodes):
 
-        sceneitem = QtWidgets.QTreeWidgetItem()
-        sceneitem.setText(0, 'scene')
-        self.widget.addTopLevelItems([sceneitem])
-        sceneitem.setExpanded(True)
-
         self._items = nodes
-        for node in nodes:
-            self._add_node_item(node, sceneitem)
+        top_items = [self._add_node_item(node, parent=None) for node in nodes]
+        self.widget.addTopLevelItems(top_items)
 
-    def _add_node_item(self, node, parent):
-        nodeitem = QtWidgets.QTreeWidgetItem(parent)
+    def _add_node_item(self, node, parent=None):
+        if parent:
+            nodeitem = QtWidgets.QTreeWidgetItem(parent)
+        else:
+            nodeitem = QtWidgets.QTreeWidgetItem()
         nodeitem.setText(0, node.__class__.__name__)
         node.widget = nodeitem
         
         for child_node in node.children:
             self._add_node_item(child_node, nodeitem)
+
+        return nodeitem
 
     def find_selected_item(self, item):
         index = self.widget.indexFromItem(item)
@@ -113,9 +113,9 @@ class ObjectViewer(App):
         super().__init__(SETTINGS, UI, STYLE)
         self.controller = Controller(self)
         self.view = View(self.controller)
-        self.view.camera.events.rotX.connect(self.controller.on_rotX)
-        self.view.camera.events.rotZ.connect(self.controller.on_rotZ)
-        self.view.camera.events.distance.connect(self.controller.on_distance)
+        # self.view.camera.events.rotX.connect(self.controller.on_rotX)
+        # self.view.camera.events.rotZ.connect(self.controller.on_rotZ)
+        # self.view.camera.events.distance.connect(self.controller.on_distance)
 
         self.setup()
         self.init()

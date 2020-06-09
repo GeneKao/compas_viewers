@@ -204,6 +204,8 @@ class View(GLWidget):
 
         self.buffers = []
         for node in self.nodes:
+
+            # print(node.settings)
             xyz = flist(node.view.xyz)
             vertices = list(node.view.vertices)
             edges = flist(node.view.edges)
@@ -216,8 +218,11 @@ class View(GLWidget):
             if hasattr(node.view, 'vertices_color'):
                 vertices_color = flist(vc for vc in node.view.vertices_color)
             else:
-                vertices_color = flist(hex_to_rgb('#000000') for key in node.view.vertices)
-            edges_color = '#000000'
+                vertices_color = node.settings.get("vertices.color", "#000000")
+                vertices_color = flist(hex_to_rgb(vertices_color) for key in node.view.vertices)
+            
+            
+            edges_color = node.settings.get("edges.color", "#000000")
             face_color = node.settings.get("color", "#cccccc")
 
             edges_color = flist(hex_to_rgb(edges_color) for key in edges)
@@ -245,6 +250,8 @@ class View(GLWidget):
                 'edges.instance.color': self.make_vertex_buffer(edges_instance_color, dynamic=True),
                 'edges.selected.color': self.make_vertex_buffer(edges_selected_color, dynamic=True),
                 'instance.color': self.make_vertex_buffer(instance_color),
+                'edges.width': node.settings.get("edges.width", self.settings['edges.width:value']),
+                'vertices.size': node.settings.get("vertices.size", self.settings['vertices.size:value']),
                 'n': len(xyz),
                 'v': len(vertices),
                 'e': len(edges),
@@ -296,7 +303,7 @@ class View(GLWidget):
 
             if self.settings['edges.on']:
                 glDisable(GL_LINE_SMOOTH)
-                glLineWidth(self.settings['edges.width:value'])
+                glLineWidth(buffer['edges.width'])
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['edges.selected.color'])
                 else:
@@ -306,7 +313,7 @@ class View(GLWidget):
                 glDrawElements(GL_LINES, buffer['e'], GL_UNSIGNED_INT, None)
 
             if self.settings['vertices.on']:
-                glPointSize(self.settings['vertices.size:value'])
+                glPointSize(buffer['vertices.size'])
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['vertices.selected.color'])
                 else:
@@ -418,6 +425,7 @@ class View(GLWidget):
         fshader = '''#version 120
         varying vec3 ec_pos;
         uniform vec3 face_color;
+        uniform float opacity;
 
         void main(){
 
@@ -429,7 +437,7 @@ class View(GLWidget):
             float dProd = max(0.0,
                     dot(ec_normal, light));
 
-            gl_FragColor = vec4(face_color * dProd, 1);
+            gl_FragColor = vec4(face_color * dProd, opacity);
             
         }
 
@@ -443,7 +451,8 @@ class View(GLWidget):
 
             node.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
             node.shader_uniforms = {
-                'face_color': glGetUniformLocation( node.shader, 'face_color' )
+                'face_color': glGetUniformLocation( node.shader, 'face_color' ),
+                'opacity': glGetUniformLocation( node.shader, 'opacity' ),
             }
 
             vertex_buffer = [ [node.view.xyz[index] for index in face] for face in node.view.faces]
@@ -480,7 +489,10 @@ class View(GLWidget):
                     if node.widget.isSelected():
                         glUniform3f( node.shader_uniforms['face_color'],1,1,0)
                     else:
-                        glUniform3f( node.shader_uniforms['face_color'],1,1,1)
+                        rgb = hex_to_rgb(node.settings.get("color", "#ff0000"))
+                        glUniform3f( node.shader_uniforms['face_color'], *rgb)
+
+                    glUniform1f( node.shader_uniforms['opacity'], node.settings.get("opacity", 1))
     
                     glDrawArrays(GL_TRIANGLES, 0, node.vertex_buffer.shape[0])
                 finally:

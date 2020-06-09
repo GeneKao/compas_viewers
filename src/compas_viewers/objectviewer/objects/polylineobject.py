@@ -24,6 +24,10 @@ class PolylineObject(PrimitiveObject):
 class PolylineView(PrimitiveView):
 
     @property
+    def vertices(self):
+        return [i for i in range(len(list(self.primitive.points)))]
+
+    @property
     def edges(self):
         return [[i, i+1] for i,_ in list(enumerate(self.primitive.points))[:-1]]
 

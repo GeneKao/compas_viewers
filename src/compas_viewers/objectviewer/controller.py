@@ -101,17 +101,17 @@ class Controller(core.controller.Controller):
     # Slots
     # ==========================================================================
 
-    def on_rotX(self, rx):
-        slider = self.controls['elevation']
-        slider.update(rx)
+    # def on_rotX(self, rx):
+    #     slider = self.controls['elevation']
+    #     slider.update(rx)
 
-    def on_rotZ(self, rz):
-        slider = self.controls['azimuth']
-        slider.update(rz)
+    # def on_rotZ(self, rz):
+    #     slider = self.controls['azimuth']
+    #     slider.update(rz)
 
-    def on_distance(self, d):
-        slider = self.controls['distance']
-        slider.update(d)
+    # def on_distance(self, d):
+    #     slider = self.controls['distance']
+    #     slider.update(d)
 
     # ==========================================================================
     # commands

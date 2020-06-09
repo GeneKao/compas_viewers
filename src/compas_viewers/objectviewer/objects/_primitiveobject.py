@@ -12,28 +12,11 @@ __all__ = ['PrimitiveView', 'PrimitiveObject']
 
 class PrimitiveObject(Node):
 
-    def __init__(self, scene, primitive, name=None, visible=True, settings={}, **kwargs):
-        
-        super(PrimitiveObject, self).__init__()
-
+    def __init__(self, scene, primitive, **kwargs):
+        super(PrimitiveObject, self).__init__(**kwargs)
         self.scene = scene
         self.primitive = primitive
-        self.name = name
-        self.guid = None
-        self.visible = visible
-        # self.artist = None
         self.view = PrimitiveView(primitive)
-        self._settings = {}
-        self._settings.update(settings)
-
-
-    @property
-    def settings(self):
-        return self._settings
-
-    @settings.setter
-    def settings(self, settings):
-        return self._settings.update(settings)
 
 
 

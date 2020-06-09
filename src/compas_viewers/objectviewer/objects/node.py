@@ -11,8 +11,19 @@ __all__ = ['Node']
 class Node(object):
     """"""
 
-    def __init__(self):
+    def __init__(self, settings={}):
+        self.guid = uuid.uuid4()
         self.children = []
+        self._settings = {}
+        self._settings.update(settings)
+
+    @property
+    def settings(self):
+        return self._settings
+
+    @settings.setter
+    def settings(self, settings):
+        return self._settings.update(settings)
 
     def add(self, node):
         if node not in self.children:
@@ -30,6 +41,7 @@ class Node(object):
 # ==============================================================================
 # Main
 # ==============================================================================
+
 
 if __name__ == '__main__':
     pass

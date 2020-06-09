@@ -12,28 +12,12 @@ __all__ = ['MeshView', 'MeshObject']
 
 class MeshObject(Node):
 
-    def __init__(self, scene, datastructure, name=None, visible=True, settings={}, **kwargs):
+    def __init__(self, scene, datastructure, **kwargs):
 
-        super(MeshObject, self).__init__()
+        super(MeshObject, self).__init__(**kwargs)
         self.scene = scene
         self.datastructure = datastructure
-        self.name = name
-        self.guid = None
-        self.visible = visible
-        # self.artist = None
         self.view = MeshView(datastructure)
-        self._settings = {}
-        self._settings.update(settings)
-
-
-    @property
-    def settings(self):
-        return self._settings
-
-    @settings.setter
-    def settings(self, settings):
-        return self._settings.update(settings)
-
 
 
 class MeshView(object):
