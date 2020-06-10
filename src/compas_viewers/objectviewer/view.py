@@ -446,13 +446,13 @@ class View(GLWidget):
         # compile our shaders
         VERTEX_SHADER = shaders.compileShader(vshader, GL_VERTEX_SHADER)
         FRAGMENT_SHADER = shaders.compileShader(fshader, GL_FRAGMENT_SHADER)
+        self.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
 
         for node in self.nodes:
 
-            node.shader = shaders.compileProgram(VERTEX_SHADER, FRAGMENT_SHADER)
             node.shader_uniforms = {
-                'face_color': glGetUniformLocation( node.shader, 'face_color' ),
-                'opacity': glGetUniformLocation( node.shader, 'opacity' ),
+                'face_color': glGetUniformLocation( self.shader, 'face_color' ),
+                'opacity': glGetUniformLocation( self.shader, 'opacity' ),
             }
 
             vertex_buffer = [ [node.view.xyz[index] for index in face] for face in node.view.faces]
@@ -471,7 +471,7 @@ class View(GLWidget):
         for node in self.nodes:
             if not hasattr(node,'vbo'):
                 continue
-            shaders.glUseProgram(node.shader)
+            shaders.glUseProgram(self.shader)
             try:
                 # bind data into gpu
                 node.vbo.bind()
