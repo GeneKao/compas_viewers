@@ -26,7 +26,12 @@ for i in range(10):
     viewer.add(mesh, settings={
         'color': rgb_to_hex((rdi(0, 255), rdi(0, 255), rdi(0, 255))),
         'edges.width': 2,
-        'opacity': 0.7
+        'opacity': 0.7,
+        'vertices.size': 10,
+
+        'vertices.on': True,
+        'edges.on': False,
+        'faces.on': True,
         })
 
 viewer.update()

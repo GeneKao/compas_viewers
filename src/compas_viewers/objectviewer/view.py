@@ -252,6 +252,11 @@ class View(GLWidget):
                 'instance.color': self.make_vertex_buffer(instance_color),
                 'edges.width': node.settings.get("edges.width", self.settings['edges.width:value']),
                 'vertices.size': node.settings.get("vertices.size", self.settings['vertices.size:value']),
+
+                'vertices.on': node.settings.get("vertices.on", self.settings['vertices.on']),
+                'edges.on': node.settings.get("edges.on", self.settings['edges.on']),
+                'faces.on': node.settings.get("faces.on", self.settings['faces.on']),
+
                 'n': len(xyz),
                 'v': len(vertices),
                 'e': len(edges),
@@ -284,7 +289,7 @@ class View(GLWidget):
 
             selected = buffer['isSelected']()
 
-            if self.settings['faces.on'] and not self.use_shaders:
+            if buffer['faces.on'] and not self.use_shaders:
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['faces.selected.color'])
                 else:
@@ -301,7 +306,7 @@ class View(GLWidget):
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['faces:back'])
                 glDrawElements(GL_TRIANGLES, buffer['f'], GL_UNSIGNED_INT, None)
 
-            if self.settings['edges.on']:
+            if buffer['edges.on']:
                 glDisable(GL_LINE_SMOOTH)
                 glLineWidth(buffer['edges.width'])
                 if selected:
@@ -312,7 +317,7 @@ class View(GLWidget):
                 glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffer['edges'])
                 glDrawElements(GL_LINES, buffer['e'], GL_UNSIGNED_INT, None)
 
-            if self.settings['vertices.on']:
+            if buffer['vertices.on']:
                 glPointSize(buffer['vertices.size'])
                 if selected:
                     glBindBuffer(GL_ARRAY_BUFFER, buffer['vertices.selected.color'])
@@ -471,6 +476,10 @@ class View(GLWidget):
         for node in self.nodes:
             if not hasattr(node,'vbo'):
                 continue
+
+            if not node.settings.get("faces.on", self.settings['faces.on']):
+                continue
+
             shaders.glUseProgram(self.shader)
             try:
                 # bind data into gpu
