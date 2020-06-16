@@ -230,7 +230,7 @@ class View(GLWidget):
             faces_color_back = flist(hex_to_rgb(face_color) for key in node.view.xyz)
 
             vertices_selected_color = flist(hex_to_rgb('#999900') for key in node.view.vertices)
-            edges_selected_color = flist(hex_to_rgb('#aaaa00') for key in edges)
+            edges_selected_color = flist(hex_to_rgb('#ffff00') for key in edges)
             faces_selected_color = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
             faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
 

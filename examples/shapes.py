@@ -22,5 +22,4 @@ viewer.add(polyhedron)
 arrow = Arrow([-2, 0, 0], [0, 1, 1])
 viewer.add(arrow)
 
-viewer.update()
 viewer.show()

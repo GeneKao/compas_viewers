@@ -29,5 +29,4 @@ polyline = Polyline(pts)
 viewer.add(polyline,settings={"edges.color": "#ff00ff"})
 
 
-viewer.update()
 viewer.show()

@@ -34,5 +34,4 @@ for i in range(10):
         'faces.on': True,
         })
 
-viewer.update()
 viewer.show()

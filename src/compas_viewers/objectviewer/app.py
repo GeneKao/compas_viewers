@@ -44,6 +44,10 @@ class Manager(object):
 
     def set_items(self, nodes):
 
+        # clean up first
+        while self.widget.topLevelItemCount()>0:
+            self.widget.takeTopLevelItem(0)
+
         self._items = nodes
         top_items = [self._add_node_item(node, parent=None) for node in nodes]
         self.widget.addTopLevelItems(top_items)
@@ -161,6 +165,9 @@ class ObjectViewer(App):
         self.view.make_buffers()
         self.view.updateGL()
 
+    def show(self):
+        self.update()
+        super(ObjectViewer, self).show()
 
 # ==============================================================================
 # Main
