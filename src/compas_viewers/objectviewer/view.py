@@ -498,7 +498,7 @@ class View(GLWidget):
                     if node.widget.isSelected():
                         glUniform3f( node.shader_uniforms['face_color'],1,1,0)
                     else:
-                        rgb = hex_to_rgb(node.settings.get("color", "#ff0000"))
+                        rgb = hex_to_rgb(node.settings.get("color", "#ffffff"))
                         glUniform3f( node.shader_uniforms['face_color'], *rgb)
 
                     glUniform1f( node.shader_uniforms['opacity'], node.settings.get("opacity", 1))
