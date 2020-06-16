@@ -20,12 +20,15 @@ class LineObject(PrimitiveObject):
         
         self.start = PointObject(scene, line.start)
         self.end = PointObject(scene, line.end)
-        self.add(self.start)
-        self.add(self.end)
+        # self.add(self.start)
+        # self.add(self.end)
 
         self.view = LineView(line)
 
 class LineView(PrimitiveView):
+    @property
+    def vertices(self):
+        return [0, 1]
 
     @property
     def edges(self):
