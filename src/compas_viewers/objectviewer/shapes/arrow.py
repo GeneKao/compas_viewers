@@ -9,6 +9,11 @@ class Arrow(object):
         self.point = np.array(point)
         self.direction = np.array(direction)
 
+    def to_data(self):
+        return {
+            "point": self.point.tolist(),
+            "direction": self.direction.tolist()
+        }
 
 # ==============================================================================
 # Main

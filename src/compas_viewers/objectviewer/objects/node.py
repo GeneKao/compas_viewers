@@ -11,9 +11,10 @@ __all__ = ['Node']
 class Node(object):
     """"""
 
-    def __init__(self, settings={}):
+    def __init__(self, name = None, settings={}):
         self.guid = uuid.uuid4()
         self.children = []
+        self.name = name
         self._settings = {}
         self._settings.update(settings)
 

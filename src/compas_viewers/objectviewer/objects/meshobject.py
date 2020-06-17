@@ -18,7 +18,10 @@ class MeshObject(Node):
         self.scene = scene
         self.datastructure = datastructure
         self.view = MeshView(datastructure)
+        self.name = self.name or "Mesh"
 
+    def to_data(self):
+        return self.datastructure.to_data()
 
 class MeshView(object):
 

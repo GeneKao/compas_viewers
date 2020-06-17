@@ -17,7 +17,10 @@ class PrimitiveObject(Node):
         self.scene = scene
         self.primitive = primitive
         self.view = PrimitiveView(primitive)
+        self.name = self.name or primitive.__class__.__name__
 
+    def to_data(self):
+        return self.primitive.to_data()
 
 
 class PrimitiveView(object):

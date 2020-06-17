@@ -15,7 +15,8 @@ from compas_viewers.objectviewer.controller import Controller
 from compas_viewers.objectviewer.settings import SETTINGS
 from compas_viewers.objectviewer.ui import UI
 from compas_viewers.objectviewer.style import STYLE
-
+from compas_viewers.objectviewer.PyQtJsonModel import QJsonModel
+import json
 
 __all__ = ['ObjectViewer']
 
@@ -24,8 +25,8 @@ class ObjectTree(QtWidgets.QTreeWidget):
 
     def __init__(self):
         super().__init__()
-        self.setColumnCount(2)
-        self.setHeaderLabels(['Objects', 'Properties'])
+        self.setColumnCount(1)
+        self.setHeaderLabels(['Scene'])
 
 
 class Manager(object):
@@ -41,6 +42,7 @@ class Manager(object):
         self.widget.setLayout(self.layout)
         self.parent.setWidget(self.widget)
         self.widget.itemSelectionChanged.connect(self.on_item_selection_changed)
+        self.widget.itemDoubleClicked.connect(self.on_item_double_clicked)
 
     def set_items(self, nodes):
 
@@ -57,7 +59,7 @@ class Manager(object):
             nodeitem = QtWidgets.QTreeWidgetItem(parent)
         else:
             nodeitem = QtWidgets.QTreeWidgetItem()
-        nodeitem.setText(0, node.__class__.__name__)
+        nodeitem.setText(0, node.name)
         node.widget = nodeitem
         
         for child_node in node.children:
@@ -77,38 +79,43 @@ class Manager(object):
             index = index.parent()
         return trail[::-1]
 
+    def find_item_node(self, item):
+        trail = self.find_selected_item(item)
+        mid = trail[0][0]
+        node = self._items[mid]
+        return node
+
     def on_item_selection_changed(self):
         for item in self.widget.selectedItems():
-            trail = self.find_selected_item(item)
-            mid = trail[0][0]
-            node = self._items[mid]
+            node = self.find_item_node(item)
             if node not in self.app.view.selected:
                 self.app.view.selected.add(node)
 
-            # mesh = meshobject.datastructure
-            # if len(trail) > 0:
-            #     pass
-            # if len(trail) > 1:
-            #     pass
-            # if len(trail) > 2:
-            #     if trail[1][0] == 0:
-            #         # vertex
-            #         key = int(item.text(0))
-            #         attr = mesh.vertex_attributes(key)
-            #         print("Mesh {}: Vertex {} => {}".format(mid, key, attr))
-            #     else:
-            #         # edge
-            #         key = int(item.text(0))
-            #         attr = mesh.edge_attributes(key)
-            #         print("Mesh {}: Edge {} => {}".format(mid, key, attr))
-        # self.app.view.make_buffers()
         self.app.view.updateGL()
 
-class ObjectProperty(QtWidgets.QWidget):
-    def start(self):
-        self.resize(250, 150)
-        self.setWindowTitle('ObjectProperty')
-        self.show()
+    def on_item_double_clicked(self, item):
+        node = self.find_item_node(item)
+        p = ObjectProperty(self.parent, data=node.to_data())
+        p.show()
+
+class ObjectProperty(QtWidgets.QDialog):
+    def __init__(self, parent=None, data={}):
+        super(ObjectProperty, self).__init__(parent)
+        self.resize(500, 800)
+        self.setWindowTitle("Property")
+
+        # conver data dict to json format
+        json_data = json.dumps(data)
+        json_data = json.loads(json_data)
+
+        model = QJsonModel(json_data = json_data)
+        view = QtWidgets.QTreeView()
+        view.setModel(model)
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(view)
+        self.setLayout(layout)
+        
 
 class ObjectViewer(App):
     """"""

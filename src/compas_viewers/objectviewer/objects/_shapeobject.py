@@ -25,7 +25,10 @@ class ShapeObject(Node):
         self.view = ShapeView(shape)
         self._settings = {}
         self._settings.update(settings)
+        self.name = self.name or self.shape.__class__.__name__
 
+    def to_data(self):
+        return self.shape.to_data()
 
     @property
     def settings(self):
