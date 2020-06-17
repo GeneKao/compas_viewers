@@ -23,7 +23,7 @@ for i in range(10):
     mesh = Mesh.from_shape(box)
     mesh_transform_numpy(mesh, X)
 
-    viewer.add(mesh, settings={
+    viewer.add(mesh, name="Mesh.%s"%i, settings={
         'color': rgb_to_hex((rdi(0, 255), rdi(0, 255), rdi(0, 255))),
         'edges.width': 2,
         'opacity': 0.7,
