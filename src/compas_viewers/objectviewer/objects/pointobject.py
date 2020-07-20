@@ -12,9 +12,9 @@ __all__ = ['PointView', 'PointObject']
 
 class PointObject(PrimitiveObject):
 
-    def __init__(self, scene, primitive, name=None, visible=True, settings={}, **kwargs):
-        super(PointObject,self).__init__(scene, primitive, **kwargs)
-        self.view = PointView(primitive)
+    def __init__(self, scene, point, **kwargs):
+        super(PointObject,self).__init__(scene, point, **kwargs)
+        self.view = PointView(point)
 
 class PointView(PrimitiveView):
 
