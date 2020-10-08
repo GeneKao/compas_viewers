@@ -40,13 +40,14 @@ def flist(items):
 class View(GLWidget):
     """"""
 
-    def __init__(self, controller):
+    def __init__(self, controller, activate_selection=False):
         super(View, self).__init__()
         self.controller = controller
         self.n = 0
         self.v = 0
         self.e = 0
         self.f = 0
+        self.activate_selection = activate_selection
 
         self.selecting = False
         self.deselecting = False
@@ -95,42 +96,46 @@ class View(GLWidget):
             x = self.mouse.last_pos.x()
             y = self.mouse.last_pos.y()
 
-            if self.mouse.buttons['left']:
-                rgb = self.instance_map[y][x]
-                selected_hex = rgb_to_hex(rgb)
+            if self.activate_selection:
+                # perform object selection through instance color
+                if self.mouse.buttons['left']:
+                    rgb = self.instance_map[y][x]
+                    selected_hex = rgb_to_hex(rgb)
 
-                # when clicked on objects
-                if selected_hex in self.intances:
-                    for hex_key in self.intances:
-                        if selected_hex == hex_key:
-                            if not self.deselecting:
-                                self.select(self.intances[hex_key])
-                            else:
+                    # when clicked on objects
+                    if selected_hex in self.intances:
+                        for hex_key in self.intances:
+                            if selected_hex == hex_key:
+                                if not self.deselecting:
+                                    self.select(self.intances[hex_key])
+                                else:
+                                    self.deselect(self.intances[hex_key])
+                            elif not self.selecting and not self.deselecting:
                                 self.deselect(self.intances[hex_key])
-                        elif not self.selecting and not self.deselecting:
-                            self.deselect(self.intances[hex_key])
-                    print('selected:', self.selected)
+                        print('selected:', self.selected)
 
-                # when clicked on blank area
-                elif not self.selecting and not self.deselecting:
-                    for item in list(self.selected):
-                        self.deselect(item)
+                    # when clicked on blank area
+                    elif not self.selecting and not self.deselecting:
+                        for item in list(self.selected):
+                            self.deselect(item)
 
     def keyPressAction(self, key):
-        if key == SHIFT:
-            self.selecting = True
-            print('start selecting')
-        elif key == CTRL:
-            self.deselecting = True
-            print('start deselecting')
+        if self.activate_selection:
+            if key == SHIFT:
+                self.selecting = True
+                print('start selecting')
+            elif key == CTRL:
+                self.deselecting = True
+                print('start deselecting')
 
     def keyReleaseAction(self, key):
-        if key == SHIFT:
-            self.selecting = False
-            print('stop selecting')
-        elif key == CTRL:
-            self.deselecting = False
-            print('stop deselecting')
+        if self.activate_selection:
+            if key == SHIFT:
+                self.selecting = False
+                print('stop selecting')
+            elif key == CTRL:
+                self.deselecting = False
+                print('stop deselecting')
 
     def select(self, item):
         if isinstance(item, dict):
@@ -153,7 +158,8 @@ class View(GLWidget):
 
     def paint(self):
 
-        self.draw_instances()
+        if self.activate_selection:
+            self.draw_instances()
 
         glDisable(GL_DEPTH_TEST)
         for dl in self.display_lists:
@@ -234,8 +240,13 @@ class View(GLWidget):
             faces_selected_color = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
             faces_selected_color_back = flist(hex_to_rgb('#ffff00') for key in node.view.xyz)
 
+            if self.activate_selection:
+                is_selected = node.widget.isSelected
+            else:
+                is_selected = lambda: False
+
             buffer = {
-                'isSelected': node.widget.isSelected,
+                'isSelected': is_selected,
                 'xyz': self.make_vertex_buffer(xyz),
                 'vertices': self.make_index_buffer(vertices),
                 'edges': self.make_index_buffer(edges),
@@ -495,7 +506,7 @@ class View(GLWidget):
                     # actually tell opengl to draw
                     # the stuff in the VBO as a series
                     # of triangles
-                    if node.widget.isSelected():
+                    if self.activate_selection and node.widget.isSelected():
                         glUniform3f( node.shader_uniforms['face_color'],1,1,0)
                     else:
                         rgb = hex_to_rgb(node.settings.get("color", "#ffffff"))

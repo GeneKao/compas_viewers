@@ -12,7 +12,7 @@ from compas.geometry import Rotation
 from compas_viewers.objectviewer import ObjectViewer
 
 
-viewer = ObjectViewer()
+viewer = ObjectViewer(activate_selection=True)
 # make 10 random meshes
 # with random position and orientation
 for i in range(10):

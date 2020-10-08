@@ -120,19 +120,22 @@ class ObjectProperty(QtWidgets.QDialog):
 class ObjectViewer(App):
     """"""
 
-    def __init__(self, grid=True, axis=True):
+    def __init__(self, grid=True, axis=True, activate_selection=False):
         super().__init__(SETTINGS, UI, STYLE)
+
+        self.activate_selection = activate_selection
         self.controller = Controller(self)
-        self.view = View(self.controller)
+        self.view = View(self.controller, activate_selection)
         # self.view.camera.events.rotX.connect(self.controller.on_rotX)
         # self.view.camera.events.rotZ.connect(self.controller.on_rotZ)
         # self.view.camera.events.distance.connect(self.controller.on_distance)
 
         self.setup()
         self.init()
-        self.init_sidebar2()
 
-        self.manager = Manager(self.sidebar2, self)
+        if self.activate_selection:
+            self.init_sidebar2()
+            self.manager = Manager(self.sidebar2, self)
 
         self.view.glInit()
         if grid:
@@ -167,7 +170,8 @@ class ObjectViewer(App):
         # self._update_items()
 
     def update(self):
-        self.manager.set_items(list(self.controller.scene.traverse(recursive=False)))
+        if self.activate_selection:
+            self.manager.set_items(list(self.controller.scene.traverse(recursive=False)))
         self.view.glInit()
         self.view.make_buffers()
         self.view.updateGL()

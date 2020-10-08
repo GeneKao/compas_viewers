@@ -61,4 +61,4 @@ SETTINGS['camera.fov:scale'] = +1
 
 SETTINGS['camera.rotation:delta'] = +0.5
 SETTINGS['camera.near:value'] = 0.1
-SETTINGS['camera.far:value'] = 1000
+SETTINGS['camera.far:value'] = 100000

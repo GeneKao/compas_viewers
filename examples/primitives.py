@@ -20,11 +20,11 @@ for i in range(10):
 
 
 point = Point(0,0,0)
-viewer.add(point)
+viewer.add(point,settings={ 'vertices.size': 10})
 
 
 polyline = Polyline([[2,0,0], [1,0,0], [1,1,0], [1,1,1]])
-viewer.add(polyline)
+viewer.add(polyline,settings={ 'vertices.size': 10})
 
 
 plane = Plane([0, 0, 2], [1, 1, 1])
